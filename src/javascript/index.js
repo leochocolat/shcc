@@ -1,5 +1,5 @@
-import Loader from './components/Loader';
+import Home from './components/Home';
 
 document.addEventListener('DOMContentLoaded', () => {
-    new Loader()
+    new Home()
 });
