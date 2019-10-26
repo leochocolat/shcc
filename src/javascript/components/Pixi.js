@@ -39,14 +39,14 @@ class Pixi {
         gui.add(this._settings, 'speed', 0.1, 100).step(0.1);
         const roads = gui.addFolder('road');
         const player = gui.addFolder('player');
-        roads.add(this._roadProperties, 'height', 1, 1000).step(1).onChange(() => {this._createRoad()});
-        roads.add(this._roadProperties, 'linesPadding', 1, 1000).step(1).onChange(() => {this._createRoad()});
-        roads.add(this._roadProperties, 'linesAmount', 1, 1000).step(1).onChange(() => {this._createRoad()});
-        roads.add(this._roadProperties, 'linesWidth', 1, 1000).step(1).onChange(() => {this._createRoad()});
-        roads.add(this._roadProperties, 'linesHeight', 1, 1000).step(1).onChange(() => {this._createRoad()});
-        player.add(this._spriteProperties, 'x', 1, 1000).step(1).onChange(() => {this._createAnimatedSprite()});
-        player.add(this._spriteProperties, 'width', 1, 1000).step(1).onChange(() => {this._createAnimatedSprite()});
-        player.add(this._spriteProperties, 'translate', 1, 1000).step(1).onChange(() => {this._createAnimatedSprite()});
+        roads.add(this._roadProperties, 'height', 1, 1000).step(1).onChange(() => { this._createRoad() });
+        roads.add(this._roadProperties, 'linesPadding', 1, 1000).step(1).onChange(() => { this._createRoad() });
+        roads.add(this._roadProperties, 'linesAmount', 1, 1000).step(1).onChange(() => { this._createRoad() });
+        roads.add(this._roadProperties, 'linesWidth', 1, 1000).step(1).onChange(() => { this._createRoad() });
+        roads.add(this._roadProperties, 'linesHeight', 1, 1000).step(1).onChange(() => { this._createRoad() });
+        player.add(this._spriteProperties, 'x', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
+        player.add(this._spriteProperties, 'width', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
+        player.add(this._spriteProperties, 'translate', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
 
 
         this._setup();
@@ -108,7 +108,7 @@ class Pixi {
         //     this._textureLoader.add('sprite1', '../assets/sprite_01.png');
         // }
         this._textureLoader.add('sprite1', '../assets/sprite_01.png');
-        this._textureLoader.add('sprite1', '../assets/sprite_01.png');
+        this._textureLoader.add('sprite2', '../assets/sprite_02.png');
         this._textureLoader.onProgress.add(this._loaderProgressHandler);
         this._textureLoader.load(this._textureLoadedHandler);
     }
@@ -135,7 +135,7 @@ class Pixi {
         this._animatedSprite.play();
         this._spriteContainer.addChild(this._animatedSprite);
 
-     
+
 
         this._animatedSprite.width = this._spriteProperties.width
         this._animatedSprite.height = this._spriteProperties.width / ratio
@@ -153,14 +153,14 @@ class Pixi {
         this._roadContainer.addChild(this._road);
 
         this._roadLinesContainer = new PIXI.Container();
-        
+
         for (let i = 0; i < this._roadProperties.linesAmount; i++) {
             let roadLine = new PIXI.Graphics();
             roadLine.beginFill(0xFFFFFF);
             roadLine.drawRect(0, 0, this._roadProperties.linesWidth, this._roadProperties.linesHeight);
             roadLine.transform.skew.x = degrees;
             roadLine.transform.position.x = i * this._roadProperties.linesPadding
-            roadLine.transform.position.y = (this._roadProperties.height/2) - (this._roadProperties.linesHeight/2)
+            roadLine.transform.position.y = (this._roadProperties.height / 2) - (this._roadProperties.linesHeight / 2)
             this._roadLastPositionX = i * this._roadProperties.linesPadding;
             this._roadLinesContainer.addChild(roadLine);
         }
@@ -175,7 +175,7 @@ class Pixi {
 
     _updateRoadLinesPosition() {
         for (let i = 0; i < this._roadLinesContainer.children.length; i++) {
-        this._roadLinesContainer.children[i].position.x += this._settings.speed * -1;
+            this._roadLinesContainer.children[i].position.x += this._settings.speed * -1;
             if (this._roadLinesContainer.children[i].position.x < 0) {
                 this._roadLinesContainer.children[i].position.x = this._roadLastPositionX + this._roadProperties.linesPadding;
             }
