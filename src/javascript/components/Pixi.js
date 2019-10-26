@@ -5,7 +5,7 @@ import Stats from 'stats.js';
 
 class Pixi {
     constructor() {
-        _.bindAll(this, '_tickHandler', '_resizeHandler', '_textureLoadedHandler');
+        _.bindAll(this, '_tickHandler', '_resizeHandler', '_textureLoadedHandler', '_loaderProgressHandler');
 
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
@@ -19,15 +19,16 @@ class Pixi {
         this._setupStats();
         this._setupPixi();
         this._resize();
-        this._loadAssets();
-
         this._setupEventListeners();
+
+        this._setupLayers();
+        this._loadAssets();
     }
 
     _setupStats() {
         this._stats = new Stats();
         this._stats.showPanel(0);
-        document.body.appendChild(this._stats.dom);
+        // document.body.appendChild(this._stats.dom);
     }
 
     _setupPixi() {
@@ -54,30 +55,53 @@ class Pixi {
         this._canvas.height = this._height;
     }
 
+    _setupLayers() {
+        this._spriteContainer = new PIXI.Container();
+        this._backgroundContainer = new PIXI.Container();
+    }
+
     _loadAssets() {
         this._textureLoader = new PIXI.loaders.Loader();
-        this._textureLoader.add('https://picsum.photos/200/300');
-
+        this._textureLoader.add('sprite', '../assets/test.jpg');
+        this._textureLoader.add('sprite1', '../assets/test1.jpg');
+        this._textureLoader.onProgress.add(this._loaderProgressHandler);
         this._textureLoader.load(this._textureLoadedHandler);
     }
 
     _start() {
+        this._createAnimatedSprite();
+
         this._isReady = true;
     }
 
-    _removeChilds() {
+    _createAnimatedSprite() {
+        let animatedSprites = [
+            this._textureLoader.resources['sprite'].texture,
+            this._textureLoader.resources['sprite1'].texture,
+        ]
 
+        this._animatedSprite = new PIXI.extras.AnimatedSprite(animatedSprites);
+        this._animatedSprite.animationSpeed = .10;
+        this._animatedSprite.play();
+
+        this._spriteContainer.addChild(this._animatedSprite);
+    }
+
+    _removeChilds() {
+        this._container.removeChild(this._spriteContainer);
     }
 
     _addChilds() {
-
+        this._container.addChild(this._spriteContainer);
     }
 
     _tick() {
         if (!this._isReady) return;
-        this._removeChilds();
 
+        this._removeChilds();
         this._addChilds();
+
+        this._app.render(this._stage);
     }
 
     _setupEventListeners() {
@@ -97,6 +121,10 @@ class Pixi {
 
     _textureLoadedHandler() {
         this._start();
+    }
+
+    _loaderProgressHandler(e) {
+        console.log(`loading ${e.progress}%`);
     }
 }
 
