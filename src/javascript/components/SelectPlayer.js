@@ -16,8 +16,8 @@ class SelectPlayer {
             this.clicked = true;
             TweenLite.to(this.players[index], 1, { y: -20, ease: Power3.easeOut })
             TweenLite.to(this.playerContainer, 0.5, { autoAlpha: 0, delay: 0.1 })
-            // this.playerContainer.classList.add('hidden');
-            // new Pixi(index)
+            this.playerContainer.classList.add('hidden');
+            // new Pixi()
         }
     }
     _setup() {

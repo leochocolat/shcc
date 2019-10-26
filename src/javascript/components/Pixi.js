@@ -37,9 +37,10 @@ class Pixi {
             width: window.innerWidth,
             height: window.innerHeight,
             transparent: true,
-            antialias: true
+            antialias: true,
+            preserveDrawingBuffer: true
         });
-
+        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST
         this._canvas = this._app.view;
         this._container = new PIXI.Container();
 
@@ -50,7 +51,7 @@ class Pixi {
     _resize() {
         this._width = window.innerWidth;
         this._height = window.innerHeight;
-        
+
         this._canvas.width = this._width;
         this._canvas.height = this._height;
     }
@@ -58,41 +59,67 @@ class Pixi {
     _setupLayers() {
         this._spriteContainer = new PIXI.Container();
         this._backgroundContainer = new PIXI.Container();
+        this._roadContainer = new PIXI.Container();
+
     }
 
     _loadAssets() {
         this._textureLoader = new PIXI.loaders.Loader();
-        this._textureLoader.add('sprite', '../assets/test.jpg');
-        this._textureLoader.add('sprite1', '../assets/test1.jpg');
+        this._textureLoader.add('sprite1', '../assets/sprite_01.png');
+        this._textureLoader.add('sprite2', '../assets/sprite_02.png');
         this._textureLoader.onProgress.add(this._loaderProgressHandler);
         this._textureLoader.load(this._textureLoadedHandler);
     }
 
     _start() {
         this._createAnimatedSprite();
+        this._createRoad();
 
         this._isReady = true;
     }
 
     _createAnimatedSprite() {
-        let animatedSprites = [
-            this._textureLoader.resources['sprite'].texture,
+        let animatedTextures = [
             this._textureLoader.resources['sprite1'].texture,
+            this._textureLoader.resources['sprite2'].texture,
         ]
 
-        this._animatedSprite = new PIXI.extras.AnimatedSprite(animatedSprites);
+        this._animatedSprite = new PIXI.extras.AnimatedSprite(animatedTextures);
+
         this._animatedSprite.animationSpeed = .10;
         this._animatedSprite.play();
-
         this._spriteContainer.addChild(this._animatedSprite);
-    }
 
+        this._spriteProperties();
+
+    }
+    _spriteProperties() {
+        //resize
+        let width = 140
+        let ratio = this._animatedSprite.width / this._animatedSprite.height;
+
+        this._animatedSprite.width = width
+        this._animatedSprite.height = width / ratio
+        //position
+        this._animatedSprite.position.y = this._canvas.height - this._animatedSprite.height - 70;
+        this._animatedSprite.position.x = 270;
+    }
+    _createRoad() {
+        this._graphics = new PIXI.Graphics();
+        this._graphics.beginFill(0xFFFF00);
+        this._graphics.lineStyle(500, 0xFF0000);
+        this._graphics.drawRect(50, 50, 300, 200);
+        console.log(this._roadContainer)
+    }
     _removeChilds() {
         this._container.removeChild(this._spriteContainer);
+        this._roadContainer.addChild(this._graphics);
     }
 
     _addChilds() {
         this._container.addChild(this._spriteContainer);
+        this._roadContainer.addChild(this._graphics);
+
     }
 
     _tick() {
