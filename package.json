@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate",
+  "name": "jahnerationgame",
   "version": "1.0.0",
   "description": "Boilerplate with Gulp, Sass, BrowserSync",
   "private": true,
@@ -33,8 +33,22 @@
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
-    "acorn": "^6.1.1",
+    "acorn": "^7.1.0",
     "acorn-dynamic-import": "^4.0.0",
-    "browser-sync": "^2.26.7"
-  }
+    "browser-sync": "^2.26.7",
+    "dat.gui": "^0.7.6",
+    "gsap": "^2.1.3",
+    "pixi.js": "^4.8.5",
+    "stats.js": "^0.17.0",
+    "underscore": "^1.9.1"
+  },
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leochocolat/jahnerationGame.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leochocolat/jahnerationGame/issues"
+  },
+  "homepage": "https://github.com/leochocolat/jahnerationGame#readme"
 }
