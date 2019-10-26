@@ -4,6 +4,7 @@ import * as PIXI from 'pixi.js'
 import Stats from 'stats.js';
 import * as dat from 'dat.gui';
 import ControlsManager from '../modules/ControlsManager';
+import Timer from './Timer'
 
 class Pixi {
     constructor() {
@@ -12,6 +13,7 @@ class Pixi {
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
         this.components = {};
+
 
         this._delta = 0;
         this._isReady = false;
@@ -48,7 +50,6 @@ class Pixi {
         player.add(this._spriteProperties, 'x', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
         player.add(this._spriteProperties, 'width', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
         player.add(this._spriteProperties, 'translate', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
-
 
         this._setup();
     }
@@ -120,10 +121,13 @@ class Pixi {
     _start() {
         this._createAnimatedSprite();
         this._createRoad();
+        this._createTimer()
 
         this._isReady = true;
     }
-
+    _createTimer() {
+        this.timer = new Timer()
+    }
     _createAnimatedSprite() {
 
         let animatedTextures = [];
@@ -184,7 +188,10 @@ class Pixi {
             }
         }
     }
+    _updateTimerSeconds() {
+        console.log(this.timer.getDeltaTime())
 
+    }
     _removeChilds() {
         this._container.removeChild(this._roadContainer);
         this._container.removeChild(this._spriteContainer);
@@ -203,6 +210,7 @@ class Pixi {
         this._removeChilds();
         this._addChilds();
         this._updateRoadLinesPosition();
+        this._updateTimerSeconds();
 
         this._app.render(this._stage);
     }
