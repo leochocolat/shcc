@@ -86,27 +86,14 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/javascript/components/Title.js":
-/*!********************************************!*\
-  !*** ./src/javascript/components/Title.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n//IMPORTS\n// EXAMPLE\nvar Title =\n/*#__PURE__*/\nfunction () {\n  function Title() {\n    _classCallCheck(this, Title);\n  }\n\n  _createClass(Title, [{\n    key: \"createTitle\",\n    value: function createTitle(content) {\n      var div = document.createElement(\"div\");\n      div.innerHTML = content;\n      div.style.position = \"absolute\";\n      div.style.left = \"50%\";\n      div.style.top = \"50%\";\n      div.style.transform = \"translate(-50%, -50%)\";\n      document.body.appendChild(div);\n    }\n  }]);\n\n  return Title;\n}();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (new Title());\n\n//# sourceURL=webpack:///./src/javascript/components/Title.js?");
-
-/***/ }),
-
 /***/ "./src/javascript/index.js":
 /*!*********************************!*\
   !*** ./src/javascript/index.js ***!
   \*********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_Title_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Title.js */ \"./src/javascript/components/Title.js\");\n//IMPORTS\n\n_components_Title_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].createTitle(\"Boilerplate by Léo Mouraire Hee\");\n\n//# sourceURL=webpack:///./src/javascript/index.js?");
+eval("\n\n//# sourceURL=webpack:///./src/javascript/index.js?");
 
 /***/ })
 
