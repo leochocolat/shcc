@@ -4,11 +4,11 @@ import * as PIXI from 'pixi.js'
 import Stats from 'stats.js';
 import * as dat from 'dat.gui';
 import ControlsManager from '../modules/ControlsManager';
-import Timer from './Timer'
+import Timer from './Timer';
 
 class Pixi {
     constructor() {
-        _.bindAll(this, '_tickHandler', '_resizeHandler', '_textureLoadedHandler', '_loaderProgressHandler');
+        _.bindAll(this, '_tickHandler', '_resizeHandler', '_textureLoadedHandler', '_loaderProgressHandler', '_keyDownHandler');
 
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
@@ -180,6 +180,10 @@ class Pixi {
         this._roadContainer.rotation = -degrees;
     }
 
+    _jump() {
+        TweenLite.to(this._animatedSprite.position, 1, { y: 100 });
+    }
+
     _updateRoadLinesPosition() {
         for (let i = 0; i < this._roadLinesContainer.children.length; i++) {
             this._roadLinesContainer.children[i].position.x += this._settings.speed * -1;
@@ -188,10 +192,11 @@ class Pixi {
             }
         }
     }
-    _updateTimerSeconds() {
-        console.log(this.timer.getDeltaTime())
 
+    _updateTimerSeconds() {
+        this._currentTime = this.timer.getDeltaTime();
     }
+
     _removeChilds() {
         this._container.removeChild(this._roadContainer);
         this._container.removeChild(this._spriteContainer);
@@ -240,8 +245,17 @@ class Pixi {
     }
 
     _keyDownHandler(e) {
-        console.log(e.code);
-
+        switch (e.code) {
+            case 'Space':
+                this._jump();
+              break;
+            case 'ArrowLeft':
+                //
+              break;
+            case 'ArrowRight':
+                //
+              break;
+          }
     }
 }
 
