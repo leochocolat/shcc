@@ -11,9 +11,10 @@
     z-index: 9999
     visibility: visible
     opacity: 1
-    &.visible
-        visibility: visible
-        opacity: 1
+    transition: 1s ease
+    &.hidden
+        visibility: hidden
+        opacity: 0
 .playerSelect__logo
     position: absolute
     top: 5%
@@ -36,3 +37,5 @@
     background-color: blue
 .player__first img, .player__second img
     width: 100px
+    cursor: pointer
+
