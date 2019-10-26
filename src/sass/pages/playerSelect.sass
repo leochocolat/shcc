@@ -9,8 +9,8 @@
     top: 0
     left: 0
     z-index: 9999
-    visibility: hidden
-    opacity: 0
+    visibility: visible
+    opacity: 1
     &.visible
         visibility: visible
         opacity: 1
@@ -23,18 +23,16 @@
     font-size: 35px
     text-align: center
 .playerSelect__player
-
+    display: flex
+    height: 100vh
+.player__first, .player__second
+    width: 50%
+    justify-content: center
+    display: flex
+    align-items: center
 .player__first
-    background-color: white
-    position: absolute
-    top: 20%
-    left: 25%
-    width: 250px
-    height: 400px
+    background-color: red
 .player__second
-    background-color: white
-    position: absolute
-    top: 20%
-    right: 25%
-    width: 250px
-    height: 400px
+    background-color: blue
+.player__first img, .player__second img
+    width: 100px

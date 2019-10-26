@@ -1,7 +1,7 @@
-import Home from './components/Home';
+import SelectPlayer from './components/SelectPlayer';
 import Pixi from './components/Pixi';
 
 document.addEventListener('DOMContentLoaded', () => {
-    new Home()
+    new SelectPlayer()
     new Pixi()
 });

@@ -50,7 +50,7 @@ class Pixi {
     _resize() {
         this._width = window.innerWidth;
         this._height = window.innerHeight;
-
+        
         this._canvas.width = this._width;
         this._canvas.height = this._height;
     }

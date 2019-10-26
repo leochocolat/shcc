@@ -2532,18 +2532,6 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 
 /***/ }),
 
-/***/ "./src/javascript/components/Home.js":
-/*!*******************************************!*\
-  !*** ./src/javascript/components/Home.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ \"./node_modules/underscore/underscore.js\");\n/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\nvar Loader =\n/*#__PURE__*/\nfunction () {\n  function Loader() {\n    _classCallCheck(this, Loader);\n\n    this.container = document.querySelector('.js-container');\n    console.log(this.container);\n  }\n\n  _createClass(Loader, [{\n    key: \"_setupFunctions\",\n    value: function _setupFunctions() {}\n  }]);\n\n  return Loader;\n}();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Loader);\n\n//# sourceURL=webpack:///./src/javascript/components/Home.js?");
-
-/***/ }),
-
 /***/ "./src/javascript/components/Pixi.js":
 /*!*******************************************!*\
   !*** ./src/javascript/components/Pixi.js ***!
@@ -2556,6 +2544,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var unde
 
 /***/ }),
 
+/***/ "./src/javascript/components/SelectPlayer.js":
+/*!***************************************************!*\
+  !*** ./src/javascript/components/SelectPlayer.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ \"./node_modules/underscore/underscore.js\");\n/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Pixi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Pixi */ \"./src/javascript/components/Pixi.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\n\nvar SelectPlayer =\n/*#__PURE__*/\nfunction () {\n  function SelectPlayer() {\n    _classCallCheck(this, SelectPlayer);\n\n    // _.bindAll(this, '_selectPlayer');\n    this.container = document.querySelector('.js-container');\n    this.firstPlayer = this.container.querySelector('.js-firstPlayer');\n    this.secondPlayer = this.container.querySelector('.js-secondPlayer');\n    this.clicked = false;\n\n    this._setup();\n  }\n\n  _createClass(SelectPlayer, [{\n    key: \"_selectPlayer\",\n    value: function _selectPlayer(playerType) {\n      if (!this.clicked) {\n        this.clicked = true; // console.log(Pixi)\n        // new Pixi()\n      }\n    }\n  }, {\n    key: \"_setup\",\n    value: function _setup() {\n      this._setupEventListeners();\n    }\n  }, {\n    key: \"_setupEventListeners\",\n    value: function _setupEventListeners() {\n      var playerOne = 'bmx',\n          playerTwo = 'skate';\n      this.firstPlayer.addEventListener('click', this._selectPlayer.bind(this, playerOne));\n      this.secondPlayer.addEventListener('click', this._selectPlayer.bind(this, playerTwo));\n    }\n  }]);\n\n  return SelectPlayer;\n}();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (SelectPlayer);\n\n//# sourceURL=webpack:///./src/javascript/components/SelectPlayer.js?");
+
+/***/ }),
+
 /***/ "./src/javascript/index.js":
 /*!*********************************!*\
   !*** ./src/javascript/index.js ***!
@@ -2564,7 +2564,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var unde
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Home */ \"./src/javascript/components/Home.js\");\n/* harmony import */ var _components_Pixi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Pixi */ \"./src/javascript/components/Pixi.js\");\n\n\ndocument.addEventListener('DOMContentLoaded', function () {\n  new _components_Home__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  new _components_Pixi__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n});\n\n//# sourceURL=webpack:///./src/javascript/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_SelectPlayer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/SelectPlayer */ \"./src/javascript/components/SelectPlayer.js\");\n/* harmony import */ var _components_Pixi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Pixi */ \"./src/javascript/components/Pixi.js\");\n\n\ndocument.addEventListener('DOMContentLoaded', function () {\n  new _components_SelectPlayer__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  new _components_Pixi__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n});\n\n//# sourceURL=webpack:///./src/javascript/index.js?");
 
 /***/ })
 
