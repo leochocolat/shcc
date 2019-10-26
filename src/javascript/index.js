@@ -1,5 +1,5 @@
-import Home from './components/Home';
+import SelectPlayer from './components/SelectPlayer';
 
 document.addEventListener('DOMContentLoaded', () => {
-    new Home()
+    new SelectPlayer()
 });
