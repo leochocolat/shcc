@@ -285,15 +285,15 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 
 /***/ }),
 
-/***/ "./src/javascript/components/Loader.js":
-/*!*********************************************!*\
-  !*** ./src/javascript/components/Loader.js ***!
-  \*********************************************/
+/***/ "./src/javascript/components/Home.js":
+/*!*******************************************!*\
+  !*** ./src/javascript/components/Home.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ \"./node_modules/underscore/underscore.js\");\n/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\nvar Loader =\n/*#__PURE__*/\nfunction () {\n  function Loader() {\n    _classCallCheck(this, Loader);\n\n    this.container = document.querySelector('.js-container');\n    console.log(this.container);\n  }\n\n  _createClass(Loader, [{\n    key: \"_setupFunctions\",\n    value: function _setupFunctions() {}\n  }]);\n\n  return Loader;\n}();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Loader);\n\n//# sourceURL=webpack:///./src/javascript/components/Loader.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! underscore */ \"./node_modules/underscore/underscore.js\");\n/* harmony import */ var underscore__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(underscore__WEBPACK_IMPORTED_MODULE_0__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\nvar Loader =\n/*#__PURE__*/\nfunction () {\n  function Loader() {\n    _classCallCheck(this, Loader);\n\n    this.container = document.querySelector('.js-container');\n    console.log(this.container);\n  }\n\n  _createClass(Loader, [{\n    key: \"_setupFunctions\",\n    value: function _setupFunctions() {}\n  }]);\n\n  return Loader;\n}();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Loader);\n\n//# sourceURL=webpack:///./src/javascript/components/Home.js?");
 
 /***/ }),
 
@@ -317,7 +317,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var unde
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Loader */ \"./src/javascript/components/Loader.js\");\n/* harmony import */ var _components_Pixi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Pixi */ \"./src/javascript/components/Pixi.js\");\n\n\ndocument.addEventListener('DOMContentLoaded', function () {\n  new _components_Loader__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  new _components_Pixi__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n});\n\n//# sourceURL=webpack:///./src/javascript/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Home */ \"./src/javascript/components/Home.js\");\n/* harmony import */ var _components_Pixi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Pixi */ \"./src/javascript/components/Pixi.js\");\n\n\ndocument.addEventListener('DOMContentLoaded', function () {\n  new _components_Home__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  new _components_Pixi__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\n});\n\n//# sourceURL=webpack:///./src/javascript/index.js?");
 
 /***/ })
 

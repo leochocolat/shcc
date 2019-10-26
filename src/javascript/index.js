@@ -1,7 +1,7 @@
-import Loader from './components/Loader';
+import Home from './components/Home';
 import Pixi from './components/Pixi';
 
 document.addEventListener('DOMContentLoaded', () => {
-    new Loader()
+    new Home()
     new Pixi()
 });
