@@ -11,7 +11,7 @@ import GameManager from './GameManager'
 
 class Pixi {
     constructor() {
-        _.bindAll(this, '_tickHandler', '_resizeHandler', '_keyDownHandler');
+        _.bindAll(this, '_tickHandler', '_resizeHandler');
 
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
@@ -126,7 +126,11 @@ class Pixi {
         this._removeChilds();
         this._addChilds();
         this._roadContainer.updateRoadLinesPosition();
+<<<<<<< HEAD
         this._obstaclesContainer.updateObstaclesPosition();
+=======
+        this._spriteContainer.tick('TOTO: DeltaTime');
+>>>>>>> 83d6a0ce074b9c0bbaee90f592914538bcd5f832
         this._updateTimerSeconds();
 
         this._app.render(this._stage);
@@ -135,7 +139,6 @@ class Pixi {
     _setupEventListeners() {
         TweenLite.ticker.addEventListener('tick', this._tickHandler);
         window.addEventListener('resize', this._resizeHandler);
-        window.addEventListener('keydown', this._keyDownHandler);
     }
 
     _tickHandler() {
@@ -146,20 +149,6 @@ class Pixi {
 
     _resizeHandler() {
         this._resize();
-    }
-
-    _keyDownHandler(e) {
-        switch (e.code) {
-            case 'Space':
-                // this._jump();
-                break;
-            case 'ArrowLeft':
-                //
-                break;
-            case 'ArrowRight':
-                //
-                break;
-        }
     }
 }
 
