@@ -147,7 +147,10 @@ class Pixi {
         this._roadContainer.updateRoadLinesPosition();
         this._obstaclesContainer.updateObstaclesPosition();
         this._spriteContainer.tick('TOTO: DeltaTime');
+<<<<<<< HEAD
         this._gameManager.tick()
+=======
+>>>>>>> a0c02d9705ccdef18f16dc81e8d84dc444067df7
         this._updateTimerSeconds();
 
         this._app.render(this._stage);
