@@ -4,7 +4,6 @@ import { TweenLite, Power3 } from 'gsap';
 
 class SelectPlayer {
     constructor() {
-        // _.bindAll(this, '_selectPlayer');
         this.container = document.querySelector('.js-container');
         this.playerContainer = this.container.querySelector('.js-playerContainer');
         this.players = this.container.querySelectorAll('.js-player img');
@@ -17,7 +16,7 @@ class SelectPlayer {
             TweenLite.to(this.players[index], 1, { y: -20, ease: Power3.easeOut })
             TweenLite.to(this.playerContainer, 0.5, { autoAlpha: 0, delay: 0.1 })
             this.playerContainer.classList.add('hidden');
-            // new Pixi()
+            new Pixi()
         }
     }
     _setup() {

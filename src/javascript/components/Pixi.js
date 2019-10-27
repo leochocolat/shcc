@@ -3,9 +3,11 @@ import { TweenLite } from 'gsap';
 import * as PIXI from 'pixi.js'
 import Stats from 'stats.js';
 import * as dat from 'dat.gui';
-import Timer from './Timer'
-import Player from './Player'
-import Road from './Road'
+import Timer from './Timer';
+import Player from './Player';
+import Road from './Road';
+import Obstacles from './Obstacles';
+import GameManager from './GameManager'
 
 class Pixi {
     constructor() {
@@ -22,10 +24,10 @@ class Pixi {
             speed: 7
         }
 
-        const gui = new dat.GUI({ closed: false });
+        // const gui = new dat.GUI({ closed: false });
         // gui.add(this._settings, 'speed', 0.1, 100).step(0.1);
-        const roads = gui.addFolder('road');
-        const player = gui.addFolder('player');
+        // const roads = gui.addFolder('road');
+        // const player = gui.addFolder('player');
         // roads.add(this._roadProperties, 'height', 1, 1000).step(1).onChange(() => { this._createRoad() });
         // roads.add(this._roadProperties, 'linesPadding', 1, 1000).step(1).onChange(() => { this._createRoad() });
         // roads.add(this._roadProperties, 'linesAmount', 1, 1000).step(1).onChange(() => { this._createRoad() });
@@ -82,6 +84,8 @@ class Pixi {
     _setupLayers() {
         this._spriteContainer = new Player(this._canvas);
         this._roadContainer = new Road(this._canvas);
+        this._obstaclesContainer = new Obstacles(this._canvas);
+        this._gameManager = new GameManager(this._spriteContainer, this._obstaclesContainer)
         // this._backgroundContainer = new PIXI.Container();
         this._start();
 
@@ -105,11 +109,13 @@ class Pixi {
     _removeChilds() {
         this._container.removeChild(this._roadContainer.drawRoad());
         this._container.removeChild(this._spriteContainer.drawPlayer());
+        this._container.removeChild(this._obstaclesContainer.drawObstacles());
     }
 
     _addChilds() {
         this._container.addChild(this._roadContainer.drawRoad());
         this._container.addChild(this._spriteContainer.drawPlayer());
+        this._container.addChild(this._obstaclesContainer.drawObstacles());
     }
 
     _tick() {
@@ -120,6 +126,7 @@ class Pixi {
         this._removeChilds();
         this._addChilds();
         this._roadContainer.updateRoadLinesPosition();
+        this._obstaclesContainer.updateObstaclesPosition();
         this._updateTimerSeconds();
 
         this._app.render(this._stage);

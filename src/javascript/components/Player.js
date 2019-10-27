@@ -20,18 +20,10 @@ class Player {
         this._textureLoader = new PIXI.loaders.Loader();
 
         for (let i = 0; i <= 25; i++) {
-            if (i < 10) {
-                this._textureLoader.add(`frame${i}`, `../assets/sprites/jump/0000${i}.png`);
-            } else {
-                this._textureLoader.add(`frame${i}`, `../assets/sprites/jump/000${i}.png`);
-            }
+            this._textureLoader.add(`frame${i}`, `../assets/sprites/jump/jump_0${i}.png`);
         }
         for (let i = 0; i <= 31; i++) {
-            if (i < 10) {
-                this._textureLoader.add(`frame${26 + i}`, `../assets/sprites/pedale/0000${i}.png`);
-            } else {
-                this._textureLoader.add(`frame${26 + i}`, `../assets/sprites/pedale/000${i}.png`);
-            }
+            this._textureLoader.add(`frame${26 + i}`, `../assets/sprites/pedale/pedale_0${i}.png`);
         }
         // this._textureLoader.onProgress.add(this._loaderProgressHandler);
         this._textureLoader.load(() => { this.createAnimatedSprite() });
