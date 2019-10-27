@@ -40,11 +40,6 @@ class Road {
         }
 
         this._roadContainer.addChild(this._roadLinesContainer);
-
-        // this._roadContainer.position.x = this._roadProperties.x;
-        // this._roadContainer.position.y = this._roadProperties.y;
-        // this._roadContainer.transform.skew.x = degrees;
-        // this._roadContainer.rotation = -degrees;
     }
     updateRoadLinesPosition() {
         for (let i = 0; i < this._roadLinesContainer.children.length; i++) {

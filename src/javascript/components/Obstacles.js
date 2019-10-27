@@ -3,7 +3,7 @@ class Obstacles {
         this._canvas = canvas
         this._obstacleProperties = {
             x: this._canvas.width,
-            y: 70,
+            y: 0,
             height: 100,
             width: 100,
             speed: 7
@@ -33,26 +33,19 @@ class Obstacles {
         this._animatedObstacle.position.x = this._obstacleProperties.x - this._obstacleProperties.width
         this._animatedObstacle.position.y = this._obstacleProperties.y
 
-        this._animatedObstacle.transform.skew.x = 1
-        // this._animatedObstacle.transform.skew.y = 1
-
         this._obstaclesContainer.addChild(this._animatedObstacle);
     }
     updateObstaclesPosition() {
         if (this._animatedObstacle) {
             this._animatedObstacle.position.x += this._obstacleProperties.speed * -1;
             if (this._animatedObstacle.position.x < 0 - this._obstacleProperties.width) {
-                this._animatedObstacle.position.x = this._canvas.width * 4;
+                this._animatedObstacle.position.x = this._canvas.width * Math.random() * 3;
+                this._animatedObstacle.position.y = Math.round(Math.random()) * 200
             }
         }
     }
-    hitText() {
-        message = new PIXI.Text("You Lose!");
-        message.position.set(app.view.width / 2, app.view.height / 2);
-        message.anchor.set(.5, .5);
-        message.alpha = 0;
-        message.scale.set(1.5, 1.5);
-        app.stage.addChild(message);
+    getBounds() {
+        return this._obstaclesContainer.getBounds()
     }
     drawObstacles() {
         return this._obstaclesContainer;

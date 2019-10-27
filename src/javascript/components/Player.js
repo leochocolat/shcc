@@ -166,7 +166,10 @@ class Player {
     drawPlayer() {
         return this._spriteContainer
     }
+    getBounds() {
+        return this._spriteContainer.getBounds();
 
+    }
     _setupEventListeners() {
         window.addEventListener('keydown', this._keyDownHandler);
         window.addEventListener('keyup', this._keyUpHandler);
