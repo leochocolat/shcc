@@ -3,9 +3,11 @@ import { TweenLite } from 'gsap';
 import * as PIXI from 'pixi.js'
 import Stats from 'stats.js';
 import * as dat from 'dat.gui';
-import Timer from './Timer'
-import Player from './Player'
-import Road from './Road'
+import Timer from './Timer';
+import Player from './Player';
+import Road from './Road';
+import Obstacles from './Obstacles';
+import GameManager from './GameManager'
 
 class Pixi {
     constructor() {
@@ -82,6 +84,8 @@ class Pixi {
     _setupLayers() {
         this._spriteContainer = new Player(this._canvas);
         this._roadContainer = new Road(this._canvas);
+        this._obstaclesContainer = new Obstacles(this._canvas);
+        this._gameManager = new GameManager(this._spriteContainer, this._obstaclesContainer)
         // this._backgroundContainer = new PIXI.Container();
         this._start();
 
@@ -105,11 +109,13 @@ class Pixi {
     _removeChilds() {
         this._container.removeChild(this._roadContainer.drawRoad());
         this._container.removeChild(this._spriteContainer.drawPlayer());
+        this._container.removeChild(this._obstaclesContainer.drawObstacles());
     }
 
     _addChilds() {
         this._container.addChild(this._roadContainer.drawRoad());
         this._container.addChild(this._spriteContainer.drawPlayer());
+        this._container.addChild(this._obstaclesContainer.drawObstacles());
     }
 
     _tick() {
@@ -120,7 +126,11 @@ class Pixi {
         this._removeChilds();
         this._addChilds();
         this._roadContainer.updateRoadLinesPosition();
+<<<<<<< HEAD
+        this._obstaclesContainer.updateObstaclesPosition();
+=======
         this._spriteContainer.tick('TOTO: DeltaTime');
+>>>>>>> 83d6a0ce074b9c0bbaee90f592914538bcd5f832
         this._updateTimerSeconds();
 
         this._app.render(this._stage);
