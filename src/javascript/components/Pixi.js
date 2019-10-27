@@ -10,8 +10,12 @@ import Obstacles from './Obstacles';
 import GameManager from './GameManager'
 
 class Pixi {
-    constructor() {
+    constructor(playerIndex, resources) {
+        this._playerIndex = playerIndex;
+        this._resources = resources;
+        
         _.bindAll(this, '_tickHandler', '_resizeHandler');
+
 
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
@@ -21,8 +25,10 @@ class Pixi {
         this._isReady = false;
 
         this._settings = {
-            speed: 7
+            speed: 7,
+            allowSkew: true
         }
+
         this._skewProperties = {
             x: -100,
             y: window.innerHeight + 50,
@@ -31,6 +37,7 @@ class Pixi {
 
         // const gui = new dat.GUI({ closed: false });
         // gui.add(this._settings, 'speed', 0.1, 100).step(0.1);
+        // gui.add(this._settings, 'allowSkew');
         // const roads = gui.addFolder('road');
         // const player = gui.addFolder('player');
         // roads.add(this._roadProperties, 'height', 1, 1000).step(1).onChange(() => { this._createRoad() });
@@ -78,14 +85,17 @@ class Pixi {
         this._stage = this._app.stage;
         this._stage.addChild(this._container);
     }
+
     _setupSkewContainer() {
         this._skewedContainer = new PIXI.Container();
 
+        if (!this._settings.allowSkew) return;
         this._skewedContainer.position.x = this._skewProperties.x;
         this._skewedContainer.position.y = this._skewProperties.y;
         this._skewedContainer.transform.skew.x = this._skewProperties.degrees;
-        this._skewedContainer.rotation = -this._skewProperties.degrees;
+        this._skewedContainer.rotation = - this._skewProperties.degrees;
     }
+
     _resize() {
         this._width = window.innerWidth;
         this._height = window.innerHeight;
@@ -95,22 +105,23 @@ class Pixi {
     }
 
     _setupLayers() {
-        this._spriteContainer = new Player(this._canvas);
+        this._spriteContainer = new Player(this._canvas, this._playerIndex, this._resources);
         this._roadContainer = new Road(this._canvas);
         this._obstaclesContainer = new Obstacles(this._canvas);
         this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer)
-        // this._backgroundContainer = new PIXI.Container();
         this._start();
-
     }
+    
     _start() {
         this._createTimer()
 
         this._isReady = true;
     }
+
     _createTimer() {
         this.timer = new Timer()
     }
+
     _updateTimerSeconds() {
         this.timer.getDeltaTime()
     }
@@ -147,10 +158,7 @@ class Pixi {
         this._roadContainer.updateRoadLinesPosition();
         this._obstaclesContainer.updateObstaclesPosition();
         this._spriteContainer.tick('TOTO: DeltaTime');
-<<<<<<< HEAD
         this._gameManager.tick()
-=======
->>>>>>> a0c02d9705ccdef18f16dc81e8d84dc444067df7
         this._updateTimerSeconds();
 
         this._app.render(this._stage);
