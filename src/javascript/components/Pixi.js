@@ -9,7 +9,7 @@ import Road from './Road'
 
 class Pixi {
     constructor() {
-        _.bindAll(this, '_tickHandler', '_resizeHandler', '_keyDownHandler');
+        _.bindAll(this, '_tickHandler', '_resizeHandler');
 
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
@@ -22,10 +22,10 @@ class Pixi {
             speed: 7
         }
 
-        const gui = new dat.GUI({ closed: false });
+        // const gui = new dat.GUI({ closed: false });
         // gui.add(this._settings, 'speed', 0.1, 100).step(0.1);
-        const roads = gui.addFolder('road');
-        const player = gui.addFolder('player');
+        // const roads = gui.addFolder('road');
+        // const player = gui.addFolder('player');
         // roads.add(this._roadProperties, 'height', 1, 1000).step(1).onChange(() => { this._createRoad() });
         // roads.add(this._roadProperties, 'linesPadding', 1, 1000).step(1).onChange(() => { this._createRoad() });
         // roads.add(this._roadProperties, 'linesAmount', 1, 1000).step(1).onChange(() => { this._createRoad() });
@@ -120,6 +120,7 @@ class Pixi {
         this._removeChilds();
         this._addChilds();
         this._roadContainer.updateRoadLinesPosition();
+        this._spriteContainer.tick('TOTO: DeltaTime');
         this._updateTimerSeconds();
 
         this._app.render(this._stage);
@@ -128,7 +129,6 @@ class Pixi {
     _setupEventListeners() {
         TweenLite.ticker.addEventListener('tick', this._tickHandler);
         window.addEventListener('resize', this._resizeHandler);
-        window.addEventListener('keydown', this._keyDownHandler);
     }
 
     _tickHandler() {
@@ -139,20 +139,6 @@ class Pixi {
 
     _resizeHandler() {
         this._resize();
-    }
-
-    _keyDownHandler(e) {
-        switch (e.code) {
-            case 'Space':
-                // this._jump();
-                break;
-            case 'ArrowLeft':
-                //
-                break;
-            case 'ArrowRight':
-                //
-                break;
-        }
     }
 }
 
