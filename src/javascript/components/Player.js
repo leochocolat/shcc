@@ -2,10 +2,32 @@ import _ from 'underscore';
 import { TweenLite, Power3 } from 'gsap';
 
 class Player {
-    constructor(canvas) {
+    constructor(canvas, playerIndex, resources) {
         _.bindAll(this, '_keyDownHandler', '_keyUpHandler');
-
         this._canvas = canvas;
+        this._playerIndex = playerIndex;
+        this._resources = resources;
+
+        this._animationProperties = [
+            [
+                { start: 0, end: 3 },
+                { start: 4, end: 10 },
+                { start: 11, end: 25 },
+                { start: 0, end: 35 },
+            ],
+            [
+                { start: 0, end: 2 },
+                { start: 3, end: 9 },
+                { start: 10, end: 16 },
+                { start: 0, end: 16 },
+                { start: 0, end: 16 },
+            ]
+        ]
+
+        this._spritesNames = [
+            ['saute', 'pedale'],
+            ['saute', 'roule', 'pousse'],
+        ]
 
         this._spriteProperties = {
             x: 270,
@@ -23,49 +45,33 @@ class Player {
 
     _setup() {
         this._spriteContainer = new PIXI.Container();
-        this._loadAssets();
+        this._createAnimatedSprites();
         this._setupEventListeners();
-    }
-
-    _loadAssets() {
-        this._textureLoader = new PIXI.loaders.Loader();
-
-        for (let i = 0; i <= 25; i++) {
-            this._textureLoader.add(`frame${i}`, `../assets/sprites/jump/jump_0${i}.png`);
-        }
-        for (let i = 0; i <= 31; i++) {
-            this._textureLoader.add(`frame${26 + i}`, `../assets/sprites/pedale/pedale_0${i}.png`);
-        }
-        // this._textureLoader.onProgress.add(this._loaderProgressHandler);
-        this._textureLoader.load(() => { this._createAnimatedSprites() });
     }
 
     _createAnimatedSprites() {
         let preJumpSprites = []
-        for (let i = 0; i <= 3; i++) {
-            preJumpSprites.push(this._textureLoader.resources[`frame${i}`].texture);
+        for (let i = this._animationProperties[this._playerIndex][0].start; i <= this._animationProperties[this._playerIndex][0].end; i++) {
+            preJumpSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][0]}_0${i}.png`]);
         }
         this._preJumpAnimation = new PIXI.extras.AnimatedSprite(preJumpSprites);
-
+        
         let jumpSprites = []
-        for (let i = 3; i <= 10; i++) {
-            jumpSprites.push(this._textureLoader.resources[`frame${i}`].texture);
+        for (let i = this._animationProperties[this._playerIndex][1].start; i <= this._animationProperties[this._playerIndex][1].end; i++) {
+            jumpSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][0]}_0${i}.png`]);
         }
-
         this._jumpAnimation = new PIXI.extras.AnimatedSprite(jumpSprites);
 
         let fallSprites = []
-        for (let i = 11; i <= 25; i++) {
-            fallSprites.push(this._textureLoader.resources[`frame${i}`].texture);
+        for (let i = this._animationProperties[this._playerIndex][2].start; i <= this._animationProperties[this._playerIndex][2].end; i++) {
+            fallSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][0]}_0${i}.png`]);
         }
-
         this._fallAnimation = new PIXI.extras.AnimatedSprite(fallSprites);
-
+        
         let pedalingSprites = []
-        for (let i = 26; i <= 26 + 31; i++) {
-            pedalingSprites.push(this._textureLoader.resources[`frame${i}`].texture);
+        for (let i = this._animationProperties[this._playerIndex][3].start; i <= this._animationProperties[this._playerIndex][3].end; i++) {
+            pedalingSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][1]}_0${i}.png`]);
         }
-
         this._pedalingAnimation = new PIXI.extras.AnimatedSprite(pedalingSprites);
 
         let ratio = this._preJumpAnimation.width / this._preJumpAnimation.height;
@@ -109,7 +115,21 @@ class Player {
         this._pedalingAnimation.position.x = this._spriteProperties.x;
         this._pedalingAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
 
-        this._addChild(this._pedalingAnimation);
+        if (this._playerIndex == 1) {
+            let poussingSprites = []
+            for (let i = this._animationProperties[this._playerIndex][4].start; i <= this._animationProperties[this._playerIndex][4].end; i++) {
+                poussingSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][2]}_0${i}.png`]);
+            }
+            this._poussingAnimation = new PIXI.extras.AnimatedSprite(poussingSprites);
+            this._poussingAnimation.animationSpeed = .3;
+            this._poussingAnimation.loop = true
+            this._poussingAnimation.width = this._spriteProperties.width
+            this._poussingAnimation.height = this._spriteProperties.width / ratio;
+            this._poussingAnimation.position.x = this._spriteProperties.x;
+            this._poussingAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
+        }
+
+        this._addChild(this._poussingAnimation);
     }
 
     createFakePlayer() {

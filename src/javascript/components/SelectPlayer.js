@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import Pixi from './Pixi'
+import TextureLoader from '../modules/TextureLoader'
 import { TweenLite, Power3 } from 'gsap';
 
 class SelectPlayer {
@@ -16,7 +17,7 @@ class SelectPlayer {
             TweenLite.to(this.players[index], 1, { y: -20, ease: Power3.easeOut })
             TweenLite.to(this.playerContainer, 0.5, { autoAlpha: 0, delay: 0.1 })
             this.playerContainer.classList.add('hidden');
-            new Pixi()
+            new TextureLoader(this.players[index]);
         }
     }
     _setup() {
