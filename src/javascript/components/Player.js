@@ -55,7 +55,7 @@ class Player {
             preJumpSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][0]}_0${i}.png`]);
         }
         this._preJumpAnimation = new PIXI.extras.AnimatedSprite(preJumpSprites);
-        
+
         let jumpSprites = []
         for (let i = this._animationProperties[this._playerIndex][1].start; i <= this._animationProperties[this._playerIndex][1].end; i++) {
             jumpSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][0]}_0${i}.png`]);
@@ -67,7 +67,7 @@ class Player {
             fallSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][0]}_0${i}.png`]);
         }
         this._fallAnimation = new PIXI.extras.AnimatedSprite(fallSprites);
-        
+
         let pedalingSprites = []
         for (let i = this._animationProperties[this._playerIndex][3].start; i <= this._animationProperties[this._playerIndex][3].end; i++) {
             pedalingSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][1]}_0${i}.png`]);
@@ -129,7 +129,8 @@ class Player {
             this._poussingAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
         }
 
-        this._addChild(this._poussingAnimation);
+        this._addChild(this._pedalingAnimation);
+
     }
 
     createFakePlayer() {
