@@ -19,22 +19,34 @@ class Player {
     _loadAssets() {
         this._textureLoader = new PIXI.loaders.Loader();
 
-        this._textureLoader.add('sprite1', '../assets/sprite_01.png');
-        this._textureLoader.add('sprite2', '../assets/sprite_02.png');
+        for (let i = 0; i <= 25; i++) {
+            if (i < 10) {
+                this._textureLoader.add(`frame${i}`, `../assets/sprites/jump/0000${i}.png`);
+            } else {
+                this._textureLoader.add(`frame${i}`, `../assets/sprites/jump/000${i}.png`);
+            }
+        }
+        for (let i = 0; i <= 31; i++) {
+            if (i < 10) {
+                this._textureLoader.add(`frame${26 + i}`, `../assets/sprites/pedale/0000${i}.png`);
+            } else {
+                this._textureLoader.add(`frame${26 + i}`, `../assets/sprites/pedale/000${i}.png`);
+            }
+        }
         // this._textureLoader.onProgress.add(this._loaderProgressHandler);
         this._textureLoader.load(() => { this.createAnimatedSprite() });
     }
 
     createAnimatedSprite() {
-        this.animatedTextures = [
-            this._textureLoader.resources['sprite1'].texture,
-            this._textureLoader.resources['sprite2'].texture,
-        ]
+        let animatedTextures = []
+        for (let i = 0; i <= 25 + 31; i++) {
+            animatedTextures.push(this._textureLoader.resources[`frame${i}`].texture);
+        }
 
-        this._animatedSprite = new PIXI.extras.AnimatedSprite(this.animatedTextures);
+        this._animatedSprite = new PIXI.extras.AnimatedSprite(animatedTextures);
         let ratio = this._animatedSprite.width / this._animatedSprite.height;
 
-        this._animatedSprite.animationSpeed = .10;
+        this._animatedSprite.animationSpeed = .3;
         this._animatedSprite.play();
         this._spriteContainer.addChild(this._animatedSprite);
 

@@ -9,7 +9,7 @@ import Road from './Road'
 
 class Pixi {
     constructor() {
-        _.bindAll(this, '_tickHandler', '_resizeHandler');
+        _.bindAll(this, '_tickHandler', '_resizeHandler', '_keyDownHandler');
 
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
@@ -84,8 +84,8 @@ class Pixi {
         this._roadContainer = new Road(this._canvas);
         // this._backgroundContainer = new PIXI.Container();
         this._start();
-    }
 
+    }
     _start() {
         this._createTimer()
 
@@ -94,10 +94,14 @@ class Pixi {
     _createTimer() {
         this.timer = new Timer()
     }
-
     _updateTimerSeconds() {
         this.timer.getDeltaTime()
     }
+
+    _updateTimerSeconds() {
+        this._currentTime = this.timer.getDeltaTime();
+    }
+
     _removeChilds() {
         this._container.removeChild(this._roadContainer.drawRoad());
         this._container.removeChild(this._spriteContainer.drawPlayer());
@@ -124,6 +128,7 @@ class Pixi {
     _setupEventListeners() {
         TweenLite.ticker.addEventListener('tick', this._tickHandler);
         window.addEventListener('resize', this._resizeHandler);
+        window.addEventListener('keydown', this._keyDownHandler);
     }
 
     _tickHandler() {
@@ -134,6 +139,20 @@ class Pixi {
 
     _resizeHandler() {
         this._resize();
+    }
+
+    _keyDownHandler(e) {
+        switch (e.code) {
+            case 'Space':
+                // this._jump();
+                break;
+            case 'ArrowLeft':
+                //
+                break;
+            case 'ArrowRight':
+                //
+                break;
+        }
     }
 }
 
