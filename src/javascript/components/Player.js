@@ -12,7 +12,10 @@ class Player {
             width: 170,
             translate: 70
         }
-
+        this._fakePlayerProperties = {
+            x: 0,
+            y: 0
+        }
         this._horizontalDisplacement = 0;
 
         this._setup();
@@ -109,6 +112,13 @@ class Player {
         this._addChild(this._pedalingAnimation);
     }
 
+    createFakePlayer() {
+        this._fakePlayerRect = new PIXI.Graphics();
+        this._fakePlayerRect.beginFill(0xFF0000);
+        this._fakePlayerRect.drawRect(this._fakePlayerProperties.x, this._fakePlayerProperties.y, 100, 100);
+        return this._fakePlayerRect;
+
+    }
     _playPreJumpAnimation() {
         this._removeChilds(this._spriteContainer);
         this._addChild(this._preJumpAnimation);
@@ -156,13 +166,15 @@ class Player {
     }
 
     _updatePositionsArrow(direction) {
+        // console.log(this._fakePlayerRect.transform.position)
+        TweenLite.to(this._fakePlayerRect.transform.position, .7, { y: 10 * direction, x: 300 * direction, ease: Power3.easeOut });
         TweenLite.to(this._spriteContainer.transform.position, .7, { y: 10 * direction, x: 300 * direction, ease: Power3.easeOut });
+
     }
 
     tick() {
 
     }
-
     drawPlayer() {
         return this._spriteContainer
     }

@@ -17,7 +17,7 @@ class GameManager {
         }
     }
     _hitText() {
-        console.log('coucou')
+        console.log('text')
         let message = new PIXI.Text("You Lose!");
         message.position.set(window.innerWidth / 2, window.innerHeight / 2);
         message.anchor.set(.5, .5);

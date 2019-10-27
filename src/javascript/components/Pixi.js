@@ -81,10 +81,10 @@ class Pixi {
     _setupSkewContainer() {
         this._skewedContainer = new PIXI.Container();
 
-        this._skewedContainer.position.x = this._skewProperties.x;
-        this._skewedContainer.position.y = this._skewProperties.y;
-        this._skewedContainer.transform.skew.x = this._skewProperties.degrees;
-        this._skewedContainer.rotation = -this._skewProperties.degrees;
+        // this._skewedContainer.position.x = this._skewProperties.x;
+        // this._skewedContainer.position.y = this._skewProperties.y;
+        // this._skewedContainer.transform.skew.x = this._skewProperties.degrees;
+        // this._skewedContainer.rotation = -this._skewProperties.degrees;
     }
     _resize() {
         this._width = window.innerWidth;
@@ -98,7 +98,7 @@ class Pixi {
         this._spriteContainer = new Player(this._canvas);
         this._roadContainer = new Road(this._canvas);
         this._obstaclesContainer = new Obstacles(this._canvas);
-        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer)
+        this._gameManager = new GameManager(this._stage, this._spriteContainer.createFakePlayer(), this._obstaclesContainer)
         // this._backgroundContainer = new PIXI.Container();
         this._start();
 
@@ -122,6 +122,7 @@ class Pixi {
     _removeChilds() {
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
         this._skewedContainer.removeChild(this._obstaclesContainer.drawObstacles())
+        this._skewedContainer.removeChild(this._spriteContainer.createFakePlayer())
 
         this._container.removeChild(this._skewedContainer)
 
@@ -131,6 +132,7 @@ class Pixi {
     _addChilds() {
         this._skewedContainer.addChild(this._roadContainer.drawRoad());
         this._skewedContainer.addChild(this._obstaclesContainer.drawObstacles());
+        this._skewedContainer.addChild(this._spriteContainer.createFakePlayer())
 
         this._container.addChild(this._skewedContainer);
 
