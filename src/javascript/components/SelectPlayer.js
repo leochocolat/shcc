@@ -9,14 +9,13 @@ class SelectPlayer {
         this.playerContainer = this.container.querySelector('.js-playerContainer');
         this.players = this.container.querySelectorAll('.js-player img');
         this.clicked = false;
-        this._setup()
+        this._setup();
     }
     _selectPlayer(index) {
-        console.log(index)
         if (!this.clicked) {
             this.clicked = true;
-            TweenLite.to(this.players[index], 1, { y: 70, ease: Power3.easeOut })
-            TweenLite.to(this.playerContainer, 0.5, { autoAlpha: 0, visibility: 'hidden', delay: 0.1 })
+            TweenLite.to(this.players[index], 1, { y: 70, ease: Power3.easeOut });
+            TweenLite.to(this.playerContainer, 0.5, { autoAlpha: 0, visibility: 'hidden', delay: 0.1 });
             new TextureLoader(index);
         }
     }
