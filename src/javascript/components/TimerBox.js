@@ -46,8 +46,8 @@ class TimerBox {
         this._timerBoxContainer.addChild(this._timerBoxGraphicTop);
         this._timerBoxContainer.addChild(this._timerBoxGraphicRight);
         this._timerBoxContainer.addChild(this._timerBoxGraphicFront);
-        this._timerBoxContainer.position.x += 100
-        this._timerBoxContainer.position.y += 35
+        this._timerBoxContainer.position.x += this._canvas.width / 20
+        this._timerBoxContainer.position.y += this._canvas.width / 20
 
 
     }
