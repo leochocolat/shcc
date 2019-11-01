@@ -13,7 +13,7 @@ class GameManager {
             obstacleBounds = this._obstacle.getBounds();
 
         if (playerBounds.x + playerBounds.width >= obstacleBounds.x && playerBounds.x < obstacleBounds.x + obstacleBounds.width && playerBounds.y + playerBounds.height >= obstacleBounds.y) {
-            this._hitText()
+            // this._hitText()
         }
     }
     _hitText() {

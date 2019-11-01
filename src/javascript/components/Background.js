@@ -12,10 +12,8 @@ class Background {
     };
 
     this.velocity = {};
-    this.velocity.x =
-      this._wallProperties.speed * Math.cos((Math.PI * 30.75) / 180);
-    this.velocity.y =
-      this._wallProperties.speed * Math.sin((Math.PI * 30.75) / 180);
+    this.velocity.x = this._wallProperties.speed * Math.cos((Math.PI * 30.75) / 180);
+    this.velocity.y = this._wallProperties.speed * Math.sin((Math.PI * 30.75) / 180);
 
     this.setup();
   }
@@ -44,12 +42,8 @@ class Background {
       building.width = this._wallProperties.width;
       building.height = this._wallProperties.height;
 
-      building.position.x =
-        this._wallProperties.x -
-        this._wallProperties.padding * i * Math.cos((Math.PI * 30.75) / 180);
-      building.position.y =
-        this._wallProperties.y +
-        this._wallProperties.padding * i * Math.sin((Math.PI * 30.75) / 180);
+      building.position.x = this._wallProperties.x - this._wallProperties.padding * i * Math.cos((Math.PI * 30.75) / 180);
+      building.position.y = this._wallProperties.y + this._wallProperties.padding * i * Math.sin((Math.PI * 30.75) / 180);
 
       this._buildings.push(building);
       this._buildingsContainer.addChild(building);
@@ -63,7 +57,7 @@ class Background {
       this._buildingsContainer.children[i].transform.position.y += this.velocity.y;
 
       if (this._buildingsContainer.children[i].position.x + this._wallProperties.width < 0) {
-        // this._buildingsContainer.children[i].gotoAndStop(Math.round(Math.random() * this._textures.length));
+        this._buildingsContainer.children[i].gotoAndStop(Math.round(Math.random() * this._textures.length));
         this._buildingsContainer.children[i].position.x = this._wallProperties.x;
         this._buildingsContainer.children[i].position.y = this._wallProperties.y;
       }

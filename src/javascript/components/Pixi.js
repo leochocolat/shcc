@@ -110,11 +110,11 @@ class Pixi {
     _setupLayers() {
         this._spriteContainer = new Player(this._canvas, this._playerIndex, this._resources['animationSpritesheet']);
         this._roadContainer = new Road(this._canvas);
-        this._obstaclesContainer = new Obstacles(this._canvas);
-        this._backgroundContainer = new Background(this._canvas, this._resources['buildingSpritesheet'])
+        this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
+        this._backgroundContainer = new Background(this._canvas, this._resources['buildingSpritesheet']);
         this._timerBoxContainer = new TimerBox(this._canvas);
-        this._gameManager = new GameManager(this._stage, this._spriteContainer.createFakePlayer(), this._obstaclesContainer)
-        // this._backgroundContainer = new PIXI.Container();
+        this._gameManager = new GameManager(this._stage, this._spriteContainer.createFakePlayer(), this._obstaclesContainer);
+
         this._start();
     }
 
@@ -141,13 +141,11 @@ class Pixi {
 
 
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
-        this._skewedContainer.removeChild(this._obstaclesContainer.drawObstacles())
         this._skewedContainer.removeChild(this._spriteContainer.createFakePlayer())
-
         this._skewedContainer.removeChild(this._timerBoxContainer.drawTimerBox());
 
-        this._container.removeChild(this._skewedContainer)
-
+        this._container.removeChild(this._skewedContainer);
+        this._container.removeChild(this._obstaclesContainer.drawObstacles())
         this._container.removeChild(this._spriteContainer.drawPlayer());
 
     }
@@ -156,13 +154,11 @@ class Pixi {
         this._container.addChild(this._backgroundContainer.drawBackground());
 
         this._skewedContainer.addChild(this._roadContainer.drawRoad());
-        this._skewedContainer.addChild(this._obstaclesContainer.drawObstacles());
         this._skewedContainer.addChild(this._spriteContainer.createFakePlayer())
-
         this._skewedContainer.addChild(this._timerBoxContainer.drawTimerBox());
 
         this._container.addChild(this._skewedContainer);
-
+        this._container.addChild(this._obstaclesContainer.drawObstacles());
         this._container.addChild(this._spriteContainer.drawPlayer());
 
     }
@@ -174,12 +170,13 @@ class Pixi {
 
         this._removeChilds();
         this._addChilds();
+
         this._roadContainer.updateRoadLinesPosition();
         this._obstaclesContainer.updateObstaclesPosition();
         this._backgroundContainer.updateBackgroundPosition();
 
-        // this._spriteContainer.tick('TOTO: DeltaTime');
-        this._gameManager.tick()
+        // this._spriteContainer.tick('TODO: DeltaTime');
+        this._gameManager.tick();
         this._updateTimerSeconds();
 
 
