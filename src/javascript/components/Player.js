@@ -72,24 +72,24 @@ class Player {
         for (let i = this._animationProperties[this._playerIndex][3].start; i <= this._animationProperties[this._playerIndex][3].end; i++) {
             pedalingSprites.push(this._resources.textures[`${this._spritesNames[this._playerIndex][1]}_0${i}.png`]);
         }
-        this._pedalingAnimation = new PIXI.extras.AnimatedSprite(pedalingSprites);
+        this._standardAnimation = new PIXI.extras.AnimatedSprite(pedalingSprites);
 
         let ratio = this._preJumpAnimation.width / this._preJumpAnimation.height;
 
         this._preJumpAnimation.animationSpeed = .3;
         this._jumpAnimation.animationSpeed = .3;
         this._fallAnimation.animationSpeed = .3;
-        this._pedalingAnimation.animationSpeed = .3;
+        this._standardAnimation.animationSpeed = .3;
 
         this._preJumpAnimation.loop = false
         this._jumpAnimation.loop = false
         this._fallAnimation.loop = false
-        this._pedalingAnimation.loop = true
+        this._standardAnimation.loop = true
 
         this._preJumpAnimation.play()
         this._jumpAnimation.play()
         this._fallAnimation.play()
-        this._pedalingAnimation.play()
+        this._standardAnimation.play()
 
         this._preJumpAnimation.width = this._spriteProperties.width
         this._preJumpAnimation.height = this._spriteProperties.width / ratio;
@@ -100,8 +100,8 @@ class Player {
         this._fallAnimation.width = this._spriteProperties.width
         this._fallAnimation.height = this._spriteProperties.width / ratio;
 
-        this._pedalingAnimation.width = this._spriteProperties.width
-        this._pedalingAnimation.height = this._spriteProperties.width / ratio;
+        this._standardAnimation.width = this._spriteProperties.width
+        this._standardAnimation.height = this._spriteProperties.width / ratio;
 
         this._preJumpAnimation.position.x = this._spriteProperties.x;
         this._preJumpAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
@@ -112,8 +112,8 @@ class Player {
         this._fallAnimation.position.x = this._spriteProperties.x;
         this._fallAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
 
-        this._pedalingAnimation.position.x = this._spriteProperties.x;
-        this._pedalingAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
+        this._standardAnimation.position.x = this._spriteProperties.x;
+        this._standardAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
 
         if (this._playerIndex == 1) {
             let poussingSprites = []
@@ -122,15 +122,14 @@ class Player {
             }
             this._poussingAnimation = new PIXI.extras.AnimatedSprite(poussingSprites);
             this._poussingAnimation.animationSpeed = .3;
-            this._poussingAnimation.loop = true
-            this._poussingAnimation.width = this._spriteProperties.width
+            this._poussingAnimation.loop = true;
+            this._poussingAnimation.width = this._spriteProperties.width;
             this._poussingAnimation.height = this._spriteProperties.width / ratio;
             this._poussingAnimation.position.x = this._spriteProperties.x;
             this._poussingAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
         }
 
-        this._addChild(this._pedalingAnimation);
-
+        this._addChild(this._standardAnimation);
     }
 
     createFakePlayer() {
@@ -164,22 +163,24 @@ class Player {
         TweenLite.to(this._spriteContainer.transform.position, 0.4, {
             y: 0, onComplete: () => {
                 this._isJumping = false;
-                this._playPedalingAnimation();
+                setTimeout(() => {
+                    this._playPedalingAnimation();
+                }, 0)
             }
         });
     }
 
     _playPedalingAnimation() {
         this._removeChilds(this._spriteContainer);
-        this._addChild(this._pedalingAnimation);
-        this._pedalingAnimation.gotoAndPlay(0);
+        this._addChild(this._standardAnimation);
+        this._standardAnimation.gotoAndPlay(0);
     }
 
     _removeChilds(container) {
         container.removeChild(this._preJumpAnimation);
         container.removeChild(this._jumpAnimation);
         container.removeChild(this._fallAnimation);
-        container.removeChild(this._pedalingAnimation);
+        container.removeChild(this._standardAnimation);
     }
 
     _addChild(animatedSprite) {

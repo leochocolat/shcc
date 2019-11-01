@@ -174,6 +174,8 @@ class Pixi {
         this._gameManager.tick()
         this._updateTimerSeconds();
 
+
+        
         this._app.render(this._stage);
     }
 
