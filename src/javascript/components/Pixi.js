@@ -113,7 +113,7 @@ class Pixi {
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
         this._backgroundContainer = new Background(this._canvas, this._resources['buildingSpritesheet']);
         this._timerBoxContainer = new TimerBox(this._canvas);
-        this._gameManager = new GameManager(this._stage, this._spriteContainer.createFakePlayer(), this._obstaclesContainer);
+        this._gameManager = new GameManager(this._stage, this._spriteContainer.getPlayer(), this._obstaclesContainer);
 
         this._start();
     }
@@ -141,7 +141,6 @@ class Pixi {
 
 
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
-        this._skewedContainer.removeChild(this._spriteContainer.createFakePlayer())
         this._skewedContainer.removeChild(this._timerBoxContainer.drawTimerBox());
 
         this._container.removeChild(this._skewedContainer);
@@ -154,7 +153,6 @@ class Pixi {
         this._container.addChild(this._backgroundContainer.drawBackground());
 
         this._skewedContainer.addChild(this._roadContainer.drawRoad());
-        this._skewedContainer.addChild(this._spriteContainer.createFakePlayer())
         this._skewedContainer.addChild(this._timerBoxContainer.drawTimerBox());
 
         this._container.addChild(this._skewedContainer);
