@@ -13,7 +13,7 @@ class Pixi {
     constructor(playerIndex, resources) {
         this._playerIndex = playerIndex;
         this._resources = resources;
-        
+
         _.bindAll(this, '_tickHandler', '_resizeHandler');
 
 
@@ -108,10 +108,11 @@ class Pixi {
         this._spriteContainer = new Player(this._canvas, this._playerIndex, this._resources);
         this._roadContainer = new Road(this._canvas);
         this._obstaclesContainer = new Obstacles(this._canvas);
-        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer)
+        this._gameManager = new GameManager(this._stage, this._spriteContainer.createFakePlayer(), this._obstaclesContainer)
+        // this._backgroundContainer = new PIXI.Container();
         this._start();
     }
-    
+
     _start() {
         this._createTimer()
 
@@ -133,6 +134,7 @@ class Pixi {
     _removeChilds() {
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
         this._skewedContainer.removeChild(this._obstaclesContainer.drawObstacles())
+        this._skewedContainer.removeChild(this._spriteContainer.createFakePlayer())
 
         this._container.removeChild(this._skewedContainer)
 
@@ -142,6 +144,7 @@ class Pixi {
     _addChilds() {
         this._skewedContainer.addChild(this._roadContainer.drawRoad());
         this._skewedContainer.addChild(this._obstaclesContainer.drawObstacles());
+        this._skewedContainer.addChild(this._spriteContainer.createFakePlayer())
 
         this._container.addChild(this._skewedContainer);
 
@@ -161,6 +164,8 @@ class Pixi {
         this._gameManager.tick()
         this._updateTimerSeconds();
 
+
+        
         this._app.render(this._stage);
     }
 
