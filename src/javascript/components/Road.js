@@ -15,6 +15,7 @@ class Road {
         this._settings = {
             speed: 7
         }
+        
         this._roadContainer = new PIXI.Container();
         this.createRoad()
     }
