@@ -4,8 +4,8 @@ class Background {
     this._resources = resources;
 
     this._wallProperties = {
-      x: this._canvas.width,
-      y: -this._canvas.height,
+      x: this._canvas.width * 1.9,
+      y: -this._canvas.height * 2,
       height: 850,
       speed: 7,
       padding: 400
@@ -33,7 +33,7 @@ class Background {
 
     this._buildings = [];
 
-    let limit = 5;
+    let limit = 9;
     for (let i = 0; i < limit; i++) {
       let building = new PIXI.extras.AnimatedSprite(this._textures);
       building.gotoAndStop(Math.round(Math.random() * this._textures.length));
