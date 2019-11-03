@@ -8,10 +8,10 @@ class TextureLoader {
         _.bindAll(this, '_onTextureLoaded');
 
         this._spritesheetsUrl = [
-            '../assets/spriteheets/bikeSpritesheet.json',
-            '../assets/spriteheets/skateSpritesheet.json',
-            '../assets/spriteheets/buildingSpritesheet.json',
-            '../assets/spriteheets/obstacles.json'
+            'assets/spriteheets/bikeSpritesheet.json',
+            'assets/spriteheets/skateSpritesheet.json',
+            'assets/spriteheets/buildingSpritesheet.json',
+            'assets/spriteheets/obstacles.json'
         ]
 
         this._setup();
