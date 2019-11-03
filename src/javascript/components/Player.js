@@ -143,26 +143,31 @@ class Player {
     }
 
     _playJumpAnimation() {
+        if (this._isTweening) return;
+        this._isTweening = true;
+
         this._removeChilds(this._spriteContainer);
         this._addChild(this._jumpAnimation);
+
         this._jumpAnimation.gotoAndPlay(0);
         TweenLite.to(this._spriteContainer.transform.position, .5, {
             y: -40, onComplete: () => {
+                this._isTweening = false;
                 this._playFallAnimation();
             }
         });
     }
 
     _playFallAnimation() {
+        this._isTweening = true;
         this._removeChilds(this._spriteContainer);
         this._addChild(this._fallAnimation);
         this._fallAnimation.gotoAndPlay(0);
         TweenLite.to(this._spriteContainer.transform.position, 0.4, {
             y: 0, onComplete: () => {
+                this._isTweening = false;
                 this._isJumping = false;
-                setTimeout(() => {
-                    this._playPedalingAnimation();
-                }, 0)
+                this._playPedalingAnimation();
             }
         });
     }
@@ -185,6 +190,7 @@ class Player {
     }
 
     _updatePositionsArrow(direction) {
+        if (this._isTweening) return;
         TweenLite.to(this._spriteContainer.transform.position, .7, { y: 10 * direction, x: 300 * direction, ease: Power3.easeOut });
     }
 

@@ -8,16 +8,16 @@ class GameManager {
     _setup() {
         // TESTS
     }
+
     tick() {
         let playerBounds = this._player.getBounds(),
             obstacleBounds = this._obstacle.getBounds();
 
-        console.log(obstacleBounds.y);
-
         if (playerBounds.x + playerBounds.width >= obstacleBounds.x && playerBounds.x < obstacleBounds.x + obstacleBounds.width && playerBounds.y + playerBounds.height >= obstacleBounds.y) {
-            this._hitText();
+            // this._hitText();
         }
     }
+
     _hitText() {
         let message = new PIXI.Text("You Lose!");
         message.position.set(window.innerWidth / 2, window.innerHeight / 2);

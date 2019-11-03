@@ -12,14 +12,14 @@ class Background {
     };
 
     this.velocity = {};
-    this.velocity.x = this._wallProperties.speed * Math.cos((Math.PI * 30.75) / 180);
-    this.velocity.y = this._wallProperties.speed * Math.sin((Math.PI * 30.75) / 180);
 
     this.setup();
   }
 
   setup() {
     this._buildingsContainer = new PIXI.Container();
+    // this._buildingsContainer.transform.skew.x = - Math.PI * 30.75 / 180;
+    // this._buildingsContainer.rotation = Math.PI * 30.75 / 180;
     this._createAnimatedBackground();
   }
 
@@ -50,18 +50,19 @@ class Background {
     }
   }
 
-  updateBackgroundPosition() {
-    for (let i = 0; i < this._buildingsContainer.children.length; i++) {
+  updateBackgroundPosition(speed, deltaTime) {
+    this.velocity.x = speed * Math.cos((Math.PI * 30.75) / 180);
+    this.velocity.y = speed * Math.sin((Math.PI * 30.75) / 180);
 
-      this._buildingsContainer.children[i].transform.position.x += -this.velocity.x;
-      this._buildingsContainer.children[i].transform.position.y += this.velocity.y;
+    for (let i = 0; i < this._buildingsContainer.children.length; i++) {
+      this._buildingsContainer.children[i].transform.position.x += -this.velocity.x * deltaTime;
+      this._buildingsContainer.children[i].transform.position.y += this.velocity.y * deltaTime;
 
       if (this._buildingsContainer.children[i].position.x + this._wallProperties.width < 0) {
         this._buildingsContainer.children[i].gotoAndStop(Math.round(Math.random() * this._textures.length));
         this._buildingsContainer.children[i].position.x = this._wallProperties.x;
         this._buildingsContainer.children[i].position.y = this._wallProperties.y;
       }
-
     }
   }
 

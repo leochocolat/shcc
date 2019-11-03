@@ -8,6 +8,7 @@ class Timer {
         this.startTime = Date.now();
         this.seconds = 0;
     }
+
     getDeltaTime() {
         let elapsedTime = Date.now() - this.startTime;
         this.seconds = (elapsedTime / 1000).toFixed(2)
@@ -15,6 +16,7 @@ class Timer {
         this.shadowTimer.innerHTML = this.timer.innerHTML
         return this.seconds
     }
+
     stopTimer() {
         clearInterval(this.interval);
     }

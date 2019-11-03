@@ -28,7 +28,7 @@ class Pixi {
         this._isReady = false;
 
         this._settings = {
-            speed: 7,
+            speed: .5,
             allowSkew: true
         }
 
@@ -56,6 +56,10 @@ class Pixi {
     }
 
     _setup() {
+        this._dateNow = Date.now()
+        this._lastTime = this._dateNow;
+        this._deltaTime = 16;
+
         this._setupStats();
         this._setupPixi();
         this._resize();
@@ -93,8 +97,12 @@ class Pixi {
         this._skewedContainer = new PIXI.Container();
 
         if (!this._settings.allowSkew) return;
+        this._skewedContainer.position.x = 0;
+        this._skewedContainer.position.y = 0;
+
         this._skewedContainer.position.x = this._skewProperties.x;
         this._skewedContainer.position.y = this._skewProperties.y;
+
         this._skewedContainer.transform.skew.x = this._skewProperties.degrees;
         this._skewedContainer.rotation = - this._skewProperties.degrees;
     }
@@ -139,14 +147,12 @@ class Pixi {
     _removeChilds() {
         this._container.removeChild(this._backgroundContainer.drawBackground());
 
-
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
         this._skewedContainer.removeChild(this._timerBoxContainer.drawTimerBox());
 
         this._container.removeChild(this._skewedContainer);
-        this._container.removeChild(this._obstaclesContainer.drawObstacles())
+        this._skewedContainer.removeChild(this._obstaclesContainer.drawObstacles())
         this._container.removeChild(this._spriteContainer.drawPlayer());
-
     }
 
     _addChilds() {
@@ -156,30 +162,34 @@ class Pixi {
         this._skewedContainer.addChild(this._timerBoxContainer.drawTimerBox());
 
         this._container.addChild(this._skewedContainer);
-        this._container.addChild(this._obstaclesContainer.drawObstacles());
+        this._skewedContainer.addChild(this._obstaclesContainer.drawObstacles());
         this._container.addChild(this._spriteContainer.drawPlayer());
-
     }
 
     _tick() {
         if (!this._isReady) return;
+        this._updateDeltaTime();
 
-        this._delta += 1 * this._settings.speed;
+        this._delta += 1 * this._settings.speed * this.deltaTime;
 
         this._removeChilds();
         this._addChilds();
 
-        this._roadContainer.updateRoadLinesPosition();
-        this._obstaclesContainer.updateObstaclesPosition();
-        this._backgroundContainer.updateBackgroundPosition();
+        this._roadContainer.updateRoadLinesPosition(this._settings.speed, this._deltaTime);
+        this._obstaclesContainer.updateObstaclesPosition(this._settings.speed, this._deltaTime);
+        this._backgroundContainer.updateBackgroundPosition(this._settings.speed, this._deltaTime);
 
         // this._spriteContainer.tick('TODO: DeltaTime');
         this._gameManager.tick();
         this._updateTimerSeconds();
 
-
-
         this._app.render(this._stage);
+    }
+
+    _updateDeltaTime() {
+        this._dateNow = Date.now();
+        this._deltaTime = this._dateNow - this._lastTime;
+        this._lastTime = this._dateNow;
     }
 
     _setupEventListeners() {

@@ -15,10 +15,11 @@ class Road {
         this._settings = {
             speed: 7
         }
-        
+
         this._roadContainer = new PIXI.Container();
         this.createRoad()
     }
+
     createRoad() {
         const degrees = Math.PI * 30.75 / 180
 
@@ -42,14 +43,16 @@ class Road {
 
         this._roadContainer.addChild(this._roadLinesContainer);
     }
-    updateRoadLinesPosition() {
+
+    updateRoadLinesPosition(speed, deltaTime) {
         for (let i = 0; i < this._roadLinesContainer.children.length; i++) {
-            this._roadLinesContainer.children[i].position.x += this._settings.speed * -1;
+            this._roadLinesContainer.children[i].position.x += speed * -1 * deltaTime;
             if (this._roadLinesContainer.children[i].position.x < 0) {
                 this._roadLinesContainer.children[i].position.x = this._roadLastPositionX + this._roadProperties.linesPadding;
             }
         }
     }
+
     drawRoad() {
         return this._roadContainer
     }
