@@ -85,7 +85,9 @@ class Pixi {
             transparent: false,
             backgroundColor: 0x808080
         });
+
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+        PIXI.settings.SORTABLE_CHILDREN;
 
         this._canvas = this._app.view;
         this._container = new PIXI.Container();
@@ -98,7 +100,7 @@ class Pixi {
 
         if (!this._settings.allowSkew) return;
         this._skewedContainer.position.x = 0;
-        this._skewedContainer.position.y = 0;
+        this._skewedContainer.position.y = 500;
 
         this._skewedContainer.position.x = this._skewProperties.x;
         this._skewedContainer.position.y = this._skewProperties.y;
@@ -145,7 +147,7 @@ class Pixi {
     }
 
     _removeChilds() {
-        this._container.removeChild(this._backgroundContainer.drawBackground());
+        this._skewedContainer.removeChild(this._backgroundContainer.drawBackground());
 
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
         this._skewedContainer.removeChild(this._timerBoxContainer.drawTimerBox());
@@ -159,7 +161,7 @@ class Pixi {
     }
 
     _addChilds() {
-        this._container.addChild(this._backgroundContainer.drawBackground());
+        this._skewedContainer.addChild(this._backgroundContainer.drawBackground());
 
         this._skewedContainer.addChild(this._roadContainer.drawRoad());
         this._skewedContainer.addChild(this._timerBoxContainer.drawTimerBox());
