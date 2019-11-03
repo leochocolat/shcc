@@ -185,7 +185,6 @@ class Pixi {
         this._obstaclesContainer.updateObstaclesPosition(this._settings.speed, this._deltaTime);
         this._backgroundContainer.updateBackgroundPosition(this._settings.speed, this._deltaTime);
 
-        // this._spriteContainer.tick('TODO: DeltaTime');
         this._gameManager.tick();
         this._updateTimerSeconds();
 

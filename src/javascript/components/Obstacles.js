@@ -8,7 +8,7 @@ class Obstacles {
             y: 0,
             width: 350,
             speed: 7,
-            degree: (Math.PI * 30.75 / 180) / 2
+            degree: (Math.PI * 30.75 / 180)
         }
 
         this._velocity = {};
@@ -17,6 +17,7 @@ class Obstacles {
     }
     setup() {
         this._obstaclesContainer = new PIXI.Container();
+        this._obstaclesContainer.transform.skew.x = - this._obstacleProperties.degree;
 
         this._createAnimatedObstacles();
     }
@@ -29,15 +30,17 @@ class Obstacles {
 
         this._animatedObstacle = new PIXI.extras.AnimatedSprite(this._textures);
         this._animatedObstacle.gotoAndStop(Math.round(Math.random() * this._textures.length));
+
         let ratio = this._animatedObstacle.width / this._animatedObstacle.height;
+
         this._animatedObstacle.width = this._obstacleProperties.width;
         this._animatedObstacle.height = this._obstacleProperties.width / ratio;
 
-        this._animatedObstacle.transform.skew.x = - this._obstacleProperties.degree;
-        this._animatedObstacle.rotation = this._obstacleProperties.degree;
-
         this._animatedObstacle.position.x = this._obstacleProperties.x;
         this._animatedObstacle.position.y = this._obstacleProperties.y;
+
+        // this._animatedObstacle.transform.skew.x = - this._obstacleProperties.degree;
+        this._animatedObstacle.rotation = this._obstacleProperties.degree;
 
         this._obstaclesContainer.addChild(this._animatedObstacle);
     }
