@@ -10,7 +10,8 @@ class TextureLoader {
         this._spritesheetsUrl = [
             '../assets/spriteheets/bikeSpritesheet.json',
             '../assets/spriteheets/skateSpritesheet.json',
-            '../assets/spriteheets/buildingSpritesheet.json'
+            '../assets/spriteheets/buildingSpritesheet.json',
+            '../assets/spriteheets/obstacles.json'
         ]
 
         this._setup();
@@ -21,6 +22,7 @@ class TextureLoader {
         this._textureLoader = new PIXI.loaders.Loader();
         this._textureLoader.add('animationSpritesheet', this._spritesheetsUrl[this._playerIndex]);
         this._textureLoader.add('buildingSpritesheet', this._spritesheetsUrl[2]);
+        this._textureLoader.add('obstaclesSpritesheet', this._spritesheetsUrl[3]);
     }
 
     _setupEventListeners() {

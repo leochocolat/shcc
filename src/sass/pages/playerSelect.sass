@@ -4,7 +4,7 @@
 .container__playerSelect
     width: 100%
     height: 100vh
-    background-color: black
+    background-color: grey
     position: absolute
     top: 0
     left: 0
@@ -15,27 +15,28 @@
     &.hidden
         visibility: hidden
         opacity: 0
-.playerSelect__logo
+.playerSelect__text
     position: absolute
-    top: 5%
+    top: 15%
     left: 50%
-    transform: translateX(-50%)
+    transform: translateX(-50%) skewY(5.125deg)
+    text-transform: uppercase
     color: white
-    font-size: 35px
+    font-size: 39px
     text-align: center
+    .fontSize-player
+        font-size: 55px
 .playerSelect__player
     display: flex
     height: 100vh
 .player__first, .player__second
     width: 50%
-    justify-content: center
     display: flex
     align-items: center
 .player__first
-    background-color: red
+    justify-content: flex-end
 .player__second
-    background-color: blue
 .player__first img, .player__second img
-    width: 100px
+    width: 170px
     cursor: pointer
 
