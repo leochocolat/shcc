@@ -76,15 +76,15 @@ class Pixi {
             view: this.el,
             width: window.innerWidth,
             height: window.innerHeight,
-            transparent: true,
             antialias: true,
-            preserveDrawingBuffer: true
+            preserveDrawingBuffer: true,
+            transparent: false,
+            backgroundColor: 0x808080
         });
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
         this._canvas = this._app.view;
         this._container = new PIXI.Container();
-
         this._stage = this._app.stage;
         this._stage.addChild(this._container);
     }
@@ -125,15 +125,15 @@ class Pixi {
     }
 
     _createTimer() {
-        this.timer = new Timer()
+        this._timer = new Timer()
     }
 
     _updateTimerSeconds() {
-        this.timer.getDeltaTime()
+        this._timer.getDeltaTime()
     }
 
     _updateTimerSeconds() {
-        this._currentTime = this.timer.getDeltaTime();
+        this._currentTime = this._timer.getDeltaTime();
     }
 
     _removeChilds() {
@@ -145,6 +145,7 @@ class Pixi {
         this._skewedContainer.removeChild(this._spriteContainer.createFakePlayer())
 
         this._skewedContainer.removeChild(this._timerBoxContainer.drawTimerBox());
+        this._container.removeChild(this._timer.drawTimer())
 
         this._container.removeChild(this._skewedContainer)
 
@@ -160,8 +161,10 @@ class Pixi {
         this._skewedContainer.addChild(this._spriteContainer.createFakePlayer())
 
         this._skewedContainer.addChild(this._timerBoxContainer.drawTimerBox());
+        this._container.addChild(this._timer.drawTimer())
 
         this._container.addChild(this._skewedContainer);
+
 
         this._container.addChild(this._spriteContainer.drawPlayer());
 
