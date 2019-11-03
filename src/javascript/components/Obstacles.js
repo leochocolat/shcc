@@ -6,7 +6,7 @@ class Obstacles {
         this._obstacleProperties = {
             x: this._canvas.width,
             y: 0,
-            width: 350,
+            width: 300,
             degree: (Math.PI * 30.75 / 180)
         }
 
@@ -48,7 +48,8 @@ class Obstacles {
             this._animatedObstacle.position.x += -1 * speed * deltaTime;
             if (this._animatedObstacle.position.x < 0) {
                 this._animatedObstacle.gotoAndStop(Math.round(Math.random() * this._textures.length));
-                this._animatedObstacle.transform.position.x = this._obstacleProperties.x
+                this._animatedObstacle.transform.position.x = this._canvas.width + Math.random() * this._canvas.width / 2;
+                this._animatedObstacle.transform.position.y = this._obstacleProperties.y + 100 * (Math.round(Math.random() * 1));
             }
         }
     }

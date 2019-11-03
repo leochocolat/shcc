@@ -28,7 +28,7 @@ class Pixi {
         this._isReady = false;
 
         this._settings = {
-            speed: .5,
+            speed: .8,
             allowSkew: true
         }
 
@@ -100,7 +100,7 @@ class Pixi {
 
         if (!this._settings.allowSkew) return;
         this._skewedContainer.position.x = 0;
-        this._skewedContainer.position.y = 500;
+        // this._skewedContainer.position.y = 500;
 
         this._skewedContainer.position.x = this._skewProperties.x;
         this._skewedContainer.position.y = this._skewProperties.y;

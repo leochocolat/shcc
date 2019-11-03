@@ -45,7 +45,7 @@ class Road {
             roadLine.beginFill(0xFFFFFF);
             roadLine.drawRect(0, 0, this._roadProperties.linesWidth, this._roadProperties.linesHeight);
             roadLine.transform.skew.x = degrees;
-            roadLine.transform.position.x = i * this._roadProperties.linesPadding
+            roadLine.transform.position.x = i * this._roadProperties.linesPadding;
             roadLine.transform.position.y = (this._roadProperties.height / 2) - (this._roadProperties.linesHeight / 2)
             this._roadLastPositionX = i * this._roadProperties.linesPadding;
             this._roadLinesContainer.addChild(roadLine);
@@ -58,7 +58,7 @@ class Road {
         for (let i = 0; i < this._roadLinesContainer.children.length; i++) {
             this._roadLinesContainer.children[i].position.x += speed * -1 * deltaTime;
             if (this._roadLinesContainer.children[i].position.x < 0) {
-                this._roadLinesContainer.children[i].position.x = this._roadLastPositionX + this._roadProperties.linesPadding;
+                this._roadLinesContainer.children[i].position.x = this._roadLinesContainer.position.x + this._roadLinesContainer.width + this._roadProperties.linesPadding / 2
             }
         }
     }

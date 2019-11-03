@@ -57,8 +57,6 @@ class Background {
         this._buildingsContainer.children[i].gotoAndStop(Math.round(Math.random() * this._textures.length));
         // this._buildingsContainer.children[i].transform.position.x = this._buildingsContainer.position.x + this._buildingsContainer.width / 2;
         this._buildingsContainer.children[i].transform.position.x = this._canvas.width * 1.5;
-        // this._buildingsContainer.children[i].zIndex = -1000;
-        // this._buildingsContainer.sortChildren();
       }
     }
   }
