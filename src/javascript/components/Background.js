@@ -28,6 +28,30 @@ class Background {
     for (let i in this._resources.textures) {
       this._textures.push(this._resources.textures[i]);
     }
+  }
+
+  setup() {
+    this._buildingsContainer = new PIXI.Container();
+    this._createAnimatedBackground();
+  }
+
+  _createAnimatedBackground() {
+    this._textures = [];
+    for (let i in this._resources.textures) {
+      this._textures.push(this._resources.textures[i]);
+    }
+  }
+
+  setup() {
+    this._buildingsContainer = new PIXI.Container();
+    this._createAnimatedBackground();
+  }
+
+  _createAnimatedBackground() {
+    this._textures = [];
+    for (let i in this._resources.textures) {
+      this._textures.push(this._resources.textures[i]);
+    }
 
     this._buildings = [];
 
@@ -39,11 +63,15 @@ class Background {
       let ratio = building.width / building.height;
       this._wallProperties.width = this._wallProperties.height * ratio;
 
-      building.width = this._wallProperties.width;
-      building.height = this._wallProperties.height;
-
       building.position.x = this._wallProperties.x - this._wallProperties.padding * i * Math.cos((Math.PI * 30.75) / 180);
       building.position.y = this._wallProperties.y + this._wallProperties.padding * i * Math.sin((Math.PI * 30.75) / 180);
+
+      building.position.x =
+        this._wallProperties.x -
+        this._wallProperties.padding * i * Math.cos((Math.PI * 30.75) / 180);
+      building.position.y =
+        this._wallProperties.y +
+        this._wallProperties.padding * i * Math.sin((Math.PI * 30.75) / 180);
 
       this._buildings.push(building);
       this._buildingsContainer.addChild(building);

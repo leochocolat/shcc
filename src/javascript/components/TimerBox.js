@@ -30,26 +30,22 @@ class TimerBox {
         this._timerBoxGraphicFront.transform.skew.x = this._timerBoxProperties.degrees;
         this._timerBoxGraphicFront.transform.skew.y = -this._timerBoxProperties.degrees * Math.PI / 2.18;
 
-        // this._timerBoxGraphicFront.transform.skew.x = 0.103
     }
     _createTimerBoxRight() {
         this._timerBoxGraphicRight = new PIXI.Graphics();
         this._timerBoxGraphicRight.beginFill(0x019dc3);
-        this._timerBoxGraphicRight.drawRect(0, 0, this._timerBoxProperties.width, this._timerBoxProperties.height + 20);
+        this._timerBoxGraphicRight.drawRect(0, 0, this._timerBoxProperties.width, this._timerBoxProperties.height * 2);
         this._timerBoxGraphicRight.position.x = (this._canvas.width - this._timerBoxProperties.width + 103)
         this._timerBoxGraphicRight.position.y = (this._canvas.height - this._timerBoxProperties.height + 205)
         this._timerBoxGraphicRight.transform.skew.x = -this._timerBoxProperties.degrees * Math.PI / 2.115;
-        // this._timerBoxGraphicRight.skew.x = -this._timerBoxProperties.degrees
         this._addGraphics()
     }
     _addGraphics() {
         this._timerBoxContainer.addChild(this._timerBoxGraphicTop);
         this._timerBoxContainer.addChild(this._timerBoxGraphicRight);
         this._timerBoxContainer.addChild(this._timerBoxGraphicFront);
-        this._timerBoxContainer.position.x += this._canvas.width / 20
-        this._timerBoxContainer.position.y += this._canvas.width / 20
-
-
+        this._timerBoxContainer.position.x += this._canvas.width / 18
+        this._timerBoxContainer.position.y += this._canvas.width / 18
     }
     drawTimerBox() {
         return this._timerBoxContainer

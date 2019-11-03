@@ -28,6 +28,16 @@ class Road {
         this._road.drawRect(0, 0, this._canvas.width * 4, this._roadProperties.height);
         this._roadContainer.addChild(this._road);
 
+        this._borderRoadLeft = new PIXI.Graphics();
+        this._borderRoadLeft.beginFill(0x666666);
+        this._borderRoadLeft.drawRect(0, 0, this._canvas.width * 4, 10);
+        this._roadContainer.addChild(this._borderRoadLeft);
+
+        this._borderRoadRight = new PIXI.Graphics();
+        this._borderRoadRight.beginFill(0x666666);
+        this._borderRoadRight.drawRect(0, this._roadProperties.height + 100, this._canvas.width * 4, 10);
+        this._roadContainer.addChild(this._borderRoadRight);
+
         this._roadLinesContainer = new PIXI.Container();
 
         for (let i = 0; i < this._roadProperties.linesAmount; i++) {
