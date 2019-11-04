@@ -12,7 +12,7 @@
     left: 0
     z-index: 9999
     visibility: visible
-    visibility: hidden
+    // visibility: hidden
     opacity: 1
     transition: 1s ease
     &.hidden
@@ -72,9 +72,16 @@
         transition: transform .2s ease-in-out
 
     &:hover
-        img 
-            transform: translateY(-10px)
+        .player__head
+            transform: translateY(-20px)
 
 .player__first
     transform: translate(-5%, -8.4%)
 
+.player
+    position: relative
+
+.player__head
+    position: absolute
+    left: 0
+    top: 0

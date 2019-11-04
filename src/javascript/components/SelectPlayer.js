@@ -14,8 +14,7 @@ class SelectPlayer {
     _selectPlayer(index) {
         if (!this.clicked) {
             this.clicked = true;
-            TweenLite.to(this.players[index], 1, { y: 70, ease: Power3.easeOut });
-            TweenLite.to(this.playerContainer, 0.5, { autoAlpha: 0, visibility: 'hidden', delay: 0.1 });
+            TweenLite.to(this.playerContainer, 0.5, { autoAlpha: 0, delay: 0.1 });
             new TextureLoader(index);
         }
     }
