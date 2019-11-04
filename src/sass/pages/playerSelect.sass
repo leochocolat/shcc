@@ -9,7 +9,7 @@
     top: 0
     left: 0
     z-index: 9999
-    visibility: hidden
+    visibility: visible
     opacity: 1
     transition: 1s ease
     &.hidden
@@ -39,4 +39,11 @@
 .player__first img, .player__second img
     width: 170px
     cursor: pointer
+.player__background
+    position: absolute
+    top: -20%
+    left: -20%
+    z-index: -1
+    img
+        width: 100%
 
