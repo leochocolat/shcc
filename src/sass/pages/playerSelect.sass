@@ -1,10 +1,11 @@
 .container
     width: 100%
     height: 100vh
+
 .container__playerSelect
     width: 100%
     height: 100vh
-    background-color: grey
+    background-color: #DA3E3F
     position: absolute
     top: 0
     left: 0
@@ -15,35 +16,48 @@
     &.hidden
         visibility: hidden
         opacity: 0
+
 .playerSelect__text
     position: absolute
-    top: 15%
+    top: 16%
     left: 50%
-    transform: translateX(-50%) skewY(5.125deg)
+    transform: translateX(-30%) skewY(5.125deg)
     text-transform: uppercase
     color: white
-    font-size: 39px
-    text-align: center
+    font-size: 50px
+    text-align: left
+    text-shadow: 1px -2px 1px black
     .fontSize-player
-        font-size: 55px
-.playerSelect__player
+        font-size: 71px
+
+.playerSelect__players
     display: flex
-    height: 100vh
-.player__first, .player__second
-    width: 50%
-    display: flex
+    justify-content: center
     align-items: center
-.player__first
-    justify-content: flex-end
-.player__second
-.player__first img, .player__second img
-    width: 170px
-    cursor: pointer
-.player__background
+
     position: absolute
-    top: -20%
-    left: -20%
-    z-index: -1
-    img
+    left: 0
+    top: 15%
+    right: 0
+    bottom: 0
+
+    width: 100%
+    height: 100vh
+
+    margin: auto
+
+
+.player__first, .player__second
+    width: 300px
+    margin: auto 20px
+    & img 
         width: 100%
+
+.player__first
+    transform: translate(-5%, -8.4%)
+
+.player__second
+
+.player__first img, .player__second
+    cursor: pointer
 
