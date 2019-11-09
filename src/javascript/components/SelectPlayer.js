@@ -15,6 +15,7 @@ class SelectPlayer {
         if (!this.clicked) {
             this.clicked = true;
             TweenLite.to(this.playerContainer, 0.5, { autoAlpha: 0, delay: 0.1 });
+            console.log(index)
             new TextureLoader(index);
         }
     }
