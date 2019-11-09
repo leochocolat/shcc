@@ -6,7 +6,7 @@ class Background {
     this._wallProperties = {
       x: this._canvas.width * 1.9,
       y: -this._canvas.height * 2,
-      height: 850,
+      height: 2050,
       padding: 400,
       degrees: Math.PI * 30.75 / 180
     };
