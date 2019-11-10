@@ -31,15 +31,17 @@ class Player {
 
         this._spriteProperties = {
             x: 270,
-            width: 170,
+            width: [170, 140],
             translate: 70
         }
+
         this._fakePlayerProperties = {
             x: 0,
             y: 0
         }
-        this._horizontalDisplacement = 0;
 
+        this._horizontalDisplacement = 0;
+        this._isPlayerJumping = false;
         this._setup();
     }
 
@@ -51,8 +53,8 @@ class Player {
     }
     _createFakePlayer() {
         this.fakePlayerRect = new PIXI.Graphics();
-        // this.fakePlayerRect.alpha = 0
-        this.fakePlayerRect.drawRect(270 + 150, 0, 150, 150);
+        this.fakePlayerRect.alpha = 0
+        this.fakePlayerRect.drawRect(270 + 150, 0, 125, 125);
     }
     _createAnimatedSprites() {
         let preJumpSprites = []
@@ -96,17 +98,17 @@ class Player {
         this._fallAnimation.play()
         this._standardAnimation.play()
 
-        this._preJumpAnimation.width = this._spriteProperties.width
-        this._preJumpAnimation.height = this._spriteProperties.width / ratio;
+        this._preJumpAnimation.width = this._spriteProperties.width[this._playerIndex]
+        this._preJumpAnimation.height = this._spriteProperties.width[this._playerIndex] / ratio;
 
-        this._jumpAnimation.width = this._spriteProperties.width
-        this._jumpAnimation.height = this._spriteProperties.width / ratio;
+        this._jumpAnimation.width = this._spriteProperties.width[this._playerIndex]
+        this._jumpAnimation.height = this._spriteProperties.width[this._playerIndex] / ratio;
 
-        this._fallAnimation.width = this._spriteProperties.width
-        this._fallAnimation.height = this._spriteProperties.width / ratio;
+        this._fallAnimation.width = this._spriteProperties.width[this._playerIndex]
+        this._fallAnimation.height = this._spriteProperties.width[this._playerIndex] / ratio;
 
-        this._standardAnimation.width = this._spriteProperties.width
-        this._standardAnimation.height = this._spriteProperties.width / ratio;
+        this._standardAnimation.width = this._spriteProperties.width[this._playerIndex]
+        this._standardAnimation.height = this._spriteProperties.width[this._playerIndex] / ratio;
 
         this._preJumpAnimation.position.x = this._spriteProperties.x;
         this._preJumpAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
@@ -128,8 +130,8 @@ class Player {
             this._poussingAnimation = new PIXI.extras.AnimatedSprite(poussingSprites);
             this._poussingAnimation.animationSpeed = .3;
             this._poussingAnimation.loop = true;
-            this._poussingAnimation.width = this._spriteProperties.width;
-            this._poussingAnimation.height = this._spriteProperties.width / ratio;
+            this._poussingAnimation.width = this._spriteProperties.width[this._playerIndex];
+            this._poussingAnimation.height = this._spriteProperties.width[this._playerIndex] / ratio;
             this._poussingAnimation.position.x = this._spriteProperties.x;
             this._poussingAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
         }
@@ -172,6 +174,7 @@ class Player {
             y: 0, onComplete: () => {
                 this._isTweening = false;
                 this._isJumping = false;
+                this._isPlayerJumping = false;
                 this._playPedalingAnimation();
             }
         });
@@ -200,7 +203,7 @@ class Player {
 
     }
     updatePositionFakePlayer() {
-        this.fakePlayerRect.y = this._spriteContainer.position.x / 2 + 15
+        this.fakePlayerRect.y = (this._spriteContainer.position.x + 55) / 2
     }
     getRealPlayer() {
         return this._spriteContainer;
@@ -208,8 +211,11 @@ class Player {
     getFakePlayer() {
         return this.fakePlayerRect;
     }
-    getBounds() {
+    getFakePlayerBounds() {
         return this.fakePlayerRect.getBounds();
+    }
+    isPlayerJumping() {
+        return this._isPlayerJumping;
     }
     _setupEventListeners() {
         window.addEventListener('keydown', this._keyDownHandler);
@@ -243,6 +249,7 @@ class Player {
             case 'Space':
             case 'ArrowUp':
                 this._isPressed = false;
+                this._isPlayerJumping = true;
                 this._playJumpAnimation();
                 break;
             case 'ArrowLeft':

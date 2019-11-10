@@ -5,7 +5,7 @@ class Obstacles {
 
         this._obstacleProperties = {
             x: this._canvas.width,
-            y: 0,
+            y: 20,
             width: 300,
             degree: (Math.PI * 30.75 / 180)
         }
@@ -55,14 +55,14 @@ class Obstacles {
             if (this._animatedObstacle.position.x < 0) {
                 this._animatedObstacle.gotoAndStop(Math.round(Math.random() * this._textures.length));
                 this._animatedObstacle.transform.position.x = this._canvas.width + Math.random() * this._canvas.width / 2;
-                this._animatedObstacle.transform.position.y = this._obstacleProperties.y + 100 * (Math.round(Math.random() * 1));
+                this._animatedObstacle.transform.position.y = this._obstacleProperties.y + 150 * (Math.round(Math.random() * 1));
             }
         }
     }
     createFakeObstacle() {
         this.obstacleRect = new PIXI.Graphics();
-        // this.obstacleRect.alpha = 0
-        this.obstacleRect.drawRect(0, 0, this._animatedObstacle.width / 2, this._animatedObstacle.height);
+        this.obstacleRect.alpha = 0
+        this.obstacleRect.drawRect(0, 0, this._animatedObstacle.width, this._animatedObstacle.height);
     }
     drawFakeObstacle() {
         return this.obstacleRect;
@@ -70,7 +70,7 @@ class Obstacles {
     getFakeObstacle() {
         return this.obstacleRect;
     }
-    getBounds() {
+    getFakeObstacleBounds() {
         return this.obstacleRect.getBounds()
     }
     drawObstacles() {

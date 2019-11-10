@@ -1,8 +1,6 @@
 class Timer {
     constructor(stage) {
         this._stage = stage;
-        this.startTime = Date.now();
-        this.seconds = 0;
         const style = new PIXI.TextStyle();
         this.timerText = new PIXI.Text('0', style);
         style.dropShadow = true
@@ -14,18 +12,25 @@ class Timer {
         this.timerText.position.set(window.innerWidth - 320, window.innerHeight - 250);
         this.timerText.transform.skew.y = 0.125
         this.timerText.scale.set(2.5, 2.5);
+        this.initTimerValues();
     }
-
+    initTimerValues() {
+        this.startTime = Date.now();
+        this.seconds = 0;
+    }
     getDeltaTime() {
-        let elapsedTime = Date.now() - this.startTime;
-        let seconds = (elapsedTime / 1000).toFixed(2)
-        this.timerText.text = `${seconds}s`
-        return seconds
+        this.elapsedTime = Date.now() - this.startTime;
+        this.seconds = (this.elapsedTime / 1000).toFixed(2)
+        this.timerText.text = `${this.seconds}s`
+        return this.seconds
     }
     drawTimer() {
         return this.timerText
     }
-
+    resetTimer() {
+        this.initTimerValues();
+        this.getDeltaTime();
+    }
     stopTimer() {
         clearInterval(this.interval);
     }

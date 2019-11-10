@@ -28,7 +28,6 @@ class Pixi {
         this._isReady = false;
 
         this._settings = {
-            speed: .8,
             allowSkew: true
         }
 
@@ -37,20 +36,6 @@ class Pixi {
             y: window.innerHeight + 50,
             degrees: Math.PI * 30.75 / 180
         }
-
-        // const gui = new dat.GUI({ closed: false });
-        // gui.add(this._settings, 'speed', 0.1, 100).step(0.1);
-        // gui.add(this._settings, 'allowSkew');
-        // const roads = gui.addFolder('road');
-        // const player = gui.addFolder('player');
-        // roads.add(this._roadProperties, 'height', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // roads.add(this._roadProperties, 'linesPadding', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // roads.add(this._roadProperties, 'linesAmount', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // roads.add(this._roadProperties, 'linesWidth', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // roads.add(this._roadProperties, 'linesHeight', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // player.add(this._spriteProperties, 'x', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
-        // player.add(this._spriteProperties, 'width', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
-        // player.add(this._spriteProperties, 'translate', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
 
         this._setup();
     }
@@ -83,7 +68,7 @@ class Pixi {
             antialias: true,
             preserveDrawingBuffer: true,
             transparent: false,
-            backgroundColor: 0x808080
+            backgroundColor: 0x808080,
         });
 
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
@@ -99,8 +84,6 @@ class Pixi {
         this._skewedContainer = new PIXI.Container();
 
         if (!this._settings.allowSkew) return;
-        this._skewedContainer.position.x = 0;
-        // this._skewedContainer.position.y = 500;
 
         this._skewedContainer.position.x = this._skewProperties.x;
         this._skewedContainer.position.y = this._skewProperties.y;
@@ -123,19 +106,14 @@ class Pixi {
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
         this._backgroundContainer = new Background(this._canvas, this._resources['buildingSpritesheet']);
         this._timerBoxContainer = new TimerBox(this._canvas);
-        this._gameManager = new GameManager(this._stage, this._spriteContainer.getFakePlayer(), this._obstaclesContainer.getFakeObstacle());
+        this._timer = new Timer()
+        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._timer);
 
         this._start();
     }
 
     _start() {
-        this._createTimer()
-
         this._isReady = true;
-    }
-
-    _createTimer() {
-        this._timer = new Timer()
     }
 
     _updateTimerSeconds() {
@@ -181,17 +159,16 @@ class Pixi {
     _tick() {
         if (!this._isReady) return;
         this._updateDeltaTime();
-
-        this._delta += 1 * this._settings.speed * this.deltaTime;
+        this._delta += 1 * this._gameManager.gameSpeed * this.deltaTime;
 
         this._removeChilds();
         this._addChilds();
 
-        this._roadContainer.updateRoadLinesPosition(this._settings.speed, this._deltaTime);
-        this._obstaclesContainer.updateObstaclesPosition(this._settings.speed, this._deltaTime);
-        this._backgroundContainer.updateBackgroundPosition(this._settings.speed, this._deltaTime);
-        this._spriteContainer.updatePositionFakePlayer(this._settings.speed, this._deltaTime)
-
+        this._roadContainer.updateRoadLinesPosition(this._gameManager.gameSpeed, this._deltaTime);
+        this._obstaclesContainer.updateObstaclesPosition(this._gameManager.gameSpeed, this._deltaTime);
+        this._backgroundContainer.updateBackgroundPosition(this._gameManager.gameSpeed, this._deltaTime);
+        this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
+        this._spriteContainer.isPlayerJumping();
         this._gameManager.tick();
         this._updateTimerSeconds();
 
