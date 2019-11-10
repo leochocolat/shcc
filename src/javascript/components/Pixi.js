@@ -69,7 +69,7 @@ class Pixi {
             antialias: true,
             preserveDrawingBuffer: true,
             transparent: false,
-            backgroundColor: 0x808080
+            backgroundColor: 0x808080,
         });
 
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;

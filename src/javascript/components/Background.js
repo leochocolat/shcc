@@ -5,13 +5,11 @@ class Background {
 
     this._wallProperties = {
       x: this._canvas.width * 1.9,
-      y: -this._canvas.height * 2,
+      y: -this._canvas.height * 1.8,
       height: 750,
       padding: 400,
       degrees: Math.PI * 30.75 / 180
     };
-
-    this.velocity = {};
 
     this.setup();
   }
@@ -32,6 +30,7 @@ class Background {
     this._buildings = [];
 
     let limit = 5;
+
     for (let i = 0; i < limit; i++) {
       let building = new PIXI.extras.AnimatedSprite(this._textures);
 
@@ -39,31 +38,41 @@ class Background {
 
       let ratio = building.width / building.height;
       this._wallProperties.width = this._wallProperties.height * ratio;
+
       building.width = this._wallProperties.width;
       building.height = this._wallProperties.height;
 
       building.rotation = this._wallProperties.degrees;
 
-      building.position.x = this._canvas.width - this._wallProperties.padding * i;
-      building.position.y = - this._canvas.height / 2;
+      building.position.x = (this._canvas.width / 2) + this._wallProperties.padding * (1 + i);
+      // building.position.x = this._canvas.width - this._wallProperties.padding * i;
+      building.position.y = - this._canvas.height / 1.8;
 
       this._buildings.push(building);
-      this._buildingsContainer.addChild(building);
+      this._buildingsContainer.addChildAt(building, 0);
     }
   }
 
   updateBackgroundPosition(speed, deltaTime) {
     for (let i = 0; i < this._buildingsContainer.children.length; i++) {
       this._buildingsContainer.children[i].transform.position.x += - speed * deltaTime;
-      if (this._buildingsContainer.children[i].position.x + this._wallProperties.width < 0) {
+      if (this._buildingsContainer.children[i].position.x < 0) {
         this._buildingsContainer.children[i].gotoAndStop(Math.round(Math.random() * this._textures.length));
-        // this._buildingsContainer.children[i].transform.position.x = this._buildingsContainer.position.x + this._buildingsContainer.width / 2;
-        this._buildingsContainer.children[i].transform.position.x = this._canvas.width * 1.5;
+        this._buildingsContainer.children[i].transform.position.x = this._buildingsContainer.position.x + this._buildingsContainer.width - this._wallProperties.padding;
+        let building = this._buildingsContainer.children[i];
+        this._buildingsContainer.removeChild(this._buildingsContainer.children[i]);
+        this._buildingsContainer.addChildAt(building, 0);
       }
     }
   }
 
+  _removeChilds() {
+    
+  }
+
   drawBackground() {
+    this._removeChilds();
+
     return this._buildingsContainer;
   }
 }
