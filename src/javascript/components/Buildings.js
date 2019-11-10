@@ -5,7 +5,7 @@ class Buildings {
 
     this._buildingsProperties = {
       x: this._canvas.width * 1.9,
-      y: -this._canvas.height * 1.8,
+      y: 100,
       height: 750,
       padding: 400,
       degrees: Math.PI * 30.75 / 180
@@ -45,7 +45,7 @@ class Buildings {
       building.rotation = this._buildingsProperties.degrees;
 
       building.position.x = (this._canvas.width / 2) + this._buildingsProperties.padding * (1 + i);
-      building.position.y = - this._canvas.height / 1.8;
+      building.position.y = this._buildingsProperties.y - building.height;
 
       this._buildings.push(building);
       this._buildingsContainer.addChildAt(building, 0);
