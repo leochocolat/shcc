@@ -7,10 +7,9 @@ class Obstacles {
             x: this._canvas.width,
             y: 20,
             width: 300,
+            height: 175,
             degree: (Math.PI * 30.75 / 180)
         }
-
-        this._velocity = {};
 
         this.setup();
     }
@@ -22,7 +21,7 @@ class Obstacles {
         this.y = 10 * Math.sin(11 * Math.PI / 180);
 
         this._createAnimatedObstacles();
-        this.createFakeObstacle()
+        this.createFakeObstacle();
     }
 
     _createAnimatedObstacles() {
