@@ -22,22 +22,23 @@ class GameManager {
             isJumping = this._player.isPlayerJumping();
         this.levelDifficulty();
         if (playerBounds.x + playerBounds.width > obstacleBounds.x && playerBounds.x < obstacleBounds.x + obstacleBounds.width && playerBounds.y + playerBounds.height > obstacleBounds.y && playerBounds.y < obstacleBounds.y + obstacleBounds.height && this._allowHit && !isJumping) {
-            this._hitText();
+            this._hitTest();
         }
     }
     levelDifficulty() {
         if (this._timer.seconds > 8.00 && this.gameSpeed == 0.8) {
             this.gameSpeed = 1
         } else if (this._timer.seconds > 15.00 && this.gameSpeed == 1) {
+            this.gameSpeed = 1.2
+        } else if (this._timer.seconds > 20.00 && this.gameSpeed == 1.2) {
             this.gameSpeed = 1.3
-        } else if (this._timer.seconds > 20.00 && this.gameSpeed == 1.3) {
+        } else if (this._timer.seconds > 30.00 && this.gameSpeed == 1.3) {
             this.gameSpeed = 1.5
-        } else if (this._timer.seconds > 30.00 && this.gameSpeed == 1.5) {
-            this.gameSpeed = 1.7
         }
-        return this.levelValue;
     }
-    _hitText() {
+    _hitTest() {
+        this.gameSpeed = 0.8
+        this._timer.resetTimer();
         this._stage.addChild(this.message);
         setTimeout(() => {
             this._stage.removeChild(this.message);

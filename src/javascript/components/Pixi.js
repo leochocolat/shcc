@@ -173,7 +173,7 @@ class Pixi {
         this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
         this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
 
-
+        console.log(this._gameManager.gameSpeed)
         this._spriteContainer.isPlayerJumping();
         this._gameManager.tick();
         this._updateTimerSeconds();
