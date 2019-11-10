@@ -14,7 +14,6 @@
     visibility: visible
     // visibility: hidden
     opacity: 1
-    transition: 1s ease
     &.hidden
         visibility: hidden
         opacity: 0
@@ -29,13 +28,18 @@
     width: 100%
     height: 150%
 
-    transform: skewY(5.125deg);
-
+    transform: skewY(5.125deg)
+.playerSelect__logo
+    position: absolute
+    top: 20px
+    left: 20px
+    img
+        width: 200px
 .playerSelect__text
     position: absolute
-    top: 16%
+    top: 10%
     left: 50%
-    transform: translateX(-30%) skewY(5.125deg)
+    transform: translateX(-50%) skewY(5.125deg)
     text-transform: uppercase
     color: white
     font-size: 50px
@@ -51,24 +55,22 @@
 
     position: absolute
     left: 0
-    top: 15%
     right: 0
-    bottom: 0
+    bottom: 10%
 
     width: 100%
-    height: 100vh
 
     margin: auto
 
 .player__first, .player__second
-    width: 300px
+    width: 200px
     margin: auto 20px
 
     cursor: pointer
 
     & img 
         width: 100%
-
+        position: absolute
         transition: transform .2s ease-in-out
 
     &:hover
@@ -80,8 +82,53 @@
 
 .player
     position: relative
-
+    height: 300px
+    &__background
+        background-color: #c9c7cb
+        width: 130px
+        height: 250px
+        position: absolute
+        transform: translateY(-10%) translateX(40%) skewY(5.125deg)
+    &__name
+        background-color: #a72b2e
+        width: 100px
+        height: 30px
+        display: flex
+        align-items: center
+        justify-content: center
+        bottom: 0
+        position: absolute
+        text-transform: uppercase
+        color: white
+        transform: translateX(40%) skewY(5.125deg)
+        &::before
+            display: inline-block
+            content: ""
+            width: 25px
+            height: 30px
+            background-color: #cf363a
+            right: -25%
+            top: -7px
+            position: absolute
+            transform: skewY(-30.125deg)
 .player__head
     position: absolute
     left: 0
     top: 0
+
+.bg__transition
+    position: absolute
+    z-index: 9999
+    right: 0
+    transform: rotate(-45deg) scaleY(5)
+    &-red
+        position: absolute
+        width: 1000px
+        height: 300vh
+        background: #FC4846
+    &-white
+        position: absolute
+        width: 850px
+        left: 75px
+        height: 300vh
+        background: white

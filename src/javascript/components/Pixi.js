@@ -37,21 +37,7 @@ class Pixi {
             y: window.innerHeight + 50,
             degrees: Math.PI * 30.75 / 180
         }
-
-        // const gui = new dat.GUI({ closed: false });
-        // gui.add(this._settings, 'speed', 0.1, 100).step(0.1);
-        // gui.add(this._settings, 'allowSkew');
-        // const roads = gui.addFolder('road');
-        // const player = gui.addFolder('player');
-        // roads.add(this._roadProperties, 'height', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // roads.add(this._roadProperties, 'linesPadding', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // roads.add(this._roadProperties, 'linesAmount', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // roads.add(this._roadProperties, 'linesWidth', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // roads.add(this._roadProperties, 'linesHeight', 1, 1000).step(1).onChange(() => { this._createRoad() });
-        // player.add(this._spriteProperties, 'x', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
-        // player.add(this._spriteProperties, 'width', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
-        // player.add(this._spriteProperties, 'translate', 1, 1000).step(1).onChange(() => { this._createAnimatedSprite() });
-
+        
         this._setup();
     }
 
@@ -99,9 +85,7 @@ class Pixi {
         this._skewedContainer = new PIXI.Container();
 
         if (!this._settings.allowSkew) return;
-        this._skewedContainer.position.x = 0;
-        // this._skewedContainer.position.y = 500;
-
+        
         this._skewedContainer.position.x = this._skewProperties.x;
         this._skewedContainer.position.y = this._skewProperties.y;
 

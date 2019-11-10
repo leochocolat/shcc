@@ -6,7 +6,7 @@ class Background {
     this._wallProperties = {
       x: this._canvas.width * 1.9,
       y: -this._canvas.height * 2,
-      height: 850,
+      height: 750,
       padding: 400,
       degrees: Math.PI * 30.75 / 180
     };
@@ -39,6 +39,8 @@ class Background {
 
       let ratio = building.width / building.height;
       this._wallProperties.width = this._wallProperties.height * ratio;
+      building.width = this._wallProperties.width;
+      building.height = this._wallProperties.height;
 
       building.rotation = this._wallProperties.degrees;
 

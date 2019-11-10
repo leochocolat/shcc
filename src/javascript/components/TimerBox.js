@@ -14,7 +14,7 @@ class TimerBox {
     }
     _createTimerBoxTop() {
         this._timerBoxGraphicTop = new PIXI.Graphics();
-        this._timerBoxGraphicTop.beginFill(0x06d1ff);
+        this._timerBoxGraphicTop.beginFill(0xf74041);
         this._timerBoxGraphicTop.drawRect(0, 0, this._timerBoxProperties.width * 2, this._timerBoxProperties.height);
         this._timerBoxGraphicTop.position.x = (this._canvas.width - this._timerBoxProperties.width - 51.5)
         this._timerBoxGraphicTop.position.y = (this._canvas.height - this._timerBoxProperties.height - 51.5)
@@ -22,7 +22,7 @@ class TimerBox {
     }
     _createTimerBoxFront() {
         this._timerBoxGraphicFront = new PIXI.Graphics();
-        this._timerBoxGraphicFront.beginFill(0x0188b8);
+        this._timerBoxGraphicFront.beginFill(0x832324);
         this._timerBoxGraphicFront.drawRect(0, 0, this._timerBoxProperties.width, this._timerBoxProperties.height);
         this._timerBoxGraphicFront.position.x = (this._canvas.width - this._timerBoxProperties.width + 103)
         this._timerBoxGraphicFront.position.y = (this._canvas.height - this._timerBoxProperties.height + 205)
@@ -33,7 +33,7 @@ class TimerBox {
     }
     _createTimerBoxRight() {
         this._timerBoxGraphicRight = new PIXI.Graphics();
-        this._timerBoxGraphicRight.beginFill(0x019dc3);
+        this._timerBoxGraphicRight.beginFill(0x8f2626);
         this._timerBoxGraphicRight.drawRect(0, 0, this._timerBoxProperties.width, this._timerBoxProperties.height * 2);
         this._timerBoxGraphicRight.position.x = (this._canvas.width - this._timerBoxProperties.width + 103)
         this._timerBoxGraphicRight.position.y = (this._canvas.height - this._timerBoxProperties.height + 205)

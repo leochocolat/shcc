@@ -18,8 +18,8 @@ class Obstacles {
         this._obstaclesContainer = new PIXI.Container();
         this._obstaclesContainer.transform.skew.x = - this._obstacleProperties.degree / 1.45;
 
-        this.x =  10 * Math.cos(11 * Math.PI / 180);
-        this.y =  10 * Math.sin(11 * Math.PI / 180);
+        this.x = 10 * Math.cos(11 * Math.PI / 180);
+        this.y = 10 * Math.sin(11 * Math.PI / 180);
 
         console.log(this.x, this.y);
 
