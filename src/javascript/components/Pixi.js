@@ -8,9 +8,9 @@ import Player from './Player';
 import Road from './Road';
 import Obstacles from './Obstacles';
 import GameManager from './GameManager'
-import Background from './Background';
+import Buildings from './Buildings';
+import Objects from './Objects';
 import TimerBox from './TimerBox';
-
 
 class Pixi {
     constructor(playerIndex, resources) {
@@ -104,7 +104,8 @@ class Pixi {
         this._spriteContainer = new Player(this._canvas, this._playerIndex, this._resources['animationSpritesheet']);
         this._roadContainer = new Road(this._canvas);
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
-        this._backgroundContainer = new Background(this._canvas, this._resources['buildingSpritesheet']);
+        this._buildingsContainer = new Buildings(this._canvas, this._resources['buildingSpritesheet']);
+        this._objectsContainer = new Objects(this._canvas, this._resources['objectsSpritesheet']);
         this._timerBoxContainer = new TimerBox(this._canvas);
         this._timer = new Timer()
         this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._timer);
@@ -125,7 +126,8 @@ class Pixi {
     }
 
     _removeChilds() {
-        this._skewedContainer.removeChild(this._backgroundContainer.drawBackground());
+        this._skewedContainer.removeChild(this._buildingsContainer.drawBuildings());
+        this._skewedContainer.removeChild(this._objectsContainer.drawObjects());
 
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
         this._skewedContainer.removeChild(this._timerBoxContainer.drawTimerBox());
@@ -141,7 +143,8 @@ class Pixi {
     }
 
     _addChilds() {
-        this._skewedContainer.addChild(this._backgroundContainer.drawBackground());
+        this._skewedContainer.addChild(this._buildingsContainer.drawBuildings());
+        this._skewedContainer.addChild(this._objectsContainer.drawObjects());
 
         this._skewedContainer.addChild(this._roadContainer.drawRoad());
         this._skewedContainer.addChild(this._timerBoxContainer.drawTimerBox());

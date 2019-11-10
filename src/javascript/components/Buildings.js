@@ -1,11 +1,11 @@
-class Background {
+class Buildings {
   constructor(canvas, resources) {
     this._canvas = canvas;
     this._resources = resources;
 
-    this._wallProperties = {
+    this._buildingsProperties = {
       x: this._canvas.width * 1.9,
-      y: -this._canvas.height * 1.8,
+      y: 100,
       height: 750,
       padding: 400,
       degrees: Math.PI * 30.75 / 180
@@ -16,12 +16,12 @@ class Background {
 
   setup() {
     this._buildingsContainer = new PIXI.Container();
-    this._buildingsContainer.transform.skew.x = - this._wallProperties.degrees / 1.45;
+    this._buildingsContainer.transform.skew.x = - this._buildingsProperties.degrees / 1.45;
 
-    this._createAnimatedBackground();
+    this._createBuildings();
   }
 
-  _createAnimatedBackground() {
+  _createBuildings() {
     this._textures = [];
     for (let i in this._resources.textures) {
       this._textures.push(this._resources.textures[i]);
@@ -37,28 +37,27 @@ class Background {
       building.gotoAndStop(Math.round(Math.random() * this._textures.length));
 
       let ratio = building.width / building.height;
-      this._wallProperties.width = this._wallProperties.height * ratio;
+      this._buildingsProperties.width = this._buildingsProperties.height * ratio;
 
-      building.width = this._wallProperties.width;
-      building.height = this._wallProperties.height;
+      building.width = this._buildingsProperties.width;
+      building.height = this._buildingsProperties.height;
 
-      building.rotation = this._wallProperties.degrees;
+      building.rotation = this._buildingsProperties.degrees;
 
-      building.position.x = (this._canvas.width / 2) + this._wallProperties.padding * (1 + i);
-      // building.position.x = this._canvas.width - this._wallProperties.padding * i;
-      building.position.y = - this._canvas.height / 1.8;
+      building.position.x = (this._canvas.width / 2) + this._buildingsProperties.padding * (1 + i);
+      building.position.y = this._buildingsProperties.y - building.height;
 
       this._buildings.push(building);
       this._buildingsContainer.addChildAt(building, 0);
     }
   }
 
-  updateBackgroundPosition(speed, deltaTime) {
+  updateBuildingsPosition(speed, deltaTime) {
     for (let i = 0; i < this._buildingsContainer.children.length; i++) {
       this._buildingsContainer.children[i].transform.position.x += - speed * deltaTime;
       if (this._buildingsContainer.children[i].position.x < 0) {
         this._buildingsContainer.children[i].gotoAndStop(Math.round(Math.random() * this._textures.length));
-        this._buildingsContainer.children[i].transform.position.x = this._buildingsContainer.position.x + this._buildingsContainer.width - this._wallProperties.padding;
+        this._buildingsContainer.children[i].transform.position.x = this._buildingsContainer.position.x + this._buildingsContainer.width - this._buildingsProperties.padding;
         let building = this._buildingsContainer.children[i];
         this._buildingsContainer.removeChild(this._buildingsContainer.children[i]);
         this._buildingsContainer.addChildAt(building, 0);
@@ -66,14 +65,8 @@ class Background {
     }
   }
 
-  _removeChilds() {
-    
-  }
-
-  drawBackground() {
-    this._removeChilds();
-
+  drawBuildings() {
     return this._buildingsContainer;
   }
 }
-export default Background;
+export default Buildings;
