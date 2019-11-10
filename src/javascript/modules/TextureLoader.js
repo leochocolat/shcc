@@ -11,7 +11,8 @@ class TextureLoader {
             'assets/spriteheets/bikeSpritesheet.json',
             'assets/spriteheets/skateSpritesheet.json',
             'assets/spriteheets/buildingSpritesheet.json',
-            'assets/spriteheets/obstacles.json'
+            'assets/spriteheets/obstacles.json',
+            'assets/spriteheets/objectsSpritesheets.json'
         ]
 
         this._setup();
@@ -23,6 +24,7 @@ class TextureLoader {
         this._textureLoader.add('animationSpritesheet', this._spritesheetsUrl[this._playerIndex]);
         this._textureLoader.add('buildingSpritesheet', this._spritesheetsUrl[2]);
         this._textureLoader.add('obstaclesSpritesheet', this._spritesheetsUrl[3]);
+        this._textureLoader.add('objectsSpritesheet', this._spritesheetsUrl[4]);
     }
 
     _setupEventListeners() {

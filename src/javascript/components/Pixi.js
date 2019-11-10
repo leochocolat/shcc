@@ -9,6 +9,7 @@ import Road from './Road';
 import Obstacles from './Obstacles';
 import GameManager from './GameManager'
 import Buildings from './Buildings';
+import Objects from './Objects';
 import TimerBox from './TimerBox';
 
 class Pixi {
@@ -105,6 +106,7 @@ class Pixi {
         this._roadContainer = new Road(this._canvas);
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
         this._buildingsContainer = new Buildings(this._canvas, this._resources['buildingSpritesheet']);
+        this._objectsContainer = new Objects(this._canvas, this._resources['objectsSpritesheet']);
         this._timerBoxContainer = new TimerBox(this._canvas);
         this._gameManager = new GameManager(this._stage, this._spriteContainer.getPlayer(), this._obstaclesContainer);
 
@@ -131,6 +133,7 @@ class Pixi {
 
     _removeChilds() {
         this._skewedContainer.removeChild(this._buildingsContainer.drawBuildings());
+        this._skewedContainer.removeChild(this._objectsContainer.drawObjects());
 
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
         this._skewedContainer.removeChild(this._timerBoxContainer.drawTimerBox());
@@ -145,6 +148,7 @@ class Pixi {
 
     _addChilds() {
         this._skewedContainer.addChild(this._buildingsContainer.drawBuildings());
+        this._skewedContainer.addChild(this._objectsContainer.drawObjects());
 
         this._skewedContainer.addChild(this._roadContainer.drawRoad());
         this._skewedContainer.addChild(this._timerBoxContainer.drawTimerBox());
@@ -169,6 +173,7 @@ class Pixi {
         this._roadContainer.updateRoadLinesPosition(this._settings.speed, this._deltaTime);
         this._obstaclesContainer.updateObstaclesPosition(this._settings.speed, this._deltaTime);
         this._buildingsContainer.updateBuildingsPosition(this._settings.speed, this._deltaTime);
+        this._objectsContainer.updateObjectsPosition(this._settings.speed, this._deltaTime);
 
         this._gameManager.tick();
         this._updateTimerSeconds();
