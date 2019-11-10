@@ -21,9 +21,8 @@ class Obstacles {
         this.x = 10 * Math.cos(11 * Math.PI / 180);
         this.y = 10 * Math.sin(11 * Math.PI / 180);
 
-        console.log(this.x, this.y);
-
         this._createAnimatedObstacles();
+        this.createFakeObstacle()
     }
 
     _createAnimatedObstacles() {
@@ -49,8 +48,10 @@ class Obstacles {
     }
 
     updateObstaclesPosition(speed, deltaTime) {
-        if (this._animatedObstacle) {
+        if (this._animatedObstacle && this.obstacleRect) {
             this._animatedObstacle.position.x += -1 * speed * deltaTime;
+            this.obstacleRect.position.x = this._animatedObstacle.position.x
+            this.obstacleRect.position.y = this._animatedObstacle.position.y
             if (this._animatedObstacle.position.x < 0) {
                 this._animatedObstacle.gotoAndStop(Math.round(Math.random() * this._textures.length));
                 this._animatedObstacle.transform.position.x = this._canvas.width + Math.random() * this._canvas.width / 2;
@@ -58,11 +59,20 @@ class Obstacles {
             }
         }
     }
-
-    getBounds() {
-        return this._obstaclesContainer.getBounds()
+    createFakeObstacle() {
+        this.obstacleRect = new PIXI.Graphics();
+        // this.obstacleRect.alpha = 0
+        this.obstacleRect.drawRect(0, 0, this._animatedObstacle.width / 2, this._animatedObstacle.height);
     }
-
+    drawFakeObstacle() {
+        return this.obstacleRect;
+    }
+    getFakeObstacle() {
+        return this.obstacleRect;
+    }
+    getBounds() {
+        return this.obstacleRect.getBounds()
+    }
     drawObstacles() {
         return this._obstaclesContainer;
     }

@@ -123,7 +123,7 @@ class Pixi {
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
         this._backgroundContainer = new Background(this._canvas, this._resources['buildingSpritesheet']);
         this._timerBoxContainer = new TimerBox(this._canvas);
-        this._gameManager = new GameManager(this._stage, this._spriteContainer.getPlayer(), this._obstaclesContainer);
+        this._gameManager = new GameManager(this._stage, this._spriteContainer.getFakePlayer(), this._obstaclesContainer.getFakeObstacle());
 
         this._start();
     }
@@ -157,7 +157,9 @@ class Pixi {
 
         this._container.removeChild(this._timer.drawTimer());
 
-        this._container.removeChild(this._spriteContainer.drawPlayer());
+        this._container.removeChild(this._spriteContainer.getRealPlayer());
+        this._container.removeChild(this._spriteContainer.getFakePlayer());
+        this._container.removeChild(this._obstaclesContainer.drawFakeObstacle());
     }
 
     _addChilds() {
@@ -168,10 +170,12 @@ class Pixi {
 
         this._container.addChild(this._skewedContainer);
         this._skewedContainer.addChild(this._obstaclesContainer.drawObstacles());
-
         this._container.addChild(this._timer.drawTimer());
 
-        this._container.addChild(this._spriteContainer.drawPlayer());
+        this._container.addChild(this._spriteContainer.getRealPlayer());
+        this._container.addChild(this._spriteContainer.getFakePlayer());
+        this._container.addChild(this._obstaclesContainer.drawFakeObstacle());
+
     }
 
     _tick() {
@@ -186,6 +190,7 @@ class Pixi {
         this._roadContainer.updateRoadLinesPosition(this._settings.speed, this._deltaTime);
         this._obstaclesContainer.updateObstaclesPosition(this._settings.speed, this._deltaTime);
         this._backgroundContainer.updateBackgroundPosition(this._settings.speed, this._deltaTime);
+        this._spriteContainer.updatePositionFakePlayer(this._settings.speed, this._deltaTime)
 
         this._gameManager.tick();
         this._updateTimerSeconds();

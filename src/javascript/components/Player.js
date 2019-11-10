@@ -46,9 +46,14 @@ class Player {
     _setup() {
         this._spriteContainer = new PIXI.Container();
         this._createAnimatedSprites();
+        this._createFakePlayer();
         this._setupEventListeners();
     }
-
+    _createFakePlayer() {
+        this.fakePlayerRect = new PIXI.Graphics();
+        // this.fakePlayerRect.alpha = 0
+        this.fakePlayerRect.drawRect(270 + 150, 0, 150, 150);
+    }
     _createAnimatedSprites() {
         let preJumpSprites = []
         for (let i = this._animationProperties[this._playerIndex][0].start; i <= this._animationProperties[this._playerIndex][0].end; i++) {
@@ -192,19 +197,19 @@ class Player {
     _updatePositionsArrow(direction) {
         if (this._isTweening) return;
         TweenLite.to(this._spriteContainer.transform.position, .7, { y: 10 * direction, x: 300 * direction, ease: Power3.easeOut });
-    }
-
-    tick() {
 
     }
-
-    drawPlayer() {
+    updatePositionFakePlayer() {
+        this.fakePlayerRect.y = this._spriteContainer.position.x / 2 + 15
+    }
+    getRealPlayer() {
         return this._spriteContainer;
     }
-
+    getFakePlayer() {
+        return this.fakePlayerRect;
+    }
     getBounds() {
-        return this._spriteContainer.getBounds();
-
+        return this.fakePlayerRect.getBounds();
     }
     _setupEventListeners() {
         window.addEventListener('keydown', this._keyDownHandler);
@@ -223,10 +228,12 @@ class Player {
             case 'ArrowLeft':
                 this._arrowPressed = true;
                 this._updatePositionsArrow(0);
+                this.updatePositionFakePlayer(0);
                 break;
             case 'ArrowRight':
                 this._arrowPressed = true;
                 this._updatePositionsArrow(1);
+                this.updatePositionFakePlayer(1);
                 break;
         }
     }

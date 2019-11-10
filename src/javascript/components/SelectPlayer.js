@@ -16,8 +16,9 @@ class SelectPlayer {
         if (!this.clicked) {
             this.clicked = true;
             new TextureLoader(index);
+            console.log(index)
             TweenLite.to(this.playerContainer, 0.2, { autoAlpha: 0, delay: 1.2 });
-            TweenLite.to(this.backgroundTransitionContainer, 1.5, { right: '300%', delay: 0.9 });
+            TweenLite.to(this.backgroundTransitionContainer, 1.5, { right: '500%', delay: 0.9 });
         }
     }
     _setup() {
