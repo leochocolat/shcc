@@ -65,7 +65,7 @@ class Obstacles {
 
     _createFakeObstacle() {
         this.obstacleRect = new PIXI.Graphics();
-        // this.obstacleRect.alpha = 0
+        this.obstacleRect.alpha = 0
         this.obstacleRect.drawRect(0, 0, this._animatedObstacle.width, this._animatedObstacle.height);
     }
 
