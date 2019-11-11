@@ -5,15 +5,14 @@ class Obstacles {
 
         this._obstacleProperties = {
             x: this._canvas.width,
-            y: 20,
-            width: 300,
+            y: 10,
+            height: 130,
             degree: (Math.PI * 30.75 / 180)
         }
 
-        this._velocity = {};
-
         this.setup();
     }
+
     setup() {
         this._obstaclesContainer = new PIXI.Container();
         this._obstaclesContainer.transform.skew.x = - this._obstacleProperties.degree / 1.45;
@@ -22,7 +21,7 @@ class Obstacles {
         this.y = 10 * Math.sin(11 * Math.PI / 180);
 
         this._createAnimatedObstacles();
-        this.createFakeObstacle()
+        this._createFakeObstacle();
     }
 
     _createAnimatedObstacles() {
@@ -36,8 +35,8 @@ class Obstacles {
 
         let ratio = this._animatedObstacle.width / this._animatedObstacle.height;
 
-        this._animatedObstacle.width = this._obstacleProperties.width;
-        this._animatedObstacle.height = this._obstacleProperties.width / ratio;
+        this._animatedObstacle.height = this._obstacleProperties.height;
+        this._animatedObstacle.width = this._obstacleProperties.height * ratio;
 
         this._animatedObstacle.position.x = this._obstacleProperties.x;
         this._animatedObstacle.position.y = this._obstacleProperties.y;
@@ -59,20 +58,25 @@ class Obstacles {
             }
         }
     }
-    createFakeObstacle() {
+
+    _createFakeObstacle() {
         this.obstacleRect = new PIXI.Graphics();
         this.obstacleRect.alpha = 0
         this.obstacleRect.drawRect(0, 0, this._animatedObstacle.width, this._animatedObstacle.height);
     }
+
     drawFakeObstacle() {
         return this.obstacleRect;
     }
+
     getFakeObstacle() {
         return this.obstacleRect;
     }
+
     getFakeObstacleBounds() {
         return this.obstacleRect.getBounds()
     }
+
     drawObstacles() {
         return this._obstaclesContainer;
     }

@@ -5,7 +5,7 @@ class Objects {
   
       this._objectsProperties = {
         x: this._canvas.width,
-        y: -150,
+        y: -270,
         scale: 0.6,
         padding: this._canvas.width * 0.5,
         degrees: Math.PI * 30.75 / 180

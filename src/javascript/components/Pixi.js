@@ -70,7 +70,7 @@ class Pixi {
             backgroundColor: 0x808080,
         });
 
-        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+        // PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
         PIXI.settings.SORTABLE_CHILDREN;
 
         this._canvas = this._app.view;
