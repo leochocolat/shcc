@@ -19,8 +19,5 @@ class Timer {
         this.initTimerValues();
         this.getDeltaTime();
     }
-    stopTimer() {
-        clearInterval(this.interval);
-    }
 }
 export default Timer;
