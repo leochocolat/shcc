@@ -18,9 +18,6 @@ class Loose {
         }
 
         this._setup();
-        setTimeout(() => {
-            this.timeline.play();
-        }, 1000)
     }
 
     _setup() {
@@ -35,8 +32,8 @@ class Loose {
         this.timeline.fromTo(this.ui.heading, 1.5, { y: 500 }, { y: 0, ease: Power3.easeOut }, 0.5);
         this.timeline.fromTo(this.ui.subheading, 1.5, { y: 300 }, { y: 0, ease: Power3.easeOut }, 0.5);
 
-        this.timeline.fromTo(this.ui.boxTop, 1, { height: 0 }, { height: '100%', ease: Power3.easeOut }, 1.4);
-        this.timeline.fromTo(this.ui.boxRight, 1, { width: 0 }, { width: '62%', ease: Power3.easeOut }, 1.4);
+        this.timeline.fromTo(this.ui.boxTop, 1, { height: '0%' }, { height: '100%', ease: Power3.easeOut }, 1.4);
+        this.timeline.fromTo(this.ui.boxRight, 1, { width: '0%' }, { width: '62%', ease: Power3.easeOut }, 1.4);
 
         this.timeline.fromTo(this.ui.heading, 0.5, { scale: .98 }, { scale: 1, ease: Power3.easeOut }, 1.5);
         this.timeline.fromTo(this.ui.shadow, 0.5, { x: 0, y: 0 }, { x: -5, y: 5, ease: Power3.easeOut }, 1.5);
@@ -49,15 +46,14 @@ class Loose {
     }
 
     animate() {
-        // this.timeline.play();
+        this.timeline.restart();
+        this.timeline.play();
     }
-
+    
     _onCompleteHandler() {
-        // this.timeline.restart();
-        // this.timeline.stop();
     }
-
-
+    
+    
 }
 
 export default Loose;

@@ -42,6 +42,7 @@ class Player {
 
         this._horizontalDisplacement = 0;
         this._isPlayerJumping = false;
+        this.animationNeedToStop = false;
         this._setup();
     }
 
@@ -50,6 +51,7 @@ class Player {
         this._createAnimatedSprites();
         this._createFakePlayer();
         this._setupEventListeners();
+
     }
     _createFakePlayer() {
         this.fakePlayerRect = new PIXI.Graphics();
@@ -185,7 +187,9 @@ class Player {
         this._addChild(this._standardAnimation);
         this._standardAnimation.gotoAndPlay(0);
     }
-
+    _stopAnimations() {
+        this._standardAnimation.gotoAndStop(0);
+    }
     _removeChilds(container) {
         container.removeChild(this._preJumpAnimation);
         container.removeChild(this._jumpAnimation);

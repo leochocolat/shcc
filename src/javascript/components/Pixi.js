@@ -107,6 +107,7 @@ class Pixi {
         this._objectsContainer = new Objects(this._canvas, this._resources['objectsSpritesheet']);
         this._timer = new Timer()
         this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._timer);
+        console.log(this._gameManager)
 
         this._start();
     }
@@ -156,17 +157,20 @@ class Pixi {
 
         this._removeChilds();
         this._addChilds();
+        if (!this._gameManager.isGameFinished) {
+            this._roadContainer.updateRoadLinesPosition(this._gameManager.gameSpeed, this._deltaTime);
+            this._obstaclesContainer.updateObstaclesPosition(this._gameManager.gameSpeed, this._deltaTime);
+            this._buildingsContainer.updateBuildingsPosition(this._gameManager.gameSpeed, this._deltaTime);
+            this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
+            this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
 
-        this._roadContainer.updateRoadLinesPosition(this._gameManager.gameSpeed, this._deltaTime);
-        this._obstaclesContainer.updateObstaclesPosition(this._gameManager.gameSpeed, this._deltaTime);
-        this._buildingsContainer.updateBuildingsPosition(this._gameManager.gameSpeed, this._deltaTime);
-        this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
-        this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
-
-        this._spriteContainer.isPlayerJumping();
-        this._gameManager.tick();
-        this._updateTimerSeconds();
-
+            this._spriteContainer.isPlayerJumping();
+            this._gameManager.tick();
+            this._updateTimerSeconds();
+        }
+        if (this._gameManager.isGameFinished) {
+            this._spriteContainer._stopAnimations()
+        }
         this._app.render(this._stage);
     }
 
