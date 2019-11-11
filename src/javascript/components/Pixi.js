@@ -100,7 +100,7 @@ class Pixi {
     }
 
     _setupLayers() {
-        this._spriteContainer = new Player(this._canvas, this._playerIndex, this._resources['animationSpritesheet']);
+        this._spriteContainer = new Player(this._canvas, this._playerIndex, this._resources['animationSpritesheet'], this._resources['shadowSpritesheet']);
         this._roadContainer = new Road(this._canvas);
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
         this._buildingsContainer = new Buildings(this._canvas, this._resources['buildingSpritesheet']);

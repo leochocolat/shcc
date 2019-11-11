@@ -47,16 +47,14 @@ class GameManager {
         this._allowHit = false;
         setTimeout(() => {
             this._allowHit = true;
-        }, 2000)
+        }, 5000)
     } 
 
     _hitTest() {
         this.gameSpeed = 0.8;
+        this._allowHitManager();
         this._timer.resetTimer();
         this.looseComponent.animate();
-        this._allowHitManager();
-        this.gameSpeed = 0.8
-        this._timer.resetTimer()
     }
     
     _endGame() {

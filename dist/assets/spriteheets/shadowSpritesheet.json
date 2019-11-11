@@ -1,0 +1,22 @@
+{"frames": {
+
+"shadow_0.png":
+{
+	"frame": {"x":1,"y":1,"w":570,"h":198},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":26,"w":570,"h":198},
+	"sourceSize": {"w":588,"h":237}
+}},
+"animations": {
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "shadowSpritesheet.png",
+	"format": "RGBA8888",
+	"size": {"w":572,"h":200},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7e32335765f38581d9ebd1c5615a5ab2:557cfb895514e15563b2e41f505e07e5:a11ece95ebd6539957555861d6da8fde$"
+}
+}

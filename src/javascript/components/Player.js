@@ -2,11 +2,13 @@ import _ from 'underscore';
 import { TweenLite, Power3 } from 'gsap';
 
 class Player {
-    constructor(canvas, playerIndex, resources) {
+    constructor(canvas, playerIndex, resources, shadows) {
         _.bindAll(this, '_keyDownHandler', '_keyUpHandler');
+
         this._canvas = canvas;
         this._playerIndex = playerIndex;
         this._resources = resources;
+        this._shadows = shadows;
 
         this._animationProperties = [
             [
@@ -48,16 +50,36 @@ class Player {
 
     _setup() {
         this._spriteContainer = new PIXI.Container();
+        this._createShadow();
         this._createAnimatedSprites();
         this._createFakePlayer();
         this._setupEventListeners();
-
     }
+
+    _createShadow() {
+        let shadowTexture = this._shadows.textures[`shadow_${this._playerIndex}.png`];
+        
+        this._shadowSprite = new PIXI.Sprite.from(shadowTexture);
+
+        if (!this._shadowSprite) return;
+
+        let ratio = this._shadowSprite.width / this._shadowSprite.height;
+        this._shadowSprite.width = 280
+        this._shadowSprite.height = 280 / ratio;
+
+        this._shadowSprite.position.x = this._spriteProperties.x - 120;
+        this._shadowSprite.position.y = this._canvas.height - this._shadowSprite.height - 65;
+
+        this._addChild(this._shadowSprite);
+    }
+
     _createFakePlayer() {
         this.fakePlayerRect = new PIXI.Graphics();
+        this.fakePlayerRect.fill = 0x0000ff
         this.fakePlayerRect.alpha = 0
         this.fakePlayerRect.drawRect(270 + 150, 0, 125, 125);
     }
+
     _createAnimatedSprites() {
         let preJumpSprites = []
         for (let i = this._animationProperties[this._playerIndex][0].start; i <= this._animationProperties[this._playerIndex][0].end; i++) {
@@ -187,9 +209,11 @@ class Player {
         this._addChild(this._standardAnimation);
         this._standardAnimation.gotoAndPlay(0);
     }
+
     _stopAnimations() {
         this._standardAnimation.gotoAndStop(0);
     }
+
     _removeChilds(container) {
         container.removeChild(this._preJumpAnimation);
         container.removeChild(this._jumpAnimation);
@@ -204,23 +228,28 @@ class Player {
     _updatePositionsArrow(direction) {
         if (this._isTweening) return;
         TweenLite.to(this._spriteContainer.transform.position, .7, { y: 10 * direction, x: 300 * direction, ease: Power3.easeOut });
+    }
 
-    }
     updatePositionFakePlayer() {
-        this.fakePlayerRect.y = (this._spriteContainer.position.x + 55) / 2
+        this.fakePlayerRect.y = (this._spriteContainer.position.x + 55)
     }
+
     getRealPlayer() {
         return this._spriteContainer;
     }
+
     getFakePlayer() {
         return this.fakePlayerRect;
     }
+
     getFakePlayerBounds() {
         return this.fakePlayerRect.getBounds();
     }
+
     isPlayerJumping() {
         return this._isPlayerJumping;
     }
+
     _setupEventListeners() {
         window.addEventListener('keydown', this._keyDownHandler);
         window.addEventListener('keyup', this._keyUpHandler);
