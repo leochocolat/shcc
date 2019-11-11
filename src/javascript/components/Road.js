@@ -6,7 +6,7 @@ class Road {
             x: -100,
             y: window.innerHeight + 50,
             height: 350,
-            linesPadding: 100,
+            linesPadding: 160,
             linesAmount: 20,
             linesWidth: 45,
             linesHeight: 15
@@ -21,7 +21,7 @@ class Road {
     }
 
     createRoad() {
-        const degrees = Math.PI * 30.75 / 180
+        const degrees = Math.PI * 30.75 / 180;
 
         this._road = new PIXI.Graphics();
         this._road.beginFill(0xC6C6C6);
@@ -43,6 +43,7 @@ class Road {
         for (let i = 0; i < this._roadProperties.linesAmount; i++) {
             let roadLine = new PIXI.Graphics();
             roadLine.beginFill(0xFFFFFF);
+            roadLine.alpha = 0.5;
             roadLine.drawRect(0, 0, this._roadProperties.linesWidth, this._roadProperties.linesHeight);
             roadLine.transform.skew.x = degrees;
             roadLine.transform.position.x = i * this._roadProperties.linesPadding;

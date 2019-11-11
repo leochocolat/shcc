@@ -71,7 +71,7 @@ class Pixi {
             backgroundColor: 0x808080,
         });
 
-        PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+        // PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
         PIXI.settings.SORTABLE_CHILDREN;
 
         this._canvas = this._app.view;
@@ -173,7 +173,7 @@ class Pixi {
         this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
         this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
 
-
+        console.log(this._gameManager.gameSpeed)
         this._spriteContainer.isPlayerJumping();
         this._gameManager.tick();
         this._updateTimerSeconds();

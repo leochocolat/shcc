@@ -1,0 +1,63 @@
+{"frames": {
+
+"obstacles_0.png":
+{
+	"frame": {"x":417,"y":188,"w":68,"h":43},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":2,"w":68,"h":43},
+	"sourceSize": {"w":73,"h":47}
+},
+"obstacles_1.png":
+{
+	"frame": {"x":1,"y":1,"w":347,"h":161},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":5,"w":347,"h":161},
+	"sourceSize": {"w":350,"h":171}
+},
+"obstacles_2.png":
+{
+	"frame": {"x":210,"y":188,"w":205,"h":58},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":205,"h":58},
+	"sourceSize": {"w":208,"h":59}
+},
+"obstacles_3.png":
+{
+	"frame": {"x":1,"y":164,"w":207,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":2,"w":207,"h":89},
+	"sourceSize": {"w":209,"h":93}
+},
+"obstacles_4.png":
+{
+	"frame": {"x":350,"y":1,"w":185,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":185,"h":93},
+	"sourceSize": {"w":209,"h":93}
+},
+"obstacles_5.png":
+{
+	"frame": {"x":445,"y":1,"w":109,"h":37},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":37},
+	"sourceSize": {"w":109,"h":37}
+}},
+"animations": {
+	"obstacles": ["obstacles_0.png","obstacles_1.png","obstacles_2.png","obstacles_3.png","obstacles_4.png","obstacles_5.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "obstaclesSpritesheet.png",
+	"format": "RGBA8888",
+	"size": {"w":486,"h":254},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c845d24c28c02e4f1d8a515dcff874de:9c6af047e45dbca5177a6c6fee491db0:98129b6c13a91336973cb8fd18fbe243$"
+}
+}
