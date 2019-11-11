@@ -37,6 +37,7 @@ class Buildings {
       building.gotoAndStop(Math.round(Math.random() * this._textures.length));
 
       let ratio = building.width / building.height;
+
       this._buildingsProperties.width = this._buildingsProperties.height * ratio;
 
       building.width = this._buildingsProperties.width;

@@ -27,13 +27,13 @@ class GameManager {
         }
     }
     levelDifficulty() {
-        if (this._timer.seconds > 5.00 && this.gameSpeed == 0.8) {
+        if (this._timer.seconds > 10.00 && this.gameSpeed == 0.8) {
             this.gameSpeed = 1
-        } else if (this._timer.seconds > 15.00 && this.gameSpeed == 1) {
+        } else if (this._timer.seconds > 20.00 && this.gameSpeed == 1) {
             this.gameSpeed = 1.2
-        } else if (this._timer.seconds > 20.00 && this.gameSpeed == 1.2) {
-            this.gameSpeed = 1.3
-        } else if (this._timer.seconds > 30.00 && this.gameSpeed == 1.3) {
+        } else if (this._timer.seconds > 30.00 && this.gameSpeed == 1.2) {
+            this.gameSpeed = 1.4
+        } else if (this._timer.seconds > 50.00 && this.gameSpeed == 1.4) {
             this._endGame()
         }
     }

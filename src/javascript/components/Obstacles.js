@@ -4,9 +4,10 @@ class Obstacles {
         this._resources = resources;
 
         this._obstacleProperties = {
-            x: this._canvas.width,
+            x: this._canvas.width * 2,
             y: 10,
             height: 130,
+            width: 250,
             degree: (Math.PI * 30.75 / 180)
         }
 
@@ -31,12 +32,15 @@ class Obstacles {
         }
 
         this._animatedObstacle = new PIXI.extras.AnimatedSprite(this._textures);
+        console.log(this._animatedObstacle.getBounds)
         this._animatedObstacle.gotoAndStop(Math.round(Math.random() * this._textures.length));
 
         let ratio = this._animatedObstacle.width / this._animatedObstacle.height;
+        console.log(ratio)
+        this._obstacleProperties.width = this._obstacleProperties.height * ratio;
 
+        this._animatedObstacle.width = this._obstacleProperties.width;
         this._animatedObstacle.height = this._obstacleProperties.height;
-        this._animatedObstacle.width = this._obstacleProperties.height * ratio;
 
         this._animatedObstacle.position.x = this._obstacleProperties.x;
         this._animatedObstacle.position.y = this._obstacleProperties.y;
@@ -61,7 +65,7 @@ class Obstacles {
 
     _createFakeObstacle() {
         this.obstacleRect = new PIXI.Graphics();
-        this.obstacleRect.alpha = 0
+        // this.obstacleRect.alpha = 0
         this.obstacleRect.drawRect(0, 0, this._animatedObstacle.width, this._animatedObstacle.height);
     }
 
