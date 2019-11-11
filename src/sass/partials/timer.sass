@@ -7,10 +7,95 @@
 .infos__timer
     color: white
     font-size: 65px
-    z-index: 1
-.shadow-timer
-    z-index: -1
-    color: grey
-    top: -6%
-    left: 3%
+    z-index: 0
     position: absolute
+    bottom: 0
+    right: -50px
+    width: 450px
+    height: 300px
+    transform: skewX(4.5deg) rotate(4.5deg)
+    .timer-value
+        position: absolute
+        right: 30%
+        text-shadow: rgba(0, 0, 0, 0.4) 2px 5px
+    .timer-box
+        .box-front
+            position: absolute
+            background-color: #7f2224
+            height: 350px
+            width: 350px
+            bottom: -125px
+        .box-top
+            position: absolute
+            background-color: #f74040
+            height: 350px
+            width: 350px
+            transform: skewX(-55deg)
+            bottom: 75%
+            right: -150px
+        .box-right
+            position: absolute
+            height: 350px
+            width: 350px
+            right: -250px
+            bottom: -2px
+            background-color: #8a2525
+            transform: skewY(-35deg)
+        .progress-bar
+            position: absolute
+            width: 350px
+            height: 150px
+            bottom: 40px
+            display: flex
+            justify-content: center
+            align-items: center
+            .progress-bar-transparent
+                position: absolute
+                height: 30px
+                width: 265px
+                .progress-bar-front
+                    position: absolute
+                    height: 30px
+                    width: 265px
+                    background-color: rgba(255, 255, 255, 0.2)
+                .progress-bar-top
+                    position: absolute
+                    height: 15px
+                    width: 265px
+                    background-color: rgba(255, 255, 255, 0.6)
+                    bottom: 30px
+                    right: -10px
+                    transform: skewX(-55deg)
+                .progress-bar-right
+                    position: absolute
+                    height: 30px
+                    bottom: 7px
+                    right: -20px
+                    width: 20px
+                    background-color: rgba(255, 255, 255, 0.4)
+                    transform: skewY(-35deg)
+            // .progress-bar-white
+            //     position: absolute
+            //     height: 30px
+            //     width: 265px
+            //     .progress-bar-front
+            //         position: absolute
+            //         height: 30px
+            //         width: 265px
+            //         background-color: rgba(255, 255, 255, 1)
+            //     .progress-bar-top
+            //         position: absolute
+            //         height: 15px
+            //         width: 265px
+            //         background-color: rgba(255, 255, 255, 1)
+            //         bottom: 30px
+            //         right: -10px
+            //         transform: skewX(-55deg)
+            //     .progress-bar-right
+            //         position: absolute
+            //         height: 30px
+            //         bottom: 7px
+            //         right: -20px
+            //         width: 20px
+            //         background-color: rgba(255, 255, 255, 1)
+            //         transform: skewY(-35deg)

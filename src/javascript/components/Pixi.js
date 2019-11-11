@@ -10,7 +10,6 @@ import Obstacles from './Obstacles';
 import GameManager from './GameManager'
 import Buildings from './Buildings';
 import Objects from './Objects';
-import TimerBox from './TimerBox';
 
 class Pixi {
     constructor(playerIndex, resources) {
@@ -106,7 +105,6 @@ class Pixi {
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
         this._buildingsContainer = new Buildings(this._canvas, this._resources['buildingSpritesheet']);
         this._objectsContainer = new Objects(this._canvas, this._resources['objectsSpritesheet']);
-        this._timerBoxContainer = new TimerBox(this._canvas);
         this._timer = new Timer()
         this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._timer);
 
@@ -118,10 +116,6 @@ class Pixi {
     }
 
     _updateTimerSeconds() {
-        this._timer.getDeltaTime()
-    }
-
-    _updateTimerSeconds() {
         this._currentTime = this._timer.getDeltaTime();
     }
 
@@ -130,12 +124,10 @@ class Pixi {
         this._skewedContainer.removeChild(this._objectsContainer.drawObjects());
 
         this._skewedContainer.removeChild(this._roadContainer.drawRoad())
-        this._skewedContainer.removeChild(this._timerBoxContainer.drawTimerBox());
 
         this._container.removeChild(this._skewedContainer);
         this._skewedContainer.removeChild(this._obstaclesContainer.drawObstacles())
 
-        this._container.removeChild(this._timer.drawTimer());
 
         this._container.removeChild(this._spriteContainer.getRealPlayer());
         this._container.removeChild(this._spriteContainer.getFakePlayer());
@@ -147,11 +139,9 @@ class Pixi {
         this._skewedContainer.addChild(this._objectsContainer.drawObjects());
 
         this._skewedContainer.addChild(this._roadContainer.drawRoad());
-        this._skewedContainer.addChild(this._timerBoxContainer.drawTimerBox());
 
         this._container.addChild(this._skewedContainer);
         this._skewedContainer.addChild(this._obstaclesContainer.drawObstacles());
-        this._container.addChild(this._timer.drawTimer());
 
         this._container.addChild(this._spriteContainer.getRealPlayer());
         this._container.addChild(this._spriteContainer.getFakePlayer());
@@ -173,7 +163,6 @@ class Pixi {
         this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
         this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
 
-        console.log(this._gameManager.gameSpeed)
         this._spriteContainer.isPlayerJumping();
         this._gameManager.tick();
         this._updateTimerSeconds();
