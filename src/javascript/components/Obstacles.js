@@ -71,9 +71,11 @@ class Obstacles {
         this._animatedObstacle.gotoAndStop(3);
 
         let ratio = this._animatedObstacle.width / this._animatedObstacle.height;
+        console.log(ratio)
+        this._obstacleProperties.width = this._obstacleProperties.height * ratio;
 
+        this._animatedObstacle.width = this._obstacleProperties.width;
         this._animatedObstacle.height = this._obstacleProperties.height;
-        this._animatedObstacle.width = this._obstacleProperties.height * ratio;
 
         this._animatedObstacle.position.x = this._obstacleProperties.x;
         this._animatedObstacle.position.y = this._obstacleProperties.y;
