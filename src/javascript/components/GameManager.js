@@ -1,3 +1,5 @@
+import Loose from './Loose';
+
 class GameManager {
     constructor(stage, player, obstacle, timer) {
         this._stage = stage
@@ -16,7 +18,9 @@ class GameManager {
         this.message.alpha = 1
         this.message.scale.set(1.5, 1.5)
 
+        this.looseComponent = new Loose(document.querySelector('.js-section-loose'));
     }
+
     tick() {
         let playerBounds = this._player.getFakePlayerBounds(),
             obstacleBounds = this._obstacle.getFakeObstacleBounds(),
@@ -26,6 +30,7 @@ class GameManager {
             this._hitTest()
         }
     }
+
     levelDifficulty() {
         if (this._timer.seconds > 10.00 && this.gameSpeed == 0.8) {
             this.gameSpeed = 1
@@ -37,14 +42,23 @@ class GameManager {
             this._endGame()
         }
     }
+
+    _allowHitManager() {
+        this._allowHit = false;
+        setTimeout(() => {
+            this._allowHit = true;
+        }, 2000)
+    }
+
     _hitTest() {
+        this.gameSpeed = 0.8;
+        this._timer.resetTimer();
+        this.looseComponent.animate();
+        this._allowHitManager();
         this.gameSpeed = 0.8
         this._timer.resetTimer()
-        this._stage.addChild(this.message)
-        setTimeout(() => {
-            this._stage.removeChild(this.message)
-        }, 300)
     }
+
     _endGame() {
         this.gameSpeed = 0
         this.isGameFinished = true
