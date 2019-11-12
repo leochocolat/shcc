@@ -5,7 +5,7 @@ class Obstacles {
 
         this._obstacleProperties = {
             x: this._canvas.width,
-            y: (350/2) / 2,
+            y: (350 / 2) / 2,
             height: 180,
             degree: Math.PI * 30.75 / 180,
             sizes: [
@@ -45,7 +45,7 @@ class Obstacles {
         let index = -1;
         for (let i in this._resources.textures) {
             index++
-            
+
             this._textures.push(this._resources.textures[i]);
             let sprite = new PIXI.Sprite.from(this._resources.textures[i]);
 

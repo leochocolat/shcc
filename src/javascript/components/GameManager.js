@@ -18,14 +18,17 @@ class GameManager {
         this.message.alpha = 1
         this.message.scale.set(1.5, 1.5)
 
+        this.progressBarCompletion = document.querySelectorAll('.progress-completion');
+
         this.looseComponent = new Loose(document.querySelector('.js-section-loose'));
     }
 
     tick() {
         let playerBounds = this._player.getFakePlayerBounds(),
             obstacleBounds = this._obstacle.getFakeObstacleBounds(),
-            isJumping = this._player.isPlayerJumping()
+            isJumping = this._player.isPlayerJumping();
         this.levelDifficulty()
+        this.animateProgressBar()
         if (playerBounds.x + playerBounds.width > obstacleBounds.x && playerBounds.x < obstacleBounds.x + obstacleBounds.width && playerBounds.y + playerBounds.height > obstacleBounds.y && playerBounds.y < obstacleBounds.y + obstacleBounds.height && this._allowHit && !isJumping) {
             this._hitTest()
         }
@@ -48,7 +51,7 @@ class GameManager {
         setTimeout(() => {
             this._allowHit = true;
         }, 5000)
-    } 
+    }
 
     _hitTest() {
         this.gameSpeed = 0.8;
@@ -56,7 +59,13 @@ class GameManager {
         this._timer.resetTimer();
         this.looseComponent.animate();
     }
+    animateProgressBar() {
+        let progressPercentage = 100 * this._timer.seconds / 50
+        for (let index = 0; index < this.progressBarCompletion.length; index++) {
+            this.progressBarCompletion[index].style.width = `${progressPercentage}%`;
+        }
 
+    }
     _endGame() {
         this.gameSpeed = 0
         this.isGameFinished = true
