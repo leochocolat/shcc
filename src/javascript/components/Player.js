@@ -34,7 +34,9 @@ class Player {
         this._spriteProperties = {
             x: 270,
             width: [170, 140],
-            translate: 70
+            translate: 70,
+            shadowTranslateX: [-120, -160],
+            shadowTranslateY: [-65, -70]
         }
 
         this._fakePlayerProperties = {
@@ -64,11 +66,11 @@ class Player {
         if (!this._shadowSprite) return;
 
         let ratio = this._shadowSprite.width / this._shadowSprite.height;
-        this._shadowSprite.width = 280
+        this._shadowSprite.width = 280;
         this._shadowSprite.height = 280 / ratio;
 
-        this._shadowSprite.position.x = this._spriteProperties.x - 120;
-        this._shadowSprite.position.y = this._canvas.height - this._shadowSprite.height - 65;
+        this._shadowSprite.position.x = this._spriteProperties.x + this._spriteProperties.shadowTranslateX[this._playerIndex];
+        this._shadowSprite.position.y = this._canvas.height - this._shadowSprite.height + this._spriteProperties.shadowTranslateY[this._playerIndex];
 
         this._addChild(this._shadowSprite);
     }
