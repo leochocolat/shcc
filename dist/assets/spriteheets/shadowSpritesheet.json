@@ -7,16 +7,25 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":10,"y":26,"w":570,"h":198},
 	"sourceSize": {"w":588,"h":237}
+},
+"shadow_1.png":
+{
+	"frame": {"x":1,"y":201,"w":529,"h":116},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":4,"w":529,"h":116},
+	"sourceSize": {"w":536,"h":125}
 }},
 "animations": {
+	"shadow": ["shadow_0.png","shadow_1.png"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "shadowSpritesheet.png",
 	"format": "RGBA8888",
-	"size": {"w":572,"h":200},
+	"size": {"w":572,"h":318},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:7e32335765f38581d9ebd1c5615a5ab2:557cfb895514e15563b2e41f505e07e5:a11ece95ebd6539957555861d6da8fde$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f331ed7d96776e7b1d17eb894cea6ee0:3348b4a6da1bcba22d0c58e0f1fe028d:a11ece95ebd6539957555861d6da8fde$"
 }
 }
