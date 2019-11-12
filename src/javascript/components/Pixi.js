@@ -3,7 +3,6 @@ import { TweenLite } from 'gsap';
 import * as PIXI from 'pixi.js'
 import Stats from 'stats.js';
 import * as dat from 'dat.gui';
-import Timer from './Timer';
 import Player from './Player';
 import Road from './Road';
 import Obstacles from './Obstacles';
@@ -105,19 +104,13 @@ class Pixi {
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
         this._buildingsContainer = new Buildings(this._canvas, this._resources['buildingSpritesheet']);
         this._objectsContainer = new Objects(this._canvas, this._resources['objectsSpritesheet']);
-        this._timer = new Timer()
-        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._timer, this._deltaTime);
-        console.log(this._gameManager)
+        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._deltaTime);
 
         this._start();
     }
 
     _start() {
         this._isReady = true;
-    }
-
-    _updateTimerSeconds() {
-        this._currentTime = this._timer.getDeltaTime();
     }
 
     _removeChilds() {
@@ -165,7 +158,7 @@ class Pixi {
 
             this._spriteContainer.isPlayerJumping();
             this._gameManager.tick();
-            this._updateTimerSeconds();
+
             this._reloadPage();
         }
 
