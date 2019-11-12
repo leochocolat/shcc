@@ -161,7 +161,7 @@ class Pixi {
             this._roadContainer.updateRoadLinesPosition(this._gameManager.gameSpeed, this._deltaTime);
             this._obstaclesContainer.updateObstaclesPosition(this._gameManager.gameSpeed, this._deltaTime);
             this._buildingsContainer.updateBuildingsPosition(this._gameManager.gameSpeed, this._deltaTime);
-            this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
+            // this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
             this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
 
             this._spriteContainer.isPlayerJumping();

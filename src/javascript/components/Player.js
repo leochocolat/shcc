@@ -39,11 +39,6 @@ class Player {
             shadowTranslateY: [-65, -70]
         }
 
-        this._fakePlayerProperties = {
-            x: 0,
-            y: 0
-        }
-
         this._horizontalDisplacement = 0;
         this._isPlayerJumping = false;
         this.animationNeedToStop = false;
@@ -77,9 +72,15 @@ class Player {
 
     _createFakePlayer() {
         this.fakePlayerRect = new PIXI.Graphics();
-        this.fakePlayerRect.fill = 0x0000ff
-        this.fakePlayerRect.alpha = 1
-        this.fakePlayerRect.drawRect(270 + 150, 0, 125, 125);
+        this.fakePlayerRect.fill = 0x0000ff;
+        this.fakePlayerRect.alpha = 0;
+        this.fakePlayerRect.drawRect(635, (350/2)/2, 200, 125);
+        this.fakePlayerRect.pivot.x = this.fakePlayerRect.width/2;
+        this.fakePlayerRect.pivot.y = this.fakePlayerRect.height/2;
+    }
+
+    updatePositionFakePlayer(direction) {
+        TweenLite.to(this.fakePlayerRect, .7, { y: (350/2) * direction, ease: Power3.easeOut });
     }
 
     _createAnimatedSprites() {
@@ -230,10 +231,6 @@ class Player {
     _updatePositionsArrow(direction) {
         if (this._isTweening) return;
         TweenLite.to(this._spriteContainer.transform.position, .7, { y: 10 * direction, x: 300 * direction, ease: Power3.easeOut });
-    }
-
-    updatePositionFakePlayer() {
-        this.fakePlayerRect.y = (this._spriteContainer.position.x + 55)
     }
 
     getRealPlayer() {
