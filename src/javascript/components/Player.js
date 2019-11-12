@@ -78,7 +78,7 @@ class Player {
     _createFakePlayer() {
         this.fakePlayerRect = new PIXI.Graphics();
         this.fakePlayerRect.fill = 0x0000ff
-        this.fakePlayerRect.alpha = 0
+        this.fakePlayerRect.alpha = 1
         this.fakePlayerRect.drawRect(270 + 150, 0, 125, 125);
     }
 
