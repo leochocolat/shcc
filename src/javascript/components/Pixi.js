@@ -22,8 +22,8 @@ class Pixi {
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
         this.components = {};
+        this._deltaTime = 0;
 
-        this._delta = 0;
         this._isReady = false;
 
         this._settings = {
@@ -106,7 +106,7 @@ class Pixi {
         this._buildingsContainer = new Buildings(this._canvas, this._resources['buildingSpritesheet']);
         this._objectsContainer = new Objects(this._canvas, this._resources['objectsSpritesheet']);
         this._timer = new Timer()
-        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._timer);
+        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._timer, this._deltaTime);
         console.log(this._gameManager)
 
         this._start();
@@ -152,12 +152,11 @@ class Pixi {
 
     _tick() {
         if (!this._isReady) return;
-        this._updateDeltaTime();
-        this._delta += 1 * this._gameManager.gameSpeed * this.deltaTime;
 
-        this._removeChilds();
-        this._addChilds();
         if (!this._gameManager.isGameFinished) {
+            this._updateDeltaTime();
+            this._removeChilds();
+            this._addChilds();
             this._roadContainer.updateRoadLinesPosition(this._gameManager.gameSpeed, this._deltaTime);
             this._obstaclesContainer.updateObstaclesPosition(this._gameManager.gameSpeed, this._deltaTime);
             this._buildingsContainer.updateBuildingsPosition(this._gameManager.gameSpeed, this._deltaTime);
@@ -167,10 +166,13 @@ class Pixi {
             this._spriteContainer.isPlayerJumping();
             this._gameManager.tick();
             this._updateTimerSeconds();
+            this._reloadPage();
         }
+
         if (this._gameManager.isGameFinished) {
             this._spriteContainer._stopAnimations()
         }
+
         this._app.render(this._stage);
     }
 
@@ -193,6 +195,11 @@ class Pixi {
 
     _resizeHandler() {
         this._resize();
+    }
+    _reloadPage() {
+        if (this._deltaTime > 1500) {
+            window.location.reload()
+        }
     }
 }
 

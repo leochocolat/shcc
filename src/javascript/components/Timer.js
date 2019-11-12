@@ -15,6 +15,9 @@ class Timer {
     drawTimer() {
         return this.timerText
     }
+    animateProgressBar() {
+        console.log(this.seconds)
+    }
     resetTimer() {
         this.initTimerValues();
         this.getDeltaTime();
