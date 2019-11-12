@@ -7,7 +7,21 @@ class Obstacles {
             x: this._canvas.width,
             y: (350/2) / 2,
             height: 180,
-            degree: Math.PI * 30.75 / 180
+            degree: Math.PI * 30.75 / 180,
+            sizes: [
+                80,
+                180,
+                70,
+                150,
+                150,
+                70
+            ],
+            obstacleSizes = [
+                { width: 0, height: 0 },
+                { width: 0, height: 0 },
+                { width: 0, height: 0 },
+                { width: 0, height: 0 },
+            ]
         }
 
         this.setup();
@@ -25,13 +39,17 @@ class Obstacles {
         this._textures = [];
         this._sprites = [];
 
+        let index = -1;
         for (let i in this._resources.textures) {
+            index++
+            
             this._textures.push(this._resources.textures[i]);
             let sprite = new PIXI.Sprite.from(this._resources.textures[i]);
 
             let ratio = sprite.width / sprite.height;
-            sprite.height = this._obstacleProperties.height;
-            sprite.width = this._obstacleProperties.height * ratio;
+
+            sprite.height = this._obstacleProperties.sizes[index];
+            sprite.width = this._obstacleProperties.sizes[index] * ratio;
 
             sprite.position.x = this._obstacleProperties.x;
             sprite.position.y = this._obstacleProperties.y;
@@ -40,14 +58,14 @@ class Obstacles {
             sprite.rotation = this._obstacleProperties.degree;
 
             this._sprites.push(sprite)
-            // this._obstaclesContainer.addChild(sprite);
         }
 
+        this._spriteTest = 5;
+
+        // this._obstaclesContainer.addChild(this._sprites[this._spriteTest]);
         this._obstaclesContainer.addChild(this._randomSprite(this._sprites));
 
         this._allowUpdate = true;
-
-        // this._oldAnimatedObstacles();
     }
 
     updateObstaclesPosition(speed, deltaTime) {
@@ -59,42 +77,11 @@ class Obstacles {
 
         if (this._obstaclesContainer.children[0].position.x < 0) {
             this._obstaclesContainer.removeChildAt(0);
+            // this._obstaclesContainer.addChild(this._sprites[this._spriteTest]);
             this._obstaclesContainer.addChild(this._randomSprite(this._sprites));
             this._obstaclesContainer.children[0].position.x = this._canvas.width * 1.5 + Math.random() * this._canvas.width / 2;
             this._obstaclesContainer.children[0].position.y = this._obstacleProperties.y + (this._obstacleProperties.y * 2) * Math.round(Math.random());
             this._updateFakeObstacle();
-        }
-    }
-
-    _oldAnimatedObstacles() {
-        this._animatedObstacle = new PIXI.extras.AnimatedSprite(this._textures);
-        this._animatedObstacle.gotoAndStop(3);
-
-        let ratio = this._animatedObstacle.width / this._animatedObstacle.height;
-        console.log(ratio)
-        this._obstacleProperties.width = this._obstacleProperties.height * ratio;
-
-        this._animatedObstacle.width = this._obstacleProperties.width;
-        this._animatedObstacle.height = this._obstacleProperties.height;
-
-        this._animatedObstacle.position.x = this._obstacleProperties.x;
-        this._animatedObstacle.position.y = this._obstacleProperties.y;
-
-        this._animatedObstacle.rotation = this._obstacleProperties.degree;
-
-        this._obstaclesContainer.addChild(this._animatedObstacle);
-    }
-
-    _updateOldObstacles() {
-        if (this._animatedObstacle && this.obstacleRect) {
-            this._animatedObstacle.position.x += -1 * speed * deltaTime;
-            this.obstacleRect.position.x = this._animatedObstacle.position.x
-            this.obstacleRect.position.y = this._animatedObstacle.position.y
-            if (this._animatedObstacle.position.x < 0) {
-                this._animatedObstacle.gotoAndStop(Math.round(Math.random() * this._textures.length));
-                this._animatedObstacle.transform.position.x = this._canvas.width + Math.random() * this._canvas.width / 2;
-                this._animatedObstacle.transform.position.y = this._obstacleProperties.y + 150 * (Math.round(Math.random() * 1));
-            }
         }
     }
 
@@ -107,7 +94,7 @@ class Obstacles {
 
     _createFakeObstacle() {
         this.obstacleRect = new PIXI.Graphics();
-        this.obstacleRect.alpha = 0
+        this.obstacleRect.alpha = 1
         this.obstacleRect.drawRect(0, 0, this._obstaclesContainer.children[0].width, this._obstaclesContainer.children[0].height);
     }
 

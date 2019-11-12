@@ -4,5 +4,5 @@ import Pixi from './components/Pixi';
 
 document.addEventListener('DOMContentLoaded', () => {
     new SelectPlayer()
-        // ._selectPlayer(0)
+        ._selectPlayer(0)
 });
