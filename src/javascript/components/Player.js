@@ -1,5 +1,16 @@
 import _ from 'underscore';
-import { TweenLite, Power3 } from 'gsap';
+import { TweenLite, Power3, TweenMax } from 'gsap';
+
+// const SCALESTART = 1.05;
+// const SCALEPRESS = 1.07;
+// const SCALEJUMP = 1;
+const SCALESTART = 1;
+const SCALEPRESS = 1.02;
+const SCALEJUMP = .95;
+
+const EASEPRESS = Power3.easeOut;
+const EASEJUMP = Power3.easeOut;
+const EASEEND = '';
 
 class Player {
     constructor(canvas, playerIndex, resources, shadows) {
@@ -9,6 +20,10 @@ class Player {
         this._playerIndex = playerIndex;
         this._resources = resources;
         this._shadows = shadows;
+
+        this.ui = {
+            gameInfos: document.querySelector('.js-game-infos-borders')
+        }
 
         this._animationProperties = [
             [
@@ -46,6 +61,8 @@ class Player {
     }
 
     _setup() {
+        TweenLite.set(this._canvas, { scale: SCALESTART });
+
         this._spriteContainer = new PIXI.Container();
         this._createShadow();
         this._createAnimatedSprites();
@@ -174,6 +191,15 @@ class Player {
         this._removeChilds(this._spriteContainer);
         this._addChild(this._preJumpAnimation);
         this._preJumpAnimation.gotoAndPlay(0);
+
+        TweenLite.to(this._canvas, 0.3, { scale: SCALEPRESS, ease: EASEPRESS });
+        // TweenLite.to(this.ui.gameInfos, 0.3, { 
+        //     borderTopWidth: `${SCALEPRESS * 12}px`,
+        //     borderRightWidth: `${SCALEPRESS * 12}px`,
+        //     borderBottomWidth: `${SCALEPRESS * 12}px`,
+        //     borderLeftWidth: `${SCALEPRESS * 12}px`,
+        //     ease: EASEPRESS,
+        //  });
     }
 
     _playJumpAnimation() {
@@ -184,6 +210,16 @@ class Player {
         this._addChild(this._jumpAnimation);
 
         this._jumpAnimation.gotoAndPlay(0);
+
+        TweenLite.to(this._canvas, 0.3, { scale: SCALEJUMP, ease: EASEJUMP });
+        TweenLite.to(this.ui.gameInfos, 0.3, { 
+            borderTopWidth: `${SCALEJUMP * 12}px`,
+            borderRightWidth: `${SCALEJUMP * 12}px`,
+            borderBottomWidth: `${SCALEJUMP * 12}px`,
+            borderLeftWidth: `${SCALEJUMP * 12}px`,
+            ease: EASEJUMP,
+         });
+
         TweenLite.to(this._spriteContainer.transform.position, .5, {
             y: -40, onComplete: () => {
                 this._isTweening = false;
@@ -197,6 +233,16 @@ class Player {
         this._removeChilds(this._spriteContainer);
         this._addChild(this._fallAnimation);
         this._fallAnimation.gotoAndPlay(0);
+
+        TweenLite.to(this._canvas, 0.5, { scale: SCALESTART, ease: EASEEND });
+        TweenLite.to(this.ui.gameInfos, 0.5, { 
+            borderTopWidth: `${SCALESTART * 12}px`,
+            borderRightWidth: `${SCALESTART * 12}px`,
+            borderBottomWidth: `${SCALESTART * 12}px`,
+            borderLeftWidth: `${SCALESTART * 12}px`,
+            ease: EASEEND,
+         });
+
         TweenLite.to(this._spriteContainer.transform.position, 0.4, {
             y: 0, onComplete: () => {
                 this._isTweening = false;

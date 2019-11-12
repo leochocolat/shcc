@@ -18,7 +18,7 @@ class Obstacles {
             ],
             obstacleSizes: [
                 { width: 30, height: 350/4 },
-                { width: 320, height: 350/3 },
+                { width: 350, height: 350/3 },
                 { width: 120, height: 350/3 },
                 { width: 120, height: 350/2 },
                 { width: 120, height: 350/2 },

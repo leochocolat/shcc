@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import { TweenLite } from 'gsap';
+import { TweenLite, TweenMax, TimelineLite } from 'gsap';
 import * as PIXI from 'pixi.js'
 import Stats from 'stats.js';
 import * as dat from 'dat.gui';
@@ -35,6 +35,8 @@ class Pixi {
             y: window.innerHeight + 50,
             degrees: Math.PI * 30.75 / 180
         }
+
+        this._allowZoomAnimation = true;
 
         this._setup();
     }
@@ -107,7 +109,6 @@ class Pixi {
         this._objectsContainer = new Objects(this._canvas, this._resources['objectsSpritesheet']);
         this._timer = new Timer()
         this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._timer, this._deltaTime);
-        console.log(this._gameManager)
 
         this._start();
     }
@@ -160,10 +161,10 @@ class Pixi {
             this._roadContainer.updateRoadLinesPosition(this._gameManager.gameSpeed, this._deltaTime);
             this._obstaclesContainer.updateObstaclesPosition(this._gameManager.gameSpeed, this._deltaTime);
             this._buildingsContainer.updateBuildingsPosition(this._gameManager.gameSpeed, this._deltaTime);
-            // this._spriteContainer.updatePositionFakePlayer(this._gameManager.gameSpeed, this._deltaTime)
             this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
 
-            this._spriteContainer.isPlayerJumping();
+            this._isPlayerJumping = this._spriteContainer.isPlayerJumping();
+
             this._gameManager.tick();
             this._updateTimerSeconds();
             this._reloadPage();
