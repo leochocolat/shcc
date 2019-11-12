@@ -62,7 +62,7 @@ class GameManager {
     animateProgressBar() {
         let progressPercentage = 100 * this._timer.seconds / 50
         for (let index = 0; index < this.progressBarCompletion.length; index++) {
-            this.progressBarCompletion[index].style.width = `${progressPercentage}px`;
+            this.progressBarCompletion[index].style.width = `${progressPercentage}%`;
         }
 
     }
