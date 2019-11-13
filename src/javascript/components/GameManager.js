@@ -74,6 +74,7 @@ class GameManager {
         this._timer.resetTimer();
         this.looseComponent.animate();
     }
+
     _updateTimerSeconds() {
         this._currentTime = this._timer.getDeltaTime();
     }
@@ -85,10 +86,12 @@ class GameManager {
         }
 
     }
+
     _endGame() {
         this.gameSpeed = 0
         this.isGameFinished = true
     }
+
     _keyPressedHandler(event) {
         switch (event.code) {
             case 'Space':
@@ -125,4 +128,5 @@ class GameManager {
         this._timer.resetTimer();
     }
 }
+
 export default GameManager
