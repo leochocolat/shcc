@@ -104,14 +104,25 @@ class GameManager {
         }
         if (this.keyPressed.left && this.keyPressed.right && this.keyPressed.up && !this._isGameReadyToStart) {
             this._timer.resetTimer();
+
+            let counter = 3,
+                counterInterval = setInterval(() => {
+                    counter--;
+                }, 1000)
+
             setTimeout(() => {
-                for (let index = 0; index < this._obstacle._sprites.length; index++) {
-                    this._obstacle._sprites[index].alpha = 1
-                }
-                this._allowHit = true
+                clearInterval(counterInterval)
+                this._startGame()
             }, 3000);
-            this._isGameReadyToStart = true;
         }
+    }
+    _startGame() {
+        for (let index = 0; index < this._obstacle._sprites.length; index++) {
+            this._obstacle._sprites[index].alpha = 1
+        }
+        this._allowHit = true
+        this._isGameReadyToStart = true;
+        this._timer.resetTimer();
     }
 }
 export default GameManager
