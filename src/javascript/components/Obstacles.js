@@ -108,25 +108,15 @@ class Obstacles {
         this.obstacleRect.drawRect(0, 0, this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].width, this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].height);
         this.obstacleRect.position.x = this._obstaclesContainer.children[0].position.x;
         this.obstacleRect.position.y = this._obstaclesContainer.children[0].position.y;
-<<<<<<< HEAD
         this.obstacleRect.pivot.x = this.obstacleRect.width/2;
         this.obstacleRect.pivot.y = this.obstacleRect.height/2;
-=======
-        this.obstacleRect.pivot.x = - this.obstacleRect.width / 2;
-        this.obstacleRect.pivot.y = this.obstacleRect.height / 2;
->>>>>>> 14c216780fa7e3fd58b91f4035fdf727ab52ef0e
     }
 
     _updateFakeObstacle() {
         this.obstacleRect.width = this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].width;
         this.obstacleRect.height = this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].height;
-<<<<<<< HEAD
         this.obstacleRect.position.x = this._obstaclesContainer.children[0].position.x;
         this.obstacleRect.position.y = this._obstaclesContainer.children[0].position.y;
-=======
-        this.obstacleRect.pivot.x = - this.obstacleRect.width / 2;
-        this.obstacleRect.pivot.y = this.obstacleRect.height / 2;
->>>>>>> 14c216780fa7e3fd58b91f4035fdf727ab52ef0e
     }
 
     drawFakeObstacle() {
