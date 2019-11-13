@@ -58,9 +58,11 @@
 
     margin-top: 100px
 
+    transform: scale(1.1) translateX(-60px)
+
 .player__first, .player__second
     width: 200px
-    margin: auto 20px
+    margin: auto 0
 
     cursor: pointer
 
@@ -79,12 +81,16 @@
 .player
     position: relative
     height: 300px
+
+    // transform: scale(1.2) translateX(-30%)
     &__background
         background-color: #c9c7cb
-        width: 130px
-        height: 250px
+        width: 90px
+        height: 180px
         position: absolute
-        transform: translateY(-10%) translateX(40%) skewY(5.125deg)
+        left: 50%
+        top: 5px
+        transform: translateY(-15%) translateX(10%) skewY(5.125deg)
     &__name
         background-color: #a72b2e
         width: 100px
@@ -96,7 +102,8 @@
         position: absolute
         text-transform: uppercase
         color: white
-        transform: translateX(40%) skewY(5.125deg)
+        transform: translate(34%,-103%) skewY(5.125deg)
+        
         &::before
             display: inline-block
             content: ""
