@@ -17,11 +17,19 @@ class Obstacles {
                 70
             ],
             obstacleSizes: [
+<<<<<<< HEAD
                 { width: 30, height: 350 / 4 },
                 { width: 320, height: 350 / 3 },
                 { width: 120, height: 350 / 3 },
                 { width: 120, height: 350 / 2 },
                 { width: 120, height: 350 / 2 },
+=======
+                { width: 30, height: 350/4 },
+                { width: 350, height: 350/3 },
+                { width: 120, height: 350/3 },
+                { width: 120, height: 350/2 },
+                { width: 120, height: 350/2 },
+>>>>>>> e40ac1500e2dbb15d875c207c7020d8b8497164d
                 { width: 50, height: 110 }
             ]
         }
