@@ -1,9 +1,6 @@
 import _ from 'underscore';
 import { TweenLite, Power3, TweenMax } from 'gsap';
 
-// const SCALESTART = 1.05;
-// const SCALEPRESS = 1.07;
-// const SCALEJUMP = 1;
 const SCALESTART = 1;
 const SCALEPRESS = 1.02;
 const SCALEJUMP = .95;
@@ -91,7 +88,7 @@ class Player {
         this.fakePlayerRect = new PIXI.Graphics();
         this.fakePlayerRect.fill = 0x0000ff;
         this.fakePlayerRect.alpha = 0;
-        this.fakePlayerRect.drawRect(635, (350/2)/2, 200, 125);
+        this.fakePlayerRect.drawRect(500, (350/2)/2, 200, 125);
         this.fakePlayerRect.pivot.x = this.fakePlayerRect.width/2;
         this.fakePlayerRect.pivot.y = this.fakePlayerRect.height/2;
     }
@@ -193,13 +190,6 @@ class Player {
         this._preJumpAnimation.gotoAndPlay(0);
 
         TweenLite.to(this._canvas, 0.3, { scale: SCALEPRESS, ease: EASEPRESS });
-        // TweenLite.to(this.ui.gameInfos, 0.3, { 
-        //     borderTopWidth: `${SCALEPRESS * 12}px`,
-        //     borderRightWidth: `${SCALEPRESS * 12}px`,
-        //     borderBottomWidth: `${SCALEPRESS * 12}px`,
-        //     borderLeftWidth: `${SCALEPRESS * 12}px`,
-        //     ease: EASEPRESS,
-        //  });
     }
 
     _playJumpAnimation() {
@@ -212,13 +202,6 @@ class Player {
         this._jumpAnimation.gotoAndPlay(0);
 
         TweenLite.to(this._canvas, 0.3, { scale: SCALEJUMP, ease: EASEJUMP });
-        TweenLite.to(this.ui.gameInfos, 0.3, { 
-            borderTopWidth: `${SCALEJUMP * 12}px`,
-            borderRightWidth: `${SCALEJUMP * 12}px`,
-            borderBottomWidth: `${SCALEJUMP * 12}px`,
-            borderLeftWidth: `${SCALEJUMP * 12}px`,
-            ease: EASEJUMP,
-         });
 
         TweenLite.to(this._spriteContainer.transform.position, .5, {
             y: -40, onComplete: () => {
@@ -235,13 +218,6 @@ class Player {
         this._fallAnimation.gotoAndPlay(0);
 
         TweenLite.to(this._canvas, 0.5, { scale: SCALESTART, ease: EASEEND });
-        TweenLite.to(this.ui.gameInfos, 0.5, { 
-            borderTopWidth: `${SCALESTART * 12}px`,
-            borderRightWidth: `${SCALESTART * 12}px`,
-            borderBottomWidth: `${SCALESTART * 12}px`,
-            borderLeftWidth: `${SCALESTART * 12}px`,
-            ease: EASEEND,
-         });
 
         TweenLite.to(this._spriteContainer.transform.position, 0.4, {
             y: 0, onComplete: () => {
