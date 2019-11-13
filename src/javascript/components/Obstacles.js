@@ -17,11 +17,11 @@ class Obstacles {
                 70
             ],
             obstacleSizes: [
-                { width: 30, height: 350/4 },
-                { width: 320, height: 350/3 },
-                { width: 120, height: 350/3 },
-                { width: 120, height: 350/2 },
-                { width: 120, height: 350/2 },
+                { width: 30, height: 350 / 4 },
+                { width: 320, height: 350 / 3 },
+                { width: 120, height: 350 / 3 },
+                { width: 120, height: 350 / 2 },
+                { width: 120, height: 350 / 2 },
                 { width: 50, height: 110 }
             ]
         }
@@ -101,12 +101,12 @@ class Obstacles {
 
     _createFakeObstacle() {
         this.obstacleRect = new PIXI.Graphics();
-        this.obstacleRect.alpha = 0
+        this.obstacleRect.alpha = 0;
         this.obstacleRect.drawRect(0, 0, this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].width, this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].height);
         this.obstacleRect.position.x = this._obstaclesContainer.children[0].position.x;
         this.obstacleRect.position.y = this._obstaclesContainer.children[0].position.y;
-        this.obstacleRect.pivot.x = - this.obstacleRect.width/2;
-        this.obstacleRect.pivot.y = this.obstacleRect.height/2;
+        this.obstacleRect.pivot.x = - this.obstacleRect.width / 2;
+        this.obstacleRect.pivot.y = this.obstacleRect.height / 2;
     }
 
     _updateFakeObstacle() {
@@ -114,8 +114,8 @@ class Obstacles {
         this.obstacleRect.position.y = this._obstaclesContainer.children[0].position.y;
         this.obstacleRect.width = this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].width;
         this.obstacleRect.height = this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].height;
-        this.obstacleRect.pivot.x = - this.obstacleRect.width/2;
-        this.obstacleRect.pivot.y = this.obstacleRect.height/2;
+        this.obstacleRect.pivot.x = - this.obstacleRect.width / 2;
+        this.obstacleRect.pivot.y = this.obstacleRect.height / 2;
     }
 
     drawFakeObstacle() {

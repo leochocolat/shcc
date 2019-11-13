@@ -55,7 +55,7 @@ class Player {
 
     _createShadow() {
         let shadowTexture = this._shadows.textures[`shadow_${this._playerIndex}.png`];
-        
+
         this._shadowSprite = new PIXI.Sprite.from(shadowTexture);
 
         if (!this._shadowSprite) return;
@@ -74,13 +74,13 @@ class Player {
         this.fakePlayerRect = new PIXI.Graphics();
         this.fakePlayerRect.fill = 0x0000ff;
         this.fakePlayerRect.alpha = 0;
-        this.fakePlayerRect.drawRect(635, (350/2)/2, 200, 125);
-        this.fakePlayerRect.pivot.x = this.fakePlayerRect.width/2;
-        this.fakePlayerRect.pivot.y = this.fakePlayerRect.height/2;
+        this.fakePlayerRect.drawRect(635, (350 / 2) / 2, 200, 125);
+        this.fakePlayerRect.pivot.x = this.fakePlayerRect.width / 2;
+        this.fakePlayerRect.pivot.y = this.fakePlayerRect.height / 2;
     }
 
     updatePositionFakePlayer(direction) {
-        TweenLite.to(this.fakePlayerRect, .7, { y: (350/2) * direction, ease: Power3.easeOut });
+        TweenLite.to(this.fakePlayerRect, .7, { y: (350 / 2) * direction, ease: Power3.easeOut });
     }
 
     _createAnimatedSprites() {
