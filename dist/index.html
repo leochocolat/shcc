@@ -10,6 +10,7 @@
 <body id="home">
 
   <section class="container js-container">
+
     <section class="container__playerSelect js-playerContainer">
       <section class="playerSelect__skewedBackground"></section>
       <div class="playerSelect__logo">
@@ -37,37 +38,6 @@
         </div>
       </div>
     </section>
-    
-    <!-- <section class="section-form">
-      <img src="assets/images/player1-inscription.png" alt="" class="section-form__image section-form__image--left">
-      <img src="assets/images/player2-inscription.png" alt="" class="section-form__image section-form__image--right">
-
-      <h1 class="section-form__title">
-        Inscris-toi pour gagner ta place pour
-        <img src="assets/images/logo-jahneration_transparent.png" alt="" class="section-form__title-logo-jahneration">
-        <span>à</span>
-        <img src="assets/images/logo-olympia.png" alt="" class="section-form__title-logo-olympia">
-      </h1>
-
-      <div class="section-form__form">
-        <div class="form__text-field-wrapper">
-            <div class="form__input-wrapper">
-              <input type="email" class="form__input form__email" placeholder="ton email">
-            </div>
-            <div class="form__input-wrapper">
-              <input type="text" class="form__input form__lastname" placeholder="ton prénom">
-            </div>
-            <div class="form__input-wrapper">
-                <input type="text" class="form__input form__name" placeholder="ton nom">
-            </div>
-        </div>
-
-        <div class="form__input-wrapper-submit">
-            <input type="submit" class="form__submit">
-        </div>
-      </div>
-
-    </section> -->
     
     <div class="bg__transition js-bgContainer">
       <div class="bg__transition-red"></div>
@@ -176,7 +146,6 @@
         </div>
       </div>
     </div>
-
   </section>
 
   <section class="section-looser js-section-loose">
@@ -201,8 +170,40 @@
       </div>
     </div>
   </section>
-  
 
+  <section class="section-form js-form-component">
+    <img src="assets/images/player1-inscription.png" alt="" class="section-form__image section-form__image--left">
+    <img src="assets/images/player2-inscription.png" alt="" class="section-form__image section-form__image--right">
+
+    <h1 class="section-form__title">
+      Inscris-toi pour gagner ta place pour
+      <img src="assets/images/logo-jahneration_transparent.png" alt="" class="section-form__title-logo-jahneration">
+      <span>à</span>
+      <img src="assets/images/logo-olympia.png" alt="" class="section-form__title-logo-olympia">
+    </h1>
+
+    <form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate js-form" target="_blank" novalidate>
+      <div class="section-form__form">
+        <div class="form__text-field-wrapper">
+          <div class="form__input-wrapper  form__input-wrapper--name">
+              <input type="text" class="form__input form__name" name="LNAME" id="mce-LNAME" placeholder="ton nom">
+          </div>
+          <div class="form__input-wrapper form__input-wrapper--lastname">
+            <input type="text" class="form__input form__lastname" name="FNAME" id="mce-FNAME" placeholder="ton prénom">
+          </div>
+          <div class="form__input-wrapper form__input-wrapper--email">
+            <input type="email" class="form__input form__email" name="EMAIL" id="mce-EMAIL" placeholder="ton email">
+          </div>
+        </div>
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_865e089434b6e7d78112f0878_4a0729be21" tabindex="-1" value=""></div>
+        <div class="form__input-wrapper-submit">
+            <input type="submit" class="form__submit" name="subscribe" id="mc-embedded-subscribe">
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
   <script src="./javascript/app.bundle.js"></script>
 
   </body>
