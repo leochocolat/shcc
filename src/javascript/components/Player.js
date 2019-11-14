@@ -88,9 +88,9 @@ class Player {
         this.fakePlayerRect = new PIXI.Graphics();
         this.fakePlayerRect.fill = 0x0000ff;
         this.fakePlayerRect.alpha = 0;
-        this.fakePlayerRect.drawRect(500, (350/2)/2, 200, 125);
-        this.fakePlayerRect.pivot.x = this.fakePlayerRect.width/2;
-        this.fakePlayerRect.pivot.y = this.fakePlayerRect.height/2;
+        this.fakePlayerRect.drawRect(500, (350 / 2) / 2, 200, 125);
+        this.fakePlayerRect.pivot.x = this.fakePlayerRect.width / 2;
+        this.fakePlayerRect.pivot.y = this.fakePlayerRect.height / 2;
     }
 
     updatePositionFakePlayer(direction) {
@@ -234,7 +234,9 @@ class Player {
         this._addChild(this._standardAnimation);
         this._standardAnimation.gotoAndPlay(0);
     }
-
+    playerOutAnimation() {
+        TweenLite.to(this._spriteContainer.transform.position, 5, { y: -this._canvas.width * Math.sin((Math.PI * 30.75) / 180), x: this._canvas.width * Math.cos((Math.PI * 30.75) / 180), ease: Power3.easeOut });
+    }
     _stopAnimations() {
         this._standardAnimation.gotoAndStop(0);
     }

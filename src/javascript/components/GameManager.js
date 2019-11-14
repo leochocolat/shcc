@@ -2,6 +2,7 @@ import Loose from './Loose';
 import Timer from './Timer';
 import CountDown from './CountDown';
 import ControlsIndications from './ControlsIndications';
+import { TweenLite } from 'gsap';
 
 
 class GameManager {
@@ -45,7 +46,6 @@ class GameManager {
         window.addEventListener('keydown', this._keyDownHandler.bind(this));
         window.addEventListener('keyup', this._keyUpHandler.bind(this));
 
-
         this.progressBarCompletion = document.querySelectorAll('.progress-completion');
         this.looseComponent = new Loose(document.querySelector('.js-section-loose'));
     }
@@ -66,8 +66,10 @@ class GameManager {
     }
 
     _levelDifficulty() {
-        if (this._timer.seconds > 10.00 && this.gameSpeed == 0.8) {
+        if (this._timer.seconds > 2.00 && this.gameSpeed == 0.8) {
             this.gameSpeed = 1
+            this._endGame()
+
         } else if (this._timer.seconds > 20.00 && this.gameSpeed == 1) {
             this.gameSpeed = 1.2
         } else if (this._timer.seconds > 30.00 && this.gameSpeed == 1.2) {
@@ -104,8 +106,27 @@ class GameManager {
     }
 
     _endGame() {
-        this.gameSpeed = 0
-        this.isGameFinished = true
+        TweenLite.to(this, 10, {
+            gameSpeed: 0, ease: Power3.easeInOut
+        })
+        setTimeout(() => {
+            this._player.playerOutAnimation()
+        }, 5000);
+
+        // setInterval(() => {
+        //     if (this.gameSpeed > 0 && this.gameSpeed < 0) {
+        //         this.gameSpeed -= 0.1
+        //     }
+        //     if (this.gameSpeed < 0.5) {
+        //         this._allowHit = false
+        //     }
+        // }, 500);
+        // if (this.gameSpeed < 0) {
+        //     setTimeout(() => {
+
+        //         this.isGameFinished = true
+        //     }, 2000);
+        // }
     }
 
     _keyDownHandler(event) {
