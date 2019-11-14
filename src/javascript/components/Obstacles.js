@@ -18,7 +18,7 @@ class Obstacles {
             ],
             obstacleSizes: [
                 { width: 30, height: 350/4 },
-                { width: 450, height: 350/3.5 },
+                { width: 500, height: 350/3.5 },
                 { width: 120, height: 350/3 },
                 { width: 120, height: 350/3 },
                 { width: 120, height: 350/3 },
@@ -90,6 +90,7 @@ class Obstacles {
 
             this._obstaclesContainer.children[0].position.x = this._canvas.width * 1.5 + Math.random() * this._canvas.width / 2;
             this._obstaclesContainer.children[0].position.y = this._obstacleProperties.y + (this._obstacleProperties.y * 2) * Math.round(Math.random());
+
             this._updateFakeObstacle();
         }
     }
