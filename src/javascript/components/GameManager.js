@@ -1,6 +1,8 @@
 import Loose from './Loose';
 import Timer from './Timer';
 import CountDown from './CountDown';
+import ControlsIndications from './ControlsIndications';
+
 
 class GameManager {
     constructor(stage, player, obstacle, timer) {
@@ -23,6 +25,8 @@ class GameManager {
 
         this._timer = new Timer()
         this._countDown = new CountDown(document.querySelector('.js-countdown'));
+        this._controlsDown = new ControlsIndications(document.querySelector('.js-controlsIndications'));
+
 
         this._countDown.setupTweens();
 
