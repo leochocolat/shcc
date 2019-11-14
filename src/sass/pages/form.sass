@@ -1,4 +1,10 @@
 .section-form 
+    display: none
+    visibility: hidden 
+    opacity: 0
+
+    z-index: 999
+
     position: absolute
     left: 0
     top: 0
@@ -28,7 +34,16 @@
 
 .form__text-field-wrapper 
     display: flex
-    flex-direction: column-reverse
+    flex-direction: column
+
+
+.form__input-wrapper
+    &--name
+        z-index: 3
+    &--lastname
+        z-index: 2
+    &--form__email
+        z-index: 1
 
 .section-form__form
     margin-top: 50px
@@ -75,6 +90,9 @@
 
     cursor: pointer
 
+    &:focus
+        color: grey!important
+
 
 .form__input-wrapper
     position: relative
@@ -98,6 +116,8 @@
         content: ''
 
         transform: skewX(-60deg)
+
+    
 
 input
     display: block

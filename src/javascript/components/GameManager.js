@@ -1,5 +1,6 @@
 import Loose from './Loose';
 import Timer from './Timer';
+import Form from './Form';
 import CountDown from './CountDown';
 import ControlsIndications from './ControlsIndications';
 import { TweenLite } from 'gsap';
@@ -23,6 +24,10 @@ class GameManager {
             left: false,
             up: false
         };
+
+        // POUR DISPLAY LE FORM
+        // this.form = new Form(document.querySelector('.js-form-component'));
+        // this.form.transitionIn();
 
         this._timer = new Timer()
         this._countDown = new CountDown(document.querySelector('.js-countdown'));
