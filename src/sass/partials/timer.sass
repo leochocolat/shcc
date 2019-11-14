@@ -57,6 +57,25 @@
             display: flex
             justify-content: center
             align-items: center
+            .progress-bar-lines
+                width: 265px
+                position: absolute
+                height: 80px
+                display: flex
+                right: -10px
+                bottom: 20px
+                .line
+                    width: calc(100% / 3)
+                    &:after
+                        width: 0px
+                        font-size: 30px
+                        content: "|"
+                        letter-spacing: 0
+                        position: absolute
+                .line-right
+                    text-align: right
+                .line-centered
+                    text-align: center
             .progress-bar-transparent
                 position: absolute
                 height: 30px

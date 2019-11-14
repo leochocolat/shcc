@@ -30,9 +30,9 @@ class CountDown {
         this.timelineOut = new TimelineLite({ paused: true, onComplete: () => { this.ui.boxContainer.style.display = 'none' } });
         this.timelineOut.timeScale(1.2);
 
-        this.timelineOut.to(this.ui.boxContainer, .8, { x: -TRANSLATEOUT * Math.cos((Math.PI * 30.75) / 180), y: TRANSLATEOUT * Math.sin((Math.PI * 30.75) / 180), ease: Power3.easeIn }, 0);
-        this.timelineOut.to(this.ui.boxTop, .8, { scaleY: 10, ease: Power2.easeIn }, 0);
-        this.timelineOut.to(this.ui.boxRight, .8, { scaleX: 10, ease: Power2.easeIn }, 0.02);
+        this.timelineOut.to(this.ui.boxContainer, 1, { x: -TRANSLATEOUT * Math.cos((Math.PI * 30.75) / 180), y: TRANSLATEOUT * Math.sin((Math.PI * 30.75) / 180), ease: Power3.easeIn }, 0);
+        this.timelineOut.to(this.ui.boxTop, .8, { scaleY: 10, ease: Power3.easeOut });
+        this.timelineOut.to(this.ui.boxRight, .8, { scaleX: 7.5, ease: Power3.easeOut });
     }
 
     animateIn() {

@@ -29,6 +29,12 @@ class GameManager {
 
 
         this._countDown.setupTweens();
+        setTimeout(() => {
+            this._controlsDown.transitionIn();
+            setTimeout(() => {
+                this._controlsDown.transitionInKey(this._controlsDown.ui.spacebar);
+            }, 400);
+        }, 2000);
 
         this._timer.resetTimer();
 
@@ -36,7 +42,9 @@ class GameManager {
             this._obstacle._sprites[index].alpha = 0
         }
 
-        window.addEventListener('keydown', this._keyPressedHandler.bind(this));
+        window.addEventListener('keydown', this._keyDownHandler.bind(this));
+        window.addEventListener('keyup', this._keyUpHandler.bind(this));
+
 
         this.progressBarCompletion = document.querySelectorAll('.progress-completion');
         this.looseComponent = new Loose(document.querySelector('.js-section-loose'));
@@ -100,49 +108,93 @@ class GameManager {
         this.isGameFinished = true
     }
 
-    _keyPressedHandler(event) {
+    _keyDownHandler(event) {
         switch (event.code) {
             case 'Space':
             case 'ArrowUp':
                 this.keyPressed.up = true;
+                this._controlsDown._playTween(this._controlsDown.ui.spacebar);
+                setTimeout(() => {
+                    this._controlsDown.transitionOutKey(this._controlsDown.ui.spacebar);
+                }, 1000);
                 break;
             case 'ArrowLeft':
                 this.keyPressed.left = true;
+                this._controlsDown._playTween(this._controlsDown.ui.left);
+                setTimeout(() => {
+                    this._controlsDown.transitionOutKey(this._controlsDown.ui.left);
+                }, 1000);
                 break;
             case 'ArrowRight':
                 this.keyPressed.right = true;
+                this._controlsDown._playTween(this._controlsDown.ui.right);
+                setTimeout(() => {
+                    this._controlsDown.transitionOutKey(this._controlsDown.ui.right);
+                }, 1000);
                 break;
+        }
+        if (this.keyPressed.up && !this.keyPressed.left && !this.keyPressed.right) {
+            setTimeout(() => {
+                this._controlsDown.transitionInKey(this._controlsDown.ui.left);
+                this._controlsDown.transitionInKey(this._controlsDown.ui.right);
+            }, 2000);
+
         }
         if (this.keyPressed.left && this.keyPressed.right && this.keyPressed.up && !this._isWaitingToStart) {
             this._timer.resetTimer();
-            this._countDown.animateIn();
+            this._controlsDown.transitionOut();
+            setTimeout(() => {
+
+                this._countDown.animateIn();
+            }, 2000);
             this._isWaitingToStart = true;
 
 
             let counter = 3;
-            this.counterInterval = setInterval(() => {
-                counter--;
+            setTimeout(() => {
+                this.counterInterval = setInterval(() => {
+                    counter--;
 
-                this._countDown.updateContent(counter);
-            }, 1000)
-
+                    this._countDown.updateContent(counter);
+                }, 1000)
+            }, 2000);
             setTimeout(() => {
                 this._startGame();
-            }, 4000);
+            }, 6000);
+        }
+    }
+    _keyUpHandler(e) {
+        switch (e.code) {
+            case 'Space':
+                this._controlsDown._validateControl(this._controlsDown.ui.spacebar);
+                break;
+            case 'ArrowUp':
+                break;
+            case 'ArrowLeft':
+                this._controlsDown._validateControl(this._controlsDown.ui.left);
+                break;
+            case 'ArrowRight':
+                this._controlsDown._validateControl(this._controlsDown.ui.right);
+                break;
         }
     }
     _startGame() {
         this._isGameReadyToStart = true;
+
         this._countDown.animateOut();
+
         clearInterval(this.counterInterval)
 
         for (let index = 0; index < this._obstacle._sprites.length; index++) {
             this._obstacle._sprites[index].alpha = 1
         }
-        this._allowHit = true
+        setTimeout(() => {
+            this._allowHit = true;
+        }, 2000);
 
         this._timer.resetTimer();
     }
 }
+
 
 export default GameManager

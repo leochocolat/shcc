@@ -1,24 +1,102 @@
 import _ from 'underscore';
-import { TimelineLite, TweenLite, Power1 } from 'gsap';
-import checkIcon from '../../check-icon.png';
+import { TimelineLite, TweenLite, Power1, Power3, TweenMax } from 'gsap';
 
 class ControlsIndications {
     constructor(el) {
-        _.bindAll(this, '_keyDownHandler', '_keyUpHandler')
-
         this.el = el;
 
         this.ui = {
+            title: this.el.querySelector('.js-title'),
             spacebar: this.el.querySelector('.js-key-spacebar'),
             left: this.el.querySelector('.js-key-left'),
             right: this.el.querySelector('.js-key-right'),
+            contentContainer: this.el.querySelector('.js-content-container'),
+            content: this.el.querySelector('.js-content')
         }
 
         this._setup();
     }
 
     _setup() {
-        this._setupEventListeners();
+        this._setupTransitionTween();
+
+        TweenLite.set(this.ui.left, { autoAlpha: 0 });
+        TweenLite.set(this.ui.right, { autoAlpha: 0 });
+        TweenLite.set(this.ui.spacebar, { autoAlpha: 0 });
+
+        // setTimeout(() => {
+        // this.transitionIn();
+
+        // setTimeout(() => {
+        //     this.transitionInKey(this.ui.spacebar);
+        //     setTimeout(() => {
+        //         this.transitionOutKey(this.ui.spacebar);
+        //     }, 1000)
+        // }, 1000)
+        // setTimeout(() => {
+        //     this.transitionInKey(this.ui.left);
+        //     this.transitionInKey(this.ui.right);
+        //     setTimeout(() => {
+        //         // this.transitionOutKey(this.ui.left);
+        //         // this.transitionOutKey(this.ui.right);
+        //     }, 1000)
+        // }, 2000)
+        // setTimeout(() => {
+        //     setTimeout(() => {
+        //         this.transitionOut();
+        //     }, 1000)
+        // }, 3000)
+        // }, 2000);
+
+    }
+
+    _setupTransitionTween() {
+        const TRANSLATE = 1000;
+        const INTERVAL = 0.1;
+        const DURATION = 1;
+        TweenLite.set(this.ui.contentContainer, { height: 0 });
+        // TweenLite.set(this.ui.title, { height: 0 });
+
+
+
+        this.timelineIn = new TimelineLite({ paused: true });
+
+        this.timelineIn.fromTo(this.ui.contentContainer, DURATION, { height: 0 }, { height: '100%', autoAlpha: 1, ease: Power3.easeInOut }, INTERVAL * 0);
+        this.timelineIn.fromTo(this.ui.title, DURATION, { y: TRANSLATE }, { y: 0, ease: Power3.easeInOut }, INTERVAL * 1);
+
+        this.timelineOut = new TimelineLite({ paused: true });
+
+        this.timelineOut.to(this.ui.title, DURATION, { y: -TRANSLATE, ease: Power3.easeInOut }, INTERVAL * 0);
+        this.timelineOut.to(this.ui.contentContainer, DURATION * 1.5, { height: 0, ease: Power3.easeInOut }, INTERVAL * 4);
+    }
+
+    transitionIn() {
+        this.timelineIn.play();
+    }
+
+    transitionOut() {
+        this.timelineOut.play();
+    }
+
+    transitionInKey(el) {
+        const TRANSLATE = 1000;
+        const DURATION = 1;
+
+        TweenLite.fromTo(el, DURATION, { y: TRANSLATE }, { y: 0, ease: Power3.easeInOut });
+        TweenLite.set(el, { autoAlpha: 1 });
+    }
+
+    transitionOutKey(el) {
+        const TRANSLATE = 1000;
+        const DURATION = 0.5;
+
+        TweenLite.fromTo(el, DURATION, { y: 0 }, {
+            y: -TRANSLATE, ease: Power3.easeInOut, onUpdate: () => {
+                if (el.getBoundingClientRect().y < 0) {
+                    TweenLite.set(el, { autoAlpha: 0 });
+                }
+            }
+        }, 0.05);
     }
 
     _playTween(el) {
@@ -27,13 +105,11 @@ class ControlsIndications {
         const DURATION = 0.3;
         const EASE = Power3.easeOut;
 
-        let boxTop = el.querySelector('.js-box-top');
-        let boxRight = el.querySelector('.js-box-right');
-
         TweenLite.to(el, DURATION, { x: TRANSLATEX, y: -TRANSLATEY, ease: EASE });
     }
 
     _validateControl(el) {
+        console.log(el)
         const DURATION = 0.2;
         const EASE = Power3.easeOut;
 
@@ -62,44 +138,6 @@ class ControlsIndications {
             }
         }, DURATION);
     }
-
-    _setupEventListeners() {
-        window.addEventListener('keydown', this._keyDownHandler);
-        window.addEventListener('keyup', this._keyUpHandler);
-    }
-
-    _keyDownHandler(e) {
-        switch (e.code) {
-            case 'Space':
-                this._playTween(this.ui.spacebar);
-                break;
-            case 'ArrowUp':
-                break;
-            case 'ArrowLeft':
-                this._playTween(this.ui.left);
-                break;
-            case 'ArrowRight':
-                this._playTween(this.ui.right);
-                break;
-        }
-    }
-
-    _keyUpHandler(e) {
-        switch (e.code) {
-            case 'Space':
-                this._validateControl(this.ui.spacebar);
-                break;
-            case 'ArrowUp':
-                break;
-            case 'ArrowLeft':
-                this._validateControl(this.ui.left);
-                break;
-            case 'ArrowRight':
-                this._validateControl(this.ui.right);
-                break;
-        }
-    }
-
 
 }
 

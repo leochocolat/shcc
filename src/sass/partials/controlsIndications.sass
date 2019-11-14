@@ -81,16 +81,23 @@
     background: #B23435
 
     text-align: center
-    width: 500px
+    width: 350px
     height: 40px
+
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
     
     padding: 10px 0
+    margin: auto
 
     &--left, &--right
-        width: 100px
+        width: 65px
         height: 40px
-        
-        margin: 0px 10px
+
+        position: relative
+        margin: 0 10px
 
         .key__boxRight
             width: 40%
@@ -100,6 +107,9 @@
     height: 40px
 
     display: none
+
+.game__infos__controlsIndications__key-content-container
+    overflow: hidden
 
 .title__boxTop
     position: absolute
