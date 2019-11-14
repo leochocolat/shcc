@@ -1,6 +1,6 @@
 import Loose from './Loose';
 import Timer from './Timer';
-
+import CountDown from './CountDown';
 
 class GameManager {
     constructor(stage, player, obstacle, timer) {
@@ -13,6 +13,7 @@ class GameManager {
         this.gameSpeed = 0.8
 
         this._isGameReadyToStart = false;
+        this._isWaitingToStart = false;
 
         this.keyPressed = {
             right: false,
@@ -21,6 +22,9 @@ class GameManager {
         };
 
         this._timer = new Timer()
+        this._countDown = new CountDown(document.querySelector('.js-countdown'));
+
+        this._countDown.setupTweens();
 
         this._timer.resetTimer();
 
@@ -105,26 +109,34 @@ class GameManager {
                 this.keyPressed.right = true;
                 break;
         }
-        if (this.keyPressed.left && this.keyPressed.right && this.keyPressed.up && !this._isGameReadyToStart) {
+        if (this.keyPressed.left && this.keyPressed.right && this.keyPressed.up && !this._isWaitingToStart) {
             this._timer.resetTimer();
+            this._countDown.animateIn();
+            this._isWaitingToStart = true;
 
-            let counter = 3,
-                counterInterval = setInterval(() => {
-                    counter--;
-                }, 1000)
+
+            let counter = 3;
+            this.counterInterval = setInterval(() => {
+                counter--;
+
+                this._countDown.updateContent(counter);
+            }, 1000)
 
             setTimeout(() => {
-                clearInterval(counterInterval)
-                this._startGame()
-            }, 3000);
+                this._startGame();
+            }, 4000);
         }
     }
     _startGame() {
+        this._isGameReadyToStart = true;
+        this._countDown.animateOut();
+        clearInterval(this.counterInterval)
+
         for (let index = 0; index < this._obstacle._sprites.length; index++) {
             this._obstacle._sprites[index].alpha = 1
         }
         this._allowHit = true
-        this._isGameReadyToStart = true;
+
         this._timer.resetTimer();
     }
 }

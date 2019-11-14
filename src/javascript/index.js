@@ -7,5 +7,4 @@ document.addEventListener('DOMContentLoaded', () => {
     new SelectPlayer()
     // ._selectPlayer(0)
 
-    new CountDown(document.querySelector('.js-countdown'));
 });
