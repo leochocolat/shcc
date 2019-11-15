@@ -1,10 +1,12 @@
+import { TweenLite } from "gsap";
+
 class Obstacles {
     constructor(canvas, resources) {
         this._canvas = canvas;
         this._resources = resources;
 
         this._obstacleProperties = {
-            x: this._canvas.width,
+            x: this._canvas.width + this._canvas.width/2,
             y: (350 / 2) / 2,
             height: 180,
             degree: Math.PI * 30.75 / 180,
@@ -34,10 +36,14 @@ class Obstacles {
     setup() {
         this._obstaclesContainer = new PIXI.Container();
         this._obstaclesContainer.transform.skew.x = - this._obstacleProperties.degree / 1.45;
-
         this._createAnimatedObstacles();
         this._createFakeObstacle();
+    }
+
+    start() {
         this._allowUpdate = true;
+        
+        TweenLite.to(this._sprites[0], .5, { alpha: 1 });
     }
 
     _createAnimatedObstacles() {
@@ -61,6 +67,8 @@ class Obstacles {
 
             sprite.anchor.set(0.5);
             sprite.rotation = this._obstacleProperties.degree;
+
+            sprite.alpha = 0;
 
             this._sprites.push(sprite);
         }

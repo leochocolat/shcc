@@ -18,6 +18,8 @@ class Player {
         this._resources = resources;
         this._shadows = shadows;
 
+        this._allowControls = true;
+
         this.ui = {
             gameInfos: document.querySelector('.js-game-infos-borders')
         }
@@ -234,9 +236,19 @@ class Player {
         this._addChild(this._standardAnimation);
         this._standardAnimation.gotoAndPlay(0);
     }
-    playerOutAnimation() {
-        TweenLite.to(this._spriteContainer.transform.position, 5, { y: -this._canvas.width * Math.sin((Math.PI * 30.75) / 180), x: this._canvas.width * Math.cos((Math.PI * 30.75) / 180), ease: Power3.easeOut });
+
+    disableControls() {
+        this._allowControls = false;
     }
+    
+    playerOutAnimation() {
+        TweenLite.to(this._spriteContainer.transform.position, 5, { y: -this._canvas.width * Math.sin((Math.PI * 30.75) / 180), x: this._canvas.width * Math.cos((Math.PI * 30.75) / 180), ease: Power2.easeIn, delay: .5  });
+    }
+
+    resetPosition() {
+        
+    }
+
     _stopAnimations() {
         this._standardAnimation.gotoAndStop(0);
     }
@@ -279,6 +291,8 @@ class Player {
     }
 
     _keyDownHandler(e) {
+        if (!this._allowControls) return;
+
         switch (e.code) {
             case 'Space':
             case 'ArrowUp':

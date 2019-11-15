@@ -52,22 +52,20 @@ class ControlsIndications {
 
     _setupTransitionTween() {
         const TRANSLATE = 1000;
-        const INTERVAL = 0.1;
         const DURATION = 1;
         TweenLite.set(this.ui.contentContainer, { height: 0 });
         // TweenLite.set(this.ui.title, { height: 0 });
 
 
-
         this.timelineIn = new TimelineLite({ paused: true });
 
-        this.timelineIn.fromTo(this.ui.contentContainer, DURATION, { height: 0 }, { height: '100%', autoAlpha: 1, ease: Power3.easeInOut }, INTERVAL * 0);
-        this.timelineIn.fromTo(this.ui.title, DURATION, { y: TRANSLATE }, { y: 0, ease: Power3.easeInOut }, INTERVAL * 1);
+        this.timelineIn.fromTo(this.ui.contentContainer, DURATION, { height: 0 }, { height: '100%', autoAlpha: 1, ease: Power3.easeInOut }, 0);
+        this.timelineIn.fromTo(this.ui.title, DURATION + 0.5, { y: TRANSLATE }, { y: 0, ease: Power3.easeInOut }, 0.01);
 
         this.timelineOut = new TimelineLite({ paused: true });
 
-        this.timelineOut.to(this.ui.title, DURATION, { y: -TRANSLATE, ease: Power3.easeInOut }, INTERVAL * 0);
-        this.timelineOut.to(this.ui.contentContainer, DURATION * 1.5, { height: 0, ease: Power3.easeInOut }, INTERVAL * 4);
+        this.timelineOut.to(this.ui.title, DURATION, { y: -TRANSLATE, ease: Power3.easeInOut }, 0);
+        this.timelineOut.to(this.ui.contentContainer, DURATION * 1.5, { height: 0, ease: Power3.easeInOut }, 0.1);
     }
 
     transitionIn() {
@@ -82,19 +80,38 @@ class ControlsIndications {
         const TRANSLATE = 1000;
         const DURATION = 1;
 
-        TweenLite.fromTo(el, DURATION, { y: TRANSLATE }, { y: 0, ease: Power3.easeInOut });
+        TweenLite.fromTo(el, DURATION, { y: TRANSLATE }, { y: 0, ease: Power2.easeInOut });
         TweenLite.set(el, { autoAlpha: 1 });
+    }
+
+    transitionInKeys(keys) {
+        const TRANSLATE = 1000;
+        const DURATION = 1.5;
+
+        TweenMax.staggerFromTo(keys, DURATION, { y: TRANSLATE }, { y: 0, ease: Power3.easeInOut }, 0.05);
+        TweenLite.set(keys, { autoAlpha: 1 });
     }
 
     transitionOutKey(el) {
         const TRANSLATE = 1000;
-        const DURATION = 0.5;
+        const DURATION = 1.5;
 
         TweenLite.fromTo(el, DURATION, { y: 0 }, {
             y: -TRANSLATE, ease: Power3.easeInOut, onUpdate: () => {
                 if (el.getBoundingClientRect().y < 0) {
                     TweenLite.set(el, { autoAlpha: 0 });
                 }
+            }
+        });
+    }
+
+    transitionOutKeys(keys) {
+        const TRANSLATE = 1000;
+        const DURATION = 1.5;
+
+        TweenMax.staggerFromTo(keys, DURATION, { y: 0 }, {
+            y: -TRANSLATE, ease: Power3.easeInOut, onComplete: () => {
+                TweenLite.set(keys, { autoAlpha: 0 });
             }
         }, 0.05);
     }
@@ -109,7 +126,6 @@ class ControlsIndications {
     }
 
     _validateControl(el) {
-        console.log(el)
         const DURATION = 0.2;
         const EASE = Power3.easeOut;
 
@@ -117,7 +133,6 @@ class ControlsIndications {
         let boxRight = el.querySelector('.js-box-right');
         let content = el.querySelector('.js-key-content');
         let check = el.querySelector('.js-image-check');
-
 
         let timeline = new TimelineLite();
 
