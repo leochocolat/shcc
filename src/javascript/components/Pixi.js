@@ -9,6 +9,10 @@ import Obstacles from './Obstacles';
 import GameManager from './GameManager'
 import Buildings from './Buildings';
 import Objects from './Objects';
+import SizeUtils from '../utils/SizeUtils';
+
+const WIDTH = 800;
+const HEIGHT = 600;
 
 class Pixi {
     constructor(resources) {
@@ -95,12 +99,24 @@ class Pixi {
 
         let ratio = Math.min(this._width / this._app.renderer.width, this._height / this._app.renderer.height);
 
-        // this._canvas.width = this._width;
-        // this._canvas.height = this._height;
-        if (this._playerContainer) {
-            this._playerContainer.getRealPlayer().scale.x = this._playerContainer.scale.y = ratio;
-        }
-        this._app.renderer.resize(Math.ceil(this._width * ratio), Math.ceil(this._height * ratio));
+        SizeUtils.getSize(
+            this._width,
+            this._height,
+            this._canvas.width,
+            this._canvas.height,
+            SizeUtils.COVER
+        );
+
+        // this._app.renderer.resize(WIDTH, HEIGHT);
+
+        this._canvas.width = this._width;
+        this._canvas.height = this._height;
+
+        // if (this._playerContainer) {
+        //     this._playerContainer.getRealPlayer().scale.x = this._playerContainer.scale.y = ratio;
+        // }
+
+        // this._app.renderer.resize(Math.ceil(this._width * ratio), Math.ceil(this._height * ratio));
     }
 
     _setupLayers() {
