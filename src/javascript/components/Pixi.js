@@ -68,6 +68,7 @@ class Pixi {
 
         // PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
         PIXI.settings.SORTABLE_CHILDREN;
+        PIXI.settings.ROUND_PIXELS
 
         this._canvas = this._app.view;
         this._container = new PIXI.Container();
@@ -88,11 +89,18 @@ class Pixi {
     }
 
     _resize() {
+
         this._width = window.innerWidth;
         this._height = window.innerHeight;
 
-        this._canvas.width = this._width;
-        this._canvas.height = this._height;
+        let ratio = Math.min(this._width / this._app.renderer.width, this._height / this._app.renderer.height);
+
+        // this._canvas.width = this._width;
+        // this._canvas.height = this._height;
+        if (this._playerContainer) {
+            this._playerContainer.getRealPlayer().scale.x = this._playerContainer.scale.y = ratio;
+        }
+        this._app.renderer.resize(Math.ceil(this._width * ratio), Math.ceil(this._height * ratio));
     }
 
     _setupLayers() {
@@ -107,15 +115,15 @@ class Pixi {
     setupPlayer(index, ressources) {
         this._playerIndex = index;
         if (this._playerIndex === 1) {
-            this._spriteContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetSkate'], ressources['shadowSpritesheet']);
+            this._playerContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetSkate'], ressources['shadowSpritesheet']);
         } else {
-            this._spriteContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetBike'], ressources['shadowSpritesheet']);
+            this._playerContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetBike'], ressources['shadowSpritesheet']);
         }
         this._setupGameManager();
     }
 
     _setupGameManager() {
-        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._deltaTime);
+        this._gameManager = new GameManager(this._stage, this._playerContainer, this._obstaclesContainer, this._deltaTime);
 
         this._dateNow = Date.now()
         this._lastTime = this._dateNow;
@@ -135,9 +143,9 @@ class Pixi {
         this._container.removeChild(this._skewedContainer);
         this._skewedContainer.removeChild(this._obstaclesContainer.drawObstacles())
 
-        if (this._spriteContainer) {
-            this._container.removeChild(this._spriteContainer.getRealPlayer());
-            this._container.removeChild(this._spriteContainer.getFakePlayer());
+        if (this._playerContainer) {
+            this._container.removeChild(this._playerContainer.getRealPlayer());
+            this._container.removeChild(this._playerContainer.getFakePlayer());
         }
 
         this._container.removeChild(this._obstaclesContainer.drawFakeObstacle());
@@ -152,9 +160,9 @@ class Pixi {
         this._container.addChild(this._skewedContainer);
         this._skewedContainer.addChild(this._obstaclesContainer.drawObstacles());
 
-        if (this._spriteContainer) {
-            this._container.addChild(this._spriteContainer.getRealPlayer());
-            this._container.addChild(this._spriteContainer.getFakePlayer());
+        if (this._playerContainer) {
+            this._container.addChild(this._playerContainer.getRealPlayer());
+            this._container.addChild(this._playerContainer.getFakePlayer());
         }
 
         this._container.addChild(this._obstaclesContainer.drawFakeObstacle());
@@ -172,16 +180,16 @@ class Pixi {
             this._buildingsContainer.updateBuildingsPosition(this._gameManager.gameSpeed, this._deltaTime);
             this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
 
-            if (this._spriteContainer) {
-                // this._isPlayerJumping = this._spriteContainer.isPlayerJumping();
+            if (this._playerContainer) {
+                // this._isPlayerJumping = this._playerContainer.isPlayerJumping();
             }
             this._gameManager.tick();
 
             this._reloadPage();
         }
 
-        if (this._gameManager.isGameFinished && this._spriteContainer) {
-            this._spriteContainer._stopAnimations()
+        if (this._gameManager.isGameFinished && this._playerContainer) {
+            this._playerContainer._stopAnimations()
         }
 
         this._app.render(this._stage);

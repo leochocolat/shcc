@@ -27,10 +27,6 @@ class GameManager {
 
         this._setup();
 
-        // for (let index = 0; index < this._obstacle._sprites.length; index++) {
-        //     this._obstacle._sprites[index].alpha = 0
-        // }
-
         this.progressBarCompletion = document.querySelectorAll('.progress-completion');
         this.looseComponent = new Loose(document.querySelector('.js-section-loose'));
     }
