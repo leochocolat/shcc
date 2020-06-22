@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import { TweenLite, Power3, TweenMax } from 'gsap';
+import Hammer from 'hammerjs';
 
 const SCALESTART = 1;
 const SCALEPRESS = 1.02;
@@ -17,6 +18,7 @@ class Player {
         this._playerIndex = playerIndex;
         this._resources = resources;
         this._shadows = shadows;
+        console.log(this._shadows)
 
         this._allowControls = true;
 
@@ -66,7 +68,16 @@ class Player {
         this._createShadow();
         this._createAnimatedSprites();
         this._createFakePlayer();
+        this._setupHammer();
         this._setupEventListeners();
+    }
+
+    _setupHammer() {
+        this.options = {
+            direction: Hammer.DIRECTION_ALL
+        }
+        this.hammer = new Hammer(this._canvas, this.options);
+        this.hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     }
 
     _createShadow() {
@@ -240,13 +251,13 @@ class Player {
     disableControls() {
         this._allowControls = false;
     }
-    
+
     playerOutAnimation() {
-        TweenLite.to(this._spriteContainer.transform.position, 5, { y: -this._canvas.width * Math.sin((Math.PI * 30.75) / 180), x: this._canvas.width * Math.cos((Math.PI * 30.75) / 180), ease: Power2.easeIn, delay: .5  });
+        TweenLite.to(this._spriteContainer.transform.position, 5, { y: -this._canvas.width * Math.sin((Math.PI * 30.75) / 180), x: this._canvas.width * Math.cos((Math.PI * 30.75) / 180), ease: Power2.easeIn, delay: .5 });
     }
 
     resetPosition() {
-        
+
     }
 
     _stopAnimations() {
@@ -285,9 +296,16 @@ class Player {
         return this._isPlayerJumping;
     }
 
+
+
     _setupEventListeners() {
         window.addEventListener('keydown', this._keyDownHandler);
         window.addEventListener('keyup', this._keyUpHandler);
+
+        this.hammer.on('swipeleft', (event) => this._swipeHandler(event))
+        this.hammer.on('swiperight', (event) => this._swipeHandler(event))
+        this.hammer.on('swipeup', (event) => this._swipeHandler(event))
+
     }
 
     _keyDownHandler(e) {
@@ -327,6 +345,24 @@ class Player {
                 break;
             case 'ArrowRight':
                 this._arrowPressed = false;
+                break;
+        }
+    }
+    _swipeHandler(swipeEvent) {
+        if (!this._allowControls) return;
+        switch (swipeEvent.type) {
+            case 'swipeup':
+                this._playJumpAnimation();
+                break;
+            case 'swipeleft':
+                this._arrowPressed = true;
+                this._updatePositionsArrow(0);
+                this.updatePositionFakePlayer(0);
+                break;
+            case 'swiperight':
+                this._arrowPressed = true;
+                this._updatePositionsArrow(1);
+                this.updatePositionFakePlayer(1);
                 break;
         }
     }

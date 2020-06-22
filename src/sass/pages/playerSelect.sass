@@ -2,6 +2,7 @@
     width: 100%
     height: 100vh
     overflow: hidden
+    position: relative
 
 .container__playerSelect
     display: flex
@@ -11,11 +12,11 @@
 
     width: 100%
     height: 100vh
-    background-color: #D83D3F
+    background-color: $bgRed
     position: absolute
     top: 0
     left: 0
-    z-index: 9999
+    z-index: 99
     visibility: visible
     // visibility: hidden
     opacity: 1
@@ -31,7 +32,7 @@
     top: 50px
 
     width: 100%
-    height: 150%
+    height: 100vh
 
     transform: skewY(5.125deg)
 .playerSelect__logo
@@ -137,3 +138,27 @@
         left: 75px
         height: 300vh
         background: white
+
+@media screen and (max-width: 640px)
+    .bg__transition
+        display: none
+    .playerSelect__text
+        font-size: 25px
+        .fontSize-player
+            font-size: 35px
+    .playerSelect__logo
+        left: 50%
+        transform: translateX(-50%)
+        img
+            width: 100px
+    .player__first
+        transform: translate(-5%,-3.4%)
+    .player
+        height: 260px
+        &__background
+            height: 140px
+            width: 70px
+    .playerSelect__players
+        transform: scale(0.8) translateX(0px)
+    
+    

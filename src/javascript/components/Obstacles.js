@@ -6,7 +6,7 @@ class Obstacles {
         this._resources = resources;
 
         this._obstacleProperties = {
-            x: this._canvas.width + this._canvas.width/2,
+            x: this._canvas.width + this._canvas.width / 2,
             y: (350 / 2) / 2,
             height: 180,
             degree: Math.PI * 30.75 / 180,
@@ -19,13 +19,13 @@ class Obstacles {
                 70
             ],
             obstacleSizes: [
-                { width: 30, height: 350/4 },
-                { width: 500, height: 350/3.5 },
-                { width: 120, height: 350/3 },
-                { width: 120, height: 350/3 },
-                { width: 120, height: 350/3 },
-                { width: 120, height: 350/2 },
-                { width: 120, height: 350/2 },
+                { width: 30, height: 350 / 4 },
+                { width: 500, height: 350 / 3.5 },
+                { width: 120, height: 350 / 3 },
+                { width: 120, height: 350 / 3 },
+                { width: 120, height: 350 / 3 },
+                { width: 120, height: 350 / 2 },
+                { width: 120, height: 350 / 2 },
                 { width: 50, height: 110 }
             ]
         }
@@ -42,7 +42,7 @@ class Obstacles {
 
     start() {
         this._allowUpdate = true;
-        
+
         TweenLite.to(this._sprites[0], .5, { alpha: 1 });
     }
 

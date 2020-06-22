@@ -80,6 +80,7 @@ class ControlsIndications {
         const TRANSLATE = 1000;
         const DURATION = 1;
 
+
         TweenLite.fromTo(el, DURATION, { y: TRANSLATE }, { y: 0, ease: Power2.easeInOut });
         TweenLite.set(el, { autoAlpha: 1 });
     }
@@ -117,6 +118,9 @@ class ControlsIndications {
     }
 
     _playTween(el) {
+
+        if (el.classList.contains('isChecked')) return;
+
         const TRANSLATEX = 10 * Math.cos((Math.PI * 30.75) / 180);
         const TRANSLATEY = 10 * Math.cos((Math.PI * 30.75) / 180);
         const DURATION = 0.3;
@@ -136,10 +140,11 @@ class ControlsIndications {
 
         let timeline = new TimelineLite();
 
+        // timeline.to(el, DURATION, { x: '0%', y: '0%', backgroundColor: '#229931', ease: EASE }, 0);
         timeline.to(boxTop, DURATION, { backgroundColor: '#33CC3C', ease: EASE }, 0);
         timeline.to(boxRight, DURATION, { backgroundColor: '#29B236', ease: EASE }, 0);
-        timeline.to(el, DURATION, { x: '0%', y: '0%', backgroundColor: '#229931', ease: EASE }, 0);
 
+        console.log(el.classList.contains('isChecked'))
         if (el.classList.contains('isChecked')) return;
         el.classList.add('isChecked');
 

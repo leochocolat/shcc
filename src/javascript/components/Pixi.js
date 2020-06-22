@@ -11,8 +11,7 @@ import Buildings from './Buildings';
 import Objects from './Objects';
 
 class Pixi {
-    constructor(playerIndex, resources) {
-        this._playerIndex = playerIndex;
+    constructor(resources) {
         this._resources = resources;
 
         _.bindAll(this, '_tickHandler', '_resizeHandler');
@@ -41,10 +40,6 @@ class Pixi {
     }
 
     _setup() {
-        this._dateNow = Date.now()
-        this._lastTime = this._dateNow;
-        this._deltaTime = 16;
-
         this._setupStats();
         this._setupPixi();
         this._resize();
@@ -68,7 +63,7 @@ class Pixi {
             antialias: true,
             preserveDrawingBuffer: true,
             transparent: false,
-            backgroundColor: 0x808080,
+            backgroundColor: 0x808080
         });
 
         // PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
@@ -101,14 +96,30 @@ class Pixi {
     }
 
     _setupLayers() {
-        this._spriteContainer = new Player(this._canvas, this._playerIndex, this._resources['animationSpritesheet'], this._resources['shadowSpritesheet']);
         this._roadContainer = new Road(this._canvas);
         this._obstaclesContainer = new Obstacles(this._canvas, this._resources['obstaclesSpritesheet']);
         this._buildingsContainer = new Buildings(this._canvas, this._resources['buildingSpritesheet']);
         this._objectsContainer = new Objects(this._canvas, this._resources['objectsSpritesheet']);
-        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._deltaTime);
 
         this._start();
+    }
+
+    setupPlayer(index, ressources) {
+        this._playerIndex = index;
+        if (this._playerIndex === 1) {
+            this._spriteContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetSkate'], ressources['shadowSpritesheet']);
+        } else {
+            this._spriteContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetBike'], ressources['shadowSpritesheet']);
+        }
+        this._setupGameManager();
+    }
+
+    _setupGameManager() {
+        this._gameManager = new GameManager(this._stage, this._spriteContainer, this._obstaclesContainer, this._deltaTime);
+
+        this._dateNow = Date.now()
+        this._lastTime = this._dateNow;
+        this._deltaTime = 16;
     }
 
     _start() {
@@ -124,9 +135,11 @@ class Pixi {
         this._container.removeChild(this._skewedContainer);
         this._skewedContainer.removeChild(this._obstaclesContainer.drawObstacles())
 
+        if (this._spriteContainer) {
+            this._container.removeChild(this._spriteContainer.getRealPlayer());
+            this._container.removeChild(this._spriteContainer.getFakePlayer());
+        }
 
-        this._container.removeChild(this._spriteContainer.getRealPlayer());
-        this._container.removeChild(this._spriteContainer.getFakePlayer());
         this._container.removeChild(this._obstaclesContainer.drawFakeObstacle());
     }
 
@@ -139,15 +152,17 @@ class Pixi {
         this._container.addChild(this._skewedContainer);
         this._skewedContainer.addChild(this._obstaclesContainer.drawObstacles());
 
-        this._container.addChild(this._spriteContainer.getRealPlayer());
-        this._container.addChild(this._spriteContainer.getFakePlayer());
+        if (this._spriteContainer) {
+            this._container.addChild(this._spriteContainer.getRealPlayer());
+            this._container.addChild(this._spriteContainer.getFakePlayer());
+        }
+
         this._container.addChild(this._obstaclesContainer.drawFakeObstacle());
 
     }
 
     _tick() {
-        if (!this._isReady) return;
-
+        if (!this._isReady || !this._gameManager) return;
         if (!this._gameManager.isGameFinished) {
             this._updateDeltaTime();
             this._removeChilds();
@@ -157,14 +172,15 @@ class Pixi {
             this._buildingsContainer.updateBuildingsPosition(this._gameManager.gameSpeed, this._deltaTime);
             this._objectsContainer.updateObjectsPosition(this._gameManager.gameSpeed, this._deltaTime);
 
-            this._isPlayerJumping = this._spriteContainer.isPlayerJumping();
-
+            if (this._spriteContainer) {
+                // this._isPlayerJumping = this._spriteContainer.isPlayerJumping();
+            }
             this._gameManager.tick();
 
             this._reloadPage();
         }
 
-        if (this._gameManager.isGameFinished) {
+        if (this._gameManager.isGameFinished && this._spriteContainer) {
             this._spriteContainer._stopAnimations()
         }
 
@@ -192,7 +208,7 @@ class Pixi {
         this._resize();
     }
     _reloadPage() {
-        if (this._deltaTime > 1500) {
+        if (this._gameManager && this._deltaTime > 1500) {
             window.location.reload()
         }
     }

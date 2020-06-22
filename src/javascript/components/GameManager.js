@@ -1,6 +1,6 @@
 import Loose from './Loose';
 import Timer from './Timer';
-import Form from './Form';
+import Form from '../modules/Form';
 import CountDown from './CountDown';
 import ControlsIndications from './ControlsIndications';
 import { TweenLite } from 'gsap';
@@ -67,7 +67,7 @@ class GameManager {
         this._isWaitingToStart = true;
 
         let counter = 3;
-        
+
         setTimeout(() => {
             this.counterInterval = setInterval(() => {
                 counter--;
@@ -168,7 +168,7 @@ class GameManager {
         setTimeout(() => {
             // POUR DISPLAY LE FORM
             this.form = new Form(document.querySelector('.js-form-component'));
-            this.form.transitionIn();  
+            this.form.transitionIn();
         }, 4500);
     }
 
@@ -185,7 +185,7 @@ class GameManager {
                 this._controlsDown._playTween(this._controlsDown.ui.spacebar);
                 setTimeout(() => {
                     this._controlsDown.transitionOutKey(this._controlsDown.ui.spacebar);
-                    this._allowArrowKey = true;
+
                 }, 1200);
                 break;
             case 'ArrowLeft':
@@ -196,11 +196,11 @@ class GameManager {
 
                 if (this.keyPressed.right) {
                     setTimeout(() => {
-                        this._controlsDown.transitionOutKeys([this._controlsDown.ui.left, this._controlsDown.ui.right]);
+                        // this._controlsDown.transitionOutKeys([this._controlsDown.ui.left, this._controlsDown.ui.right]);
                         this._controlsDown.transitionOut();
                     }, 1200);
                 }
-                
+
                 break;
             case 'ArrowRight':
                 if (!this._allowArrowKey) return;
@@ -208,9 +208,8 @@ class GameManager {
                 this.keyPressed.right = true;
                 this._controlsDown._playTween(this._controlsDown.ui.right);
 
-                if (this.keyPressed.left) {   
+                if (this.keyPressed.left) {
                     setTimeout(() => {
-                        this._controlsDown.transitionOutKeys([this._controlsDown.ui.left, this._controlsDown.ui.right]);
                         this._controlsDown.transitionOut();
                     }, 1200);
                 }
@@ -218,7 +217,15 @@ class GameManager {
                 break;
         }
 
-        if (this.keyPressed.up && !this.keyPressed.left && !this.keyPressed.right) {
+        if (this.keyPressed.left && this.keyPressed.right && this._allowArrowKey) {
+            this._allowArrowKey = false;
+            setTimeout(() => {
+                this._controlsDown.transitionOutKeys([this._controlsDown.ui.left, this._controlsDown.ui.right]);
+            }, 1800);
+        }
+
+        if (this.keyPressed.up && !this.keyPressed.left && !this.keyPressed.right && !this._allowArrowKey) {
+            this._allowArrowKey = true;
             setTimeout(() => {
                 this._controlsDown.transitionInKeys([this._controlsDown.ui.left, this._controlsDown.ui.right]);
             }, 1000);
@@ -237,11 +244,11 @@ class GameManager {
             case 'ArrowUp':
                 break;
             case 'ArrowLeft':
-                if (!this._allowArrowKey) return;
+                if (!this.keyPressed.left) return;
                 this._controlsDown._validateControl(this._controlsDown.ui.left);
                 break;
             case 'ArrowRight':
-                if (!this._allowArrowKey) return;
+                if (!this.keyPressed.right) return;
                 this._controlsDown._validateControl(this._controlsDown.ui.right);
                 break;
         }
