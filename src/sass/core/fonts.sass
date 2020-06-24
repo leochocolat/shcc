@@ -1,6 +1,15 @@
-@font-face
-    font-family: 'Krungthep'
-    src: url('../fonts/Krungthep/Krungthep.otf')
-    src: url('../fonts/Krungthep/Krungthep.eot?#iefix') format('embedded-opentype'), url('../fonts/Krungthep/Krungthep.woff') format('woff'), url('../fonts/Krungthep/Krungthep.woff2') format('woff2'), url('../fonts/Krungthep/Krungthep.ttf') format('truetype'), url('../fonts/Krungthep/Krungthep.svg') format('svg')
-    font-weight: normal
-    font-style: normal
+@mixin font-face($font-family, $weight, $url)
+    @font-face
+        font-family: '#{$font-family}'
+        src: url('../assets/fonts/#{$url}.eot')
+        src: url('../assets/fonts/#{$url}.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/#{$url}.woff2') format('woff2'), url('../assets/fonts/#{$url}.woff') format('woff'), url('../assets/fonts/#{$url}.ttf') format('truetype'), url('../assets/fonts/#{$url}.svg') format('svg')
+        font-style: normal
+        font-display: swap
+        font-weight: $weight
+        -webkit-font-smoothing: antialiased
+        -khtml-font-smoothing: antialiased
+        -apple-font-smoothing: antialiased
+        font-smooth: always
+        -moz-osx-font-smoothing: grayscale
+
+@include font-face("Krungthep", 400, "Krungthep/Krungthep")

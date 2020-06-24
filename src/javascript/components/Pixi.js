@@ -73,6 +73,7 @@ class Pixi {
         // PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
         PIXI.settings.SORTABLE_CHILDREN;
         PIXI.settings.ROUND_PIXELS
+        // PIXI.utils.clearTextureCache();
 
         this._canvas = this._app.view;
         this._container = new PIXI.Container();

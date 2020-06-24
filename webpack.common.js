@@ -33,8 +33,13 @@ module.exports = {
         use: ["file-loader"]
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ["file-loader"]
+        test: /\.(woff(2)?|eot|ttf|otf|)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: '[path][name].[ext]',
+          context: 'src', // prevent display of src/ in filename
+        },
       }
     ]
   }
