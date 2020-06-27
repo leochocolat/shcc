@@ -13,8 +13,8 @@ import GameManager from './GameManager'
 import Buildings from './Buildings';
 import Objects from './Objects';
 
-const WIDTH = 800;
-const HEIGHT = 600;
+const WIDTH = 1440;
+const HEIGHT = 900;
 
 class Pixi {
     constructor(resources) {
@@ -35,7 +35,7 @@ class Pixi {
 
         this._skewProperties = {
             x: -100,
-            y: window.innerHeight + 50,
+            y: HEIGHT + 50,
             degrees: Math.PI * 30.75 / 180
         }
 
@@ -63,8 +63,8 @@ class Pixi {
     _setupPixi() {
         this._app = new PIXI.Application({
             view: this.el,
-            width: window.innerWidth,
-            height: window.innerHeight,
+            width: WIDTH,
+            height: HEIGHT,
             antialias: true,
             preserveDrawingBuffer: true,
             transparent: false,
@@ -97,15 +97,21 @@ class Pixi {
         this._width = window.innerWidth;
         this._height = window.innerHeight;
 
-        SizeUtils.getSize(
+        let sizes = SizeUtils.getSize(
             this._width,
             this._height,
-            this._canvas.width,
-            this._canvas.height,
+            WIDTH,
+            HEIGHT,
             SizeUtils.COVER
         );
         
-        this._app.renderer.resize(this._width, this._height);
+        this._app.renderer.resize(sizes.width, sizes.height);
+        // this._canvas.style.transform = `scale(${sizes.scale}, ${sizes.scale})`;
+        this._canvas.style.left = `${sizes.x}px`;
+        this._canvas.style.top = `${sizes.y}px`;
+
+        console.log(sizes);
+        
 
         // if (this._playerContainer) {
         //     this._playerContainer.getRealPlayer().scale.x = this._playerContainer.scale.y = ratio;
