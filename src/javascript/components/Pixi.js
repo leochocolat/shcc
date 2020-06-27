@@ -1,15 +1,17 @@
 import _ from 'underscore';
-import { TweenLite, TweenMax, TimelineLite } from 'gsap';
 import * as PIXI from 'pixi.js'
+import { TweenLite } from 'gsap';
 import Stats from 'stats.js';
 import * as dat from 'dat.gui';
+
+import SizeUtils from '../utils/SizeUtils';
+
 import Player from './Player';
 import Road from './Road';
 import Obstacles from './Obstacles';
 import GameManager from './GameManager'
 import Buildings from './Buildings';
 import Objects from './Objects';
-import SizeUtils from '../utils/SizeUtils';
 
 const WIDTH = 800;
 const HEIGHT = 600;
@@ -19,7 +21,6 @@ class Pixi {
         this._resources = resources;
 
         _.bindAll(this, '_tickHandler', '_resizeHandler');
-
 
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
@@ -93,11 +94,8 @@ class Pixi {
     }
 
     _resize() {
-
         this._width = window.innerWidth;
         this._height = window.innerHeight;
-
-        let ratio = Math.min(this._width / this._app.renderer.width, this._height / this._app.renderer.height);
 
         SizeUtils.getSize(
             this._width,
@@ -106,11 +104,8 @@ class Pixi {
             this._canvas.height,
             SizeUtils.COVER
         );
-
-        // this._app.renderer.resize(WIDTH, HEIGHT);
-
-        this._canvas.width = this._width;
-        this._canvas.height = this._height;
+        
+        this._app.renderer.resize(this._width, this._height);
 
         // if (this._playerContainer) {
         //     this._playerContainer.getRealPlayer().scale.x = this._playerContainer.scale.y = ratio;

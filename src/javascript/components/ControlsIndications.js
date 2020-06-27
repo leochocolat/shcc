@@ -144,7 +144,6 @@ class ControlsIndications {
         timeline.to(boxTop, DURATION, { backgroundColor: '#33CC3C', ease: EASE }, 0);
         timeline.to(boxRight, DURATION, { backgroundColor: '#29B236', ease: EASE }, 0);
 
-        console.log(el.classList.contains('isChecked'))
         if (el.classList.contains('isChecked')) return;
         el.classList.add('isChecked');
 
