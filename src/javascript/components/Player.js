@@ -99,7 +99,7 @@ class Player {
     _createFakePlayer() {
         this.fakePlayerRect = new PIXI.Graphics();
         this.fakePlayerRect.fill = 0x0000ff;
-        this.fakePlayerRect.alpha = 0;
+        this.fakePlayerRect.alpha = 1;
         this.fakePlayerRect.drawRect(500, (350 / 2) / 2, 200, 125);
         this.fakePlayerRect.pivot.x = this.fakePlayerRect.width / 2;
         this.fakePlayerRect.pivot.y = this.fakePlayerRect.height / 2;
@@ -304,6 +304,7 @@ class Player {
         this.hammer.on('swipeleft', (event) => this._swipeHandler(event))
         this.hammer.on('swiperight', (event) => this._swipeHandler(event))
         this.hammer.on('swipeup', (event) => this._swipeHandler(event))
+        this.hammer.on('tap', (event) => this._swipeHandler(event))
 
     }
 
@@ -351,6 +352,7 @@ class Player {
         if (!this._allowControls) return;
         switch (swipeEvent.type) {
             case 'swipeup':
+            case 'tap':
                 this._playJumpAnimation();
                 break;
             case 'swipeleft':
