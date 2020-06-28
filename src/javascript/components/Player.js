@@ -320,11 +320,13 @@ class Player {
                 this._playPreJumpAnimation();
                 break;
             case 'ArrowLeft':
+                if (this._isPressed || this._isJumping) return;
                 this._arrowPressed = true;
                 this._updatePositionsArrow(0);
                 this.updatePositionFakePlayer(0);
                 break;
             case 'ArrowRight':
+                if (this._isPressed || this._isJumping) return;
                 this._arrowPressed = true;
                 this._updatePositionsArrow(1);
                 this.updatePositionFakePlayer(1);
@@ -353,14 +355,17 @@ class Player {
         switch (swipeEvent.type) {
             case 'swipeup':
             case 'tap':
+                this._isJumping = true;
                 this._playJumpAnimation();
                 break;
             case 'swipeleft':
+                if (this._isPressed || this._isJumping) return;
                 this._arrowPressed = true;
                 this._updatePositionsArrow(0);
                 this.updatePositionFakePlayer(0);
                 break;
             case 'swiperight':
+                if (this._isPressed || this._isJumping) return;
                 this._arrowPressed = true;
                 this._updatePositionsArrow(1);
                 this.updatePositionFakePlayer(1);
