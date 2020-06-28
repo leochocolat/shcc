@@ -48,6 +48,23 @@
     font-size: 50px
     text-align: left
     text-shadow: 1px -2px 1px black
+
+    .char
+        opacity: 0
+        transform: rotate(0) translateY(0)
+        transition: opacity .5s ease-in-out
+        transition-property: transform, opacity
+
+    &.transitionIn
+        .char
+            opacity: 1
+            transform: rotate(0) translateY(0)
+            @for $i from 0 through 30
+                &--#{$i} 
+                    transition-delay: #{$i * 0.05}s 
+
+             
+
     .fontSize-player
         font-size: 71px
 

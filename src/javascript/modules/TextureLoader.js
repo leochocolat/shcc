@@ -1,8 +1,9 @@
 import _ from 'underscore';
 import Pixi from '../components/Pixi';
 import DeviceUtils from '../utils/DeviceUtils';
+import SplitText from '../vendors/SplitText';
 
-import { TweenLite, Power3 } from 'gsap';
+import { TweenLite, Power3, Power4, TweenMax } from 'gsap';
 
 class TextureLoader {
     constructor(playerIndex) {
@@ -24,10 +25,14 @@ class TextureLoader {
 
         this._ui = {
             loaderProgress: this._loaderSectionContainer.querySelector('.js-loader-progress'),
-            logoLoader: this._loaderSectionContainer.querySelector('.js-loader-logo')
+            logoLoader: this._loaderSectionContainer.querySelector('.js-loader-logo'),
+            playerText: document.querySelector('.js-player-text'),
+            playerTextSpans: document.querySelectorAll('.js-player-text-span'),
+            players: document.querySelectorAll('.js-player')
         }
 
         this._setup();
+        this._setupSplitAnimtation();
         this._setupEventListeners();
     }
 
@@ -47,6 +52,18 @@ class TextureLoader {
         this._loaderEnterAnimation();
     }
 
+    _setupSplitAnimtation() {
+        for (let i = 0; i < this._ui.playerTextSpans.length; i++) {
+            const element = this._ui.playerTextSpans[i];
+            new SplitText(element, 
+                {
+                    type: 'chars', 
+                    charsClass: `char char--++`,
+                }
+            )
+        }
+    }
+
     _setupEventListeners() {
         this._textureLoader.load(this._onTextureLoaded)
     }
@@ -64,8 +81,13 @@ class TextureLoader {
     }
 
     _loaderOutAnimation() {
-        TweenLite.to(this._ui.loaderProgress, 1.3, { autoAlpha: 0, y: "-100%", ease: Power3.easeOut, delay: 1 })
-        TweenLite.to(this._loaderSectionContainer, 1, { height: 0, ease: Power3.easeOut, delay: 1.5 })
+        TweenLite.to(this._ui.loaderProgress, 0.8, { autoAlpha: 0, y: "-100%", ease: Power4.easeOut, delay: 1 });
+        TweenLite.to(this._loaderSectionContainer, 1, { height: 0, ease: Power4.easeInOut, delay: 1.2 });
+        TweenMax.staggerFrom(this._ui.players, 1.3, { y: 50, autoAlpha: 0, ease: Power4.easeOut, delay: 1.6 }, 0.1);
+
+        setTimeout(() => {
+            this._ui.playerText.classList.add('transitionIn');
+        }, 1800)
     }
 
     loadedPlayerTexture(index) {

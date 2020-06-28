@@ -106,10 +106,10 @@ class Pixi {
             SizeUtils.COVER
         );
         
-        this._app.renderer.resize(sizes.width, sizes.height);
+        // this._app.renderer.resize(sizes.width, sizes.height);
         // this._canvas.style.transform = `scale(${sizes.scale}, ${sizes.scale})`;
-        this._canvas.style.left = `${sizes.x}px`;
-        this._canvas.style.top = `${sizes.y}px`;
+        // this._canvas.style.left = `${sizes.x}px`;
+        // this._canvas.style.top = `${sizes.y}px`;
 
         console.log(sizes);
         

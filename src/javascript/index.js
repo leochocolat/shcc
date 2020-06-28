@@ -1,4 +1,5 @@
 import SelectPlayer from './components/SelectPlayer';
+import DeviceUtils from './utils/DeviceUtils';
 
 let width, height;
 let orientationMessage = document.querySelector('.js-orientation-message');
@@ -14,6 +15,8 @@ function setup() {
 }
 
 function checkSize() {
+    if (!DeviceUtils.isMobile() && !DeviceUtils.isTablet()) return;
+    
     width = window.innerWidth;
     height = window.innerHeight;
 
