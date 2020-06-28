@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import Pixi from '../components/Pixi';
-
 import { TweenLite, Power3 } from 'gsap';
+
 class TextureLoader {
     constructor(playerIndex) {
         this._playerIndex = playerIndex;
@@ -16,6 +16,7 @@ class TextureLoader {
             'assets/spriteheets/objectsSpritesheets.json',
             'assets/spriteheets/shadowSpritesheet.json'
         ]
+
         this._loaderSectionContainer = document.querySelector('.js-loader');
 
         this._ui = {
@@ -28,8 +29,8 @@ class TextureLoader {
     }
 
     _setup() {
-
         this._progressValue = 0;
+
         this._textureLoader = new PIXI.loaders.Loader();
         this._textureLoader.add('animationSpritesheetBike', this._spritesheetsUrl[0]);
         this._textureLoader.add('animationSpritesheetSkate', this._spritesheetsUrl[1]);
@@ -56,34 +57,24 @@ class TextureLoader {
     }
 
     _loaderEnterAnimation() {
-        // TweenLite.from(this._ui.logoLoader, 1.7, { autoAlpha: 0, delay: 1 })
         TweenLite.to(this._ui.loaderProgress, 1.3, { autoAlpha: 1, y: 0 })
-
     }
 
     _loaderOutAnimation() {
         TweenLite.to(this._ui.loaderProgress, 1.3, { autoAlpha: 0, y: "-100%", ease: Power3.easeOut, delay: 1 })
         TweenLite.to(this._loaderSectionContainer, 1, { height: 0, ease: Power3.easeOut, delay: 1.5 })
-
-
     }
 
     loadPlayerTexture(index) {
         let spritesheet = this._textureLoader.resources;
-        // this._textureLoader.add('animationSpritesheet', this._spritesheetsUrl[index]);
         this.pixiComponent.setupPlayer(index, spritesheet)
     }
 
     _start() {
         let spritesheet = this._textureLoader.resources;
-
-
-        console.log('ready')
         this.pixiComponent = new Pixi(spritesheet);
 
         this._loaderOutAnimation();
-
-        // this._textureLoader.destroy();
     }
 
 }
