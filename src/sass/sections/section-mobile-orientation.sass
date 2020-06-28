@@ -1,0 +1,25 @@
+.section-mobile-orientation
+    display: flex
+    justify-content: center
+    align-items: center
+
+    position: fixed
+    left: 0
+    right: 0
+    bottom: 0
+    top: 0
+
+    z-index: 9999
+
+    width: 100vw
+    height: 100vh
+
+    background: $bgRed
+
+    &.isDisable
+        display: none
+        visibility: hidden
+        pointer-events: none
+
+.section-mobile-orientation__message
+    color: white
