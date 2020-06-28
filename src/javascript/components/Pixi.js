@@ -1,25 +1,26 @@
 import _ from 'underscore';
-import { TweenLite, TweenMax, TimelineLite } from 'gsap';
 import * as PIXI from 'pixi.js'
+import { TweenLite } from 'gsap';
 import Stats from 'stats.js';
 import * as dat from 'dat.gui';
+
+import SizeUtils from '../utils/SizeUtils';
+
 import Player from './Player';
 import Road from './Road';
 import Obstacles from './Obstacles';
 import GameManager from './GameManager'
 import Buildings from './Buildings';
 import Objects from './Objects';
-import SizeUtils from '../utils/SizeUtils';
 
-const WIDTH = 800;
-const HEIGHT = 600;
+const WIDTH = 1440;
+const HEIGHT = 900;
 
 class Pixi {
     constructor(resources) {
         this._resources = resources;
 
         _.bindAll(this, '_tickHandler', '_resizeHandler');
-
 
         this.el = document.querySelector('.js-canvas');
         this.ui = {};
@@ -34,7 +35,7 @@ class Pixi {
 
         this._skewProperties = {
             x: -100,
-            y: window.innerHeight + 50,
+            y: HEIGHT + 50,
             degrees: Math.PI * 30.75 / 180
         }
 
@@ -62,8 +63,8 @@ class Pixi {
     _setupPixi() {
         this._app = new PIXI.Application({
             view: this.el,
-            width: window.innerWidth,
-            height: window.innerHeight,
+            width: WIDTH,
+            height: HEIGHT,
             antialias: true,
             preserveDrawingBuffer: true,
             transparent: false,
@@ -94,24 +95,24 @@ class Pixi {
     }
 
     _resize() {
-
         this._width = window.innerWidth;
         this._height = window.innerHeight;
 
-        let ratio = Math.min(this._width / this._app.renderer.width, this._height / this._app.renderer.height);
-
-        SizeUtils.getSize(
+        let sizes = SizeUtils.getSize(
             this._width,
             this._height,
-            this._canvas.width,
-            this._canvas.height,
+            WIDTH,
+            HEIGHT,
             SizeUtils.COVER
         );
+        
+        this._app.renderer.resize(sizes.width, sizes.height);
+        // this._canvas.style.transform = `scale(${sizes.scale}, ${sizes.scale})`;
+        this._canvas.style.left = `${sizes.x}px`;
+        this._canvas.style.top = `${sizes.y}px`;
 
-        // this._app.renderer.resize(WIDTH, HEIGHT);
-
-        this._canvas.width = this._width;
-        this._canvas.height = this._height;
+        console.log(sizes);
+        
 
         // if (this._playerContainer) {
         //     this._playerContainer.getRealPlayer().scale.x = this._playerContainer.scale.y = ratio;

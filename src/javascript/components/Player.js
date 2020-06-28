@@ -18,7 +18,6 @@ class Player {
         this._playerIndex = playerIndex;
         this._resources = resources;
         this._shadows = shadows;
-        console.log(this._shadows)
 
         this._allowControls = true;
 
