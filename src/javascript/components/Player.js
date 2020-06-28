@@ -99,7 +99,7 @@ class Player {
     _createFakePlayer() {
         this.fakePlayerRect = new PIXI.Graphics();
         this.fakePlayerRect.fill = 0x0000ff;
-        this.fakePlayerRect.alpha = 1;
+        this.fakePlayerRect.alpha = 0;
         this.fakePlayerRect.drawRect(500, (350 / 2) / 2, 200, 125);
         this.fakePlayerRect.pivot.x = this.fakePlayerRect.width / 2;
         this.fakePlayerRect.pivot.y = this.fakePlayerRect.height / 2;
