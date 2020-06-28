@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import Pixi from '../components/Pixi';
+import DeviceUtils from '../utils/DeviceUtils';
 
 import { TweenLite, Power3 } from 'gsap';
 class TextureLoader {
@@ -17,6 +18,7 @@ class TextureLoader {
             'assets/spriteheets/shadowSpritesheet.json'
         ]
         this._loaderSectionContainer = document.querySelector('.js-loader');
+        this._canvas = document.querySelector('.js-canvas');
 
         this._ui = {
             loaderProgress: this._loaderSectionContainer.querySelector('.js-loader-progress'),
@@ -68,10 +70,20 @@ class TextureLoader {
 
     }
 
-    loadPlayerTexture(index) {
+    loadedPlayerTexture(index) {
         let spritesheet = this._textureLoader.resources;
         // this._textureLoader.add('animationSpritesheet', this._spritesheetsUrl[index]);
+        this._requestFullScreen();
         this.pixiComponent.setupPlayer(index, spritesheet)
+
+    }
+
+    _requestFullScreen() {
+        if(DeviceUtils.isMobile()) {
+            document.addEventListener('click',() => {
+                this._canvas.requestFullscreen();
+            })
+        }
     }
 
     _start() {

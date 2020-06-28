@@ -23,7 +23,7 @@ class SelectPlayer {
     _selectPlayer(index) {
         if (!this.clicked) {
             this.clicked = true;
-            this._textureLoader.loadPlayerTexture(index);
+            this._textureLoader.loadedPlayerTexture(index);
             let playerHead = this._ui.players[index].querySelector(".player__head")
             TweenLite.to(playerHead, 0.5, { y: 2 });
 
