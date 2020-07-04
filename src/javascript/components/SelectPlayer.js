@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import TextureLoader from '../modules/TextureLoader'
-import { TweenLite, TimelineLite, Power4 } from 'gsap';
+import { TimelineLite, Power4 } from 'gsap';
 
 class SelectPlayer {
     constructor() {
@@ -49,7 +49,6 @@ class SelectPlayer {
                     this._ui.backgroundTransitionContainer.remove();
                 }
             });
-            // timeline.timeScale(0.2);
 
             timeline.set(this._ui.playerContainer, { autoAlpha: 0 }, 0.8);
             timeline.set(this._ui.backgroundTransitionContainer, { autoAlpha: 1 }, 0);

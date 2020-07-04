@@ -20,8 +20,9 @@
     left: 0
     z-index: 99
     visibility: visible
-    // visibility: hidden
+
     opacity: 1
+
     &.hidden
         visibility: hidden
         opacity: 0
@@ -212,5 +213,65 @@
             width: 70px
     .playerSelect__players
         transform: scale(0.8) translateX(0px)
+    
+    
+@media screen and (max-height: 400px)
+    .container__playerSelect
+
+
+    .playerSelect__logo
+        top: 10px
+        left: 10px
+
+        width: 150px
+        height: auto
+
+        img
+            width: 100%
+            height: auto
+
+    .playerSelect__text
+        margin-top: 20px
+        font-size: 24px
+
+        .fontSize-player
+            font-size: 34px
+
+    .playerSelect__players
+        margin-top: 50px
+        transform: scale(1.1) translateX(-32px);
+
+
+    .player__background
+        width: 54px
+        height: 107px
+
+    .playerSelect__players
+        .player
+            height: 200px
+            width: 120px
+            // height: 250px
+
+    .player__name
+        bottom: 20px
+        position: absolute
+
+        width: 80px
+        height: 20px
+
+        font-size: 10px
+        background-color: #a72b2e
+
+        transform: translate(34%,-103%) skewY(5.125deg)
+    
+        &::before
+            position: absolute
+            right: -19%;
+            top: -4px;
+
+            width: 15px
+            height: 20px
+
+            transform: skewY(-30.125deg)
     
     
