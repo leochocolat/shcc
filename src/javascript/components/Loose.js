@@ -43,11 +43,14 @@ class Loose {
 
         this.timeline.to(this.el, 1, { top: 0, height: '0%', y: '-10%', ease: Power3.easeOut }, 2.5);
         this.timeline.to(this.ui.container, .5, { y: '-100%', ease: Power3.easeOut }, 2.7);
+
+        //debug
+        // this.timeline.progress(0.5);
     }
 
     animate() {
-        this.timeline.restart();
-        this.timeline.play();
+        // this.timeline.restart();
+        // this.timeline.play();
     }
     
     _onCompleteHandler() {
