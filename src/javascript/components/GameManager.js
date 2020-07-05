@@ -180,48 +180,14 @@ class GameManager {
     _setupEventListeners() {
         window.addEventListener('keydown', this._keyDownHandler.bind(this));
         window.addEventListener('keyup', this._keyUpHandler.bind(this));
+        
+        this._player.hammer.on('swipeleft', (event) => this._swipeHandler(event))
+        this._player.hammer.on('swiperight', (event) => this._swipeHandler(event))
+        this._player.hammer.on('swipeup', (event) => this._swipeHandler(event))
+        this._player.hammer.on('tap', (event) => this._swipeHandler(event))
     }
 
-    _keyDownHandler(event) {
-        switch (event.code) {
-            case 'Space':
-            case 'ArrowUp':
-                this.keyPressed.up = true;
-                this._controlsDown._playTween(this._controlsDown.ui.spacebar);
-                setTimeout(() => {
-                    this._controlsDown.transitionOutKey(this._controlsDown.ui.spacebar);
-
-                }, 1200);
-                break;
-            case 'ArrowLeft':
-                if (!this._allowArrowKey) return;
-
-                this.keyPressed.left = true;
-                this._controlsDown._playTween(this._controlsDown.ui.left);
-
-                if (this.keyPressed.right) {
-                    setTimeout(() => {
-                        // this._controlsDown.transitionOutKeys([this._controlsDown.ui.left, this._controlsDown.ui.right]);
-                        this._controlsDown.transitionOut();
-                    }, 1200);
-                }
-
-                break;
-            case 'ArrowRight':
-                if (!this._allowArrowKey) return;
-
-                this.keyPressed.right = true;
-                this._controlsDown._playTween(this._controlsDown.ui.right);
-
-                if (this.keyPressed.left) {
-                    setTimeout(() => {
-                        this._controlsDown.transitionOut();
-                    }, 1200);
-                }
-
-                break;
-        }
-
+    _keyPressedAnimation() {
         if (this.keyPressed.left && this.keyPressed.right && this._allowArrowKey) {
             this._allowArrowKey = false;
             setTimeout(() => {
@@ -241,12 +207,49 @@ class GameManager {
         }
     }
 
+    _keyDownHandler(event) {
+        switch (event.code) {
+            case 'Space':
+            case 'ArrowUp':
+                this.keyPressed.up = true;
+                this._controlsDown._playTween(this._controlsDown.ui.spacebar);
+                setTimeout(() => {
+                    this._controlsDown.transitionOutKey(this._controlsDown.ui.spacebar);
+                }, 1200);
+                break;
+            case 'ArrowLeft':
+                if (!this._allowArrowKey) return;
+
+                this.keyPressed.left = true;
+                this._controlsDown._playTween(this._controlsDown.ui.left);
+                if (this.keyPressed.right) {
+                    setTimeout(() => {
+                        this._controlsDown.transitionOut();
+                    }, 1200);
+                }
+                break;
+            case 'ArrowRight':
+                if (!this._allowArrowKey) return;
+
+                this.keyPressed.right = true;
+                this._controlsDown._playTween(this._controlsDown.ui.right);
+
+                if (this.keyPressed.left) {
+                    setTimeout(() => {
+                        this._controlsDown.transitionOut();
+                    }, 1200);
+                }
+
+                break;
+        }
+        this._keyPressedAnimation();
+    }
+
     _keyUpHandler(e) {
         switch (e.code) {
             case 'Space':
-                this._controlsDown._validateControl(this._controlsDown.ui.spacebar);
-                break;
             case 'ArrowUp':
+                this._controlsDown._validateControl(this._controlsDown.ui.spacebar);
                 break;
             case 'ArrowLeft':
                 if (!this.keyPressed.left) return;
@@ -257,6 +260,46 @@ class GameManager {
                 this._controlsDown._validateControl(this._controlsDown.ui.right);
                 break;
         }
+    }
+
+    _swipeHandler(swipeEvent) {
+        switch (swipeEvent.type) {
+            case 'swipeup':
+            case 'tap':
+                this._controlsDown._validateControl(this._controlsDown.ui.spacebar);
+                this.keyPressed.up = true;
+
+                this._controlsDown._playTween(this._controlsDown.ui.spacebar);
+
+                setTimeout(() => { this._controlsDown.transitionOutKey(this._controlsDown.ui.spacebar) }, 1200);
+
+                break;
+            case 'swipeleft':
+                if (!this._allowArrowKey) return;
+
+                this.keyPressed.left = true;
+                this._controlsDown._validateControl(this._controlsDown.ui.left);
+
+                this._controlsDown._playTween(this._controlsDown.ui.left);
+
+                if (this.keyPressed.right) {
+                    setTimeout(() => { this._controlsDown.transitionOut() }, 1200) 
+                }
+                break;
+            case 'swiperight':
+                if (!this._allowArrowKey) return;
+
+                this.keyPressed.right = true;
+                this._controlsDown._validateControl(this._controlsDown.ui.right);
+
+                this._controlsDown._playTween(this._controlsDown.ui.right);
+
+                if (this.keyPressed.left) {
+                    setTimeout(() => { this._controlsDown.transitionOut() }, 1200);
+                }
+                break;
+        }
+        this._keyPressedAnimation();
     }
 }
 

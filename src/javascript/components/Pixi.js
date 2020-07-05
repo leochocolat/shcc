@@ -45,7 +45,7 @@ class Pixi {
     }
 
     _setup() {
-        this._setupStats();
+        // this._setupStats();
         this._setupPixi();
         this._resize();
         this._setupEventListeners();
@@ -224,9 +224,9 @@ class Pixi {
     }
 
     _tickHandler() {
-        this._stats.begin();
+        // this._stats.begin();
         this._tick();
-        this._stats.end();
+        // this._stats.end();
     }
 
     _resizeHandler() {
