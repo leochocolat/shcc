@@ -286,6 +286,16 @@
             width: 120px
             // height: 250px
 
+            &:hover, &.isActive
+                .player__name
+                    transform: translate(calc(34% + 5px) , calc(-103% - 3px)) skewY(5.125deg)
+
+                    &:before
+                        width: 20px
+                        height: 20px
+                        right: -20%
+                        top: -6px
+
     .player__name
         bottom: 20px
         position: absolute
