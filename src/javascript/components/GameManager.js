@@ -37,6 +37,10 @@ class GameManager {
         this._timer = new Timer();
         this._timer.resetTimer();
 
+        //debug
+        // this.form = new Form(document.querySelector('.js-form-component'));
+        // this.form.transitionIn();
+
         this._setupContolsTutorial();
     }
 

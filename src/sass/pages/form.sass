@@ -12,13 +12,22 @@
     height: 100vh
     background-color: #d93f3f
 
+
+.section-form__container 
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+    width: 100%
+    height: 100vh
+
 .section-form__title
-    max-width: 550px
-    margin: auto
-    margin-top: 80px
+    max-width: 480px
+    margin-left: auto
+    margin-right: auto
 
     color: white
-    font-size: 45px
+    font-size: 36px
     text-align: center
     text-transform: uppercase
 
@@ -97,8 +106,8 @@
 .form__input-wrapper
     position: relative
 
-    max-width: 500px
-    width: 100%
+    max-width: 480px
+    width: 70%
     height: 50px
 
     margin: 7px auto
@@ -117,7 +126,6 @@
 
         transform: skewX(-60deg)
 
-    
 
 input
     display: block
@@ -147,3 +155,96 @@ input
     &--right
         right: 0
         transform: translate(28%,-50%)
+
+@media screen and (max-width: 640px)
+    .section-form__image
+        top: auto
+        bottom: 0
+        width: 20%
+        height: auto
+
+        &--left
+            transform: translate(-28%,0)
+        &--right
+            transform: translate(28%,0)
+
+
+// @media screen and (orientation: landscape)
+//     .section-form 
+//         width: 100vh
+//         height: 100vw
+
+//         transform-origin: center
+//         transform: rotate(90deg)
+    
+
+@media screen and (max-height: 400px) 
+    .section-form__image
+        top: auto
+        bottom: 0
+        height: 60%
+
+    .section-form__title-separator
+        display: inline-block
+        padding-left: 10px
+        padding-right: 10px
+
+        margin: 10px auto
+        vertical-align: top;
+
+    .section-form__title
+        text-align: center
+        font-size: 15px
+
+        img
+            width: 20%
+            height: auto
+
+            margin: 10px auto
+            display: inline-block
+    
+
+    .form__input-wrapper
+        max-width: 350px
+        width: 60%
+        height: 30px
+
+        margin: 7px auto
+
+        &:before 
+            position: absolute
+            left: 12.5px
+            bottom: 100%
+
+            width: 100%
+            height: 30%
+
+            background: #ff4848
+            
+            content: ''
+
+            transform: skewX(-60deg)
+
+    input 
+        font-size: 12px
+
+    .section-form__form
+        margin-top: 20px
+
+    .form__input-wrapper-submit
+        margin-top: 20px
+
+        width: 150px
+
+        &:before
+            left: 6.5px
+
+        .form__submit
+            font-size: 12px
+            padding: 6px 20px
+
+    .section-form__image
+        &--left
+            transform: translate(-28%,-35%)
+        &--right
+            transform: translate(28%,-35%)
