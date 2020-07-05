@@ -101,8 +101,15 @@ class TextureLoader {
     _requestFullScreen() {
         if(DeviceUtils.isMobile()) {
             document.addEventListener('click',() => {
-                // this._canvas.requestFullscreen();
-                document.body.requestFullscreen();
+                if ( document.body.requestFullscreen) {
+                    document.body.requestFullscreen()
+                } else if ( document.body.mozRequestFullScreen) { /* Firefox */
+                    document.body.mozRequestFullScreen()
+                } else if ( document.body.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                    document.body.webkitRequestFullscreen()
+                } else if ( document.body.msRequestFullscreen) { /* IE/Edge */
+                    document.body.msRequestFullscreen() 
+                }
             })
         }
     }
