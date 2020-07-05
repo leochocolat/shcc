@@ -108,16 +108,13 @@ class Pixi {
         
         this._app.renderer.resize(sizes.width, sizes.height);
         this._app.stage.scale.set(sizes.scale, sizes.scale);
-        // this._canvas.style.transform = `scale(${sizes.scale}, ${sizes.scale})`;
-        // this._canvas.style.left = `${sizes.x}px`;
-        // this._canvas.style.top = `${sizes.y}px`;
-        
-        // this._canvas.width = sizes.width
-        // this._canvas.height = sizes.width * 2.2
 
-        // if (this._playerContainer) {
-        //     this._playerContainer.getRealPlayer().scale.x = this._playerContainer.scale.y = ratio;
-        // }
+        this._canvas.style.left = `${sizes.x}px`;
+        this._canvas.style.top = `${sizes.y}px`;
+        
+        if(this._obstaclesContainer) {
+            this._obstaclesContainer.resize()
+        }
     }
 
     _setupLayers() {

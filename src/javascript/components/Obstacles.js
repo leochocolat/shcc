@@ -37,6 +37,7 @@ class Obstacles {
         this._obstaclesContainer = new PIXI.Container();
         this._obstaclesContainer.transform.skew.x = - this._obstacleProperties.degree / 1.45;
         this._createAnimatedObstacles();
+        this.resize();
         this._createFakeObstacle();
     }
 
@@ -95,8 +96,7 @@ class Obstacles {
 
             // this._obstaclesContainer.addChild(this._sprites[this._spriteTest]);
             this._obstaclesContainer.addChild(this._randomSprite(this._sprites));
-
-            this._obstaclesContainer.children[0].position.x = this._canvas.width * 1.5 + Math.random() * this._canvas.width / 2;
+            this._obstaclesContainer.children[0].position.x =  Math.random() * 3000 + 3000 - window.innerWidth;
             this._obstaclesContainer.children[0].position.y = this._obstacleProperties.y + (this._obstacleProperties.y * 2) * Math.round(Math.random());
 
             this._updateFakeObstacle();
@@ -126,6 +126,12 @@ class Obstacles {
         this.obstacleRect.height = this._obstacleProperties.obstacleSizes[this._currentSpriteIndex].height;
         this.obstacleRect.position.x = this._obstaclesContainer.children[0].position.x;
         this.obstacleRect.position.y = this._obstaclesContainer.children[0].position.y;
+    }
+
+    resize() {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        this._obstaclesContainer.children[0].position.x = Math.random() * 3000 + 3000 - window.innerWidth;
     }
 
     drawFakeObstacle() {
