@@ -1,6 +1,7 @@
 import Loose from './Loose';
 import Timer from './Timer';
 import Form from '../modules/Form';
+import Cinematic from '../components/Cinematic';
 import CountDown from './CountDown';
 import ControlsIndications from './ControlsIndications';
 import { TweenLite } from 'gsap';
@@ -36,10 +37,6 @@ class GameManager {
 
         this._timer = new Timer();
         this._timer.resetTimer();
-
-        //debug
-        // this.form = new Form(document.querySelector('.js-form-component'));
-        // this.form.transitionIn();
 
         this._setupContolsTutorial();
     }
@@ -165,11 +162,19 @@ class GameManager {
         this._player.disableControls();
         this._player.playerOutAnimation();
 
+        this._cinematic = new Cinematic();
+        this._cinematic.transitionIn();
+
         setTimeout(() => {
-            // POUR DISPLAY LE FORM
-            this.form = new Form(document.querySelector('.js-form-component'));
-            this.form.transitionIn();
-        }, 4500);
+            this._cinematic.play().then(() => {
+                this.form = new Form(document.querySelector('.js-form-component'));
+                this.form.transitionIn();
+            
+                setTimeout(() => {
+                    this._cinematic.transitionOut();
+                }, 800);
+            })
+        }, 800);
     }
 
     _setupEventListeners() {

@@ -44,11 +44,7 @@ class SelectPlayer {
             let playerHead = this._ui.players[index].querySelector(".player__head");
             this._ui.playerTimerHead.src = `assets/images/player${index + 1}-head-progressBar.png`;
 
-            let timeline = new TimelineLite({
-                onComplete: () => {
-                    this._ui.backgroundTransitionContainer.remove();
-                }
-            });
+            let timeline = new TimelineLite();
 
             timeline.set(this._ui.playerContainer, { autoAlpha: 0 }, 0.8);
             timeline.set(this._ui.backgroundTransitionContainer, { autoAlpha: 1 }, 0);
