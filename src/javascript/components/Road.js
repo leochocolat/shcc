@@ -3,7 +3,7 @@ class Road {
         this._canvas = canvas
 
         this._roadProperties = {
-            x: 0,
+            x: -300,
             y: 0,
             height: 350,
             linesPadding: 160,
@@ -30,12 +30,12 @@ class Road {
 
         this._borderRoadLeft = new PIXI.Graphics();
         this._borderRoadLeft.beginFill(0x666666);
-        this._borderRoadLeft.drawRect(0, 0, this._canvas.width * 4, 10);
+        this._borderRoadLeft.drawRect(this._roadProperties.x, 0, this._canvas.width * 4, 10);
         this._roadContainer.addChild(this._borderRoadLeft);
 
         this._borderRoadRight = new PIXI.Graphics();
         this._borderRoadRight.beginFill(0x666666);
-        this._borderRoadRight.drawRect(0, this._roadProperties.height + 100, this._canvas.width * 4, 10);
+        this._borderRoadRight.drawRect(this._roadProperties.x, this._roadProperties.height + 100, this._canvas.width * 4, 10);
         this._roadContainer.addChild(this._borderRoadRight);
 
         this._roadLinesContainer = new PIXI.Container();

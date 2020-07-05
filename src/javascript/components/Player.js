@@ -11,7 +11,7 @@ const EASEJUMP = Power3.easeOut;
 const EASEEND = '';
 
 class Player {
-    constructor(canvas, playerIndex, resources, shadows) {
+    constructor(canvas, playerIndex, resources, shadows, stage) {
         _.bindAll(this, '_keyDownHandler', '_keyUpHandler');
 
         this._canvas = canvas;
@@ -48,10 +48,11 @@ class Player {
 
         this._spriteProperties = {
             x: 270,
+            y: 100,
             width: [170, 140],
-            translate: 70,
-            shadowTranslateX: [-120, -160],
-            shadowTranslateY: [-65, -70]
+            translate: [-80, 125],
+            shadowTranslateX: [-140, -180],
+            shadowTranslateY: [570, 680]
         }
 
         this._horizontalDisplacement = 0;
@@ -91,7 +92,7 @@ class Player {
         this._shadowSprite.height = 280 / ratio;
 
         this._shadowSprite.position.x = this._spriteProperties.x + this._spriteProperties.shadowTranslateX[this._playerIndex];
-        this._shadowSprite.position.y = this._canvas.height - this._shadowSprite.height + this._spriteProperties.shadowTranslateY[this._playerIndex];
+        this._shadowSprite.position.y = this._shadowSprite.height + this._spriteProperties.shadowTranslateY[this._playerIndex];
 
         this._addChild(this._shadowSprite);
     }
@@ -164,16 +165,16 @@ class Player {
         this._standardAnimation.height = this._spriteProperties.width[this._playerIndex] / ratio;
 
         this._preJumpAnimation.position.x = this._spriteProperties.x;
-        this._preJumpAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
+        this._preJumpAnimation.position.y = this._preJumpAnimation.height - this._spriteProperties.translate[this._playerIndex];
 
         this._jumpAnimation.position.x = this._spriteProperties.x;
-        this._jumpAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
+        this._jumpAnimation.position.y = this._preJumpAnimation.height - this._spriteProperties.translate[this._playerIndex];
 
         this._fallAnimation.position.x = this._spriteProperties.x;
-        this._fallAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
+        this._fallAnimation.position.y = this._preJumpAnimation.height - this._spriteProperties.translate[this._playerIndex];
 
         this._standardAnimation.position.x = this._spriteProperties.x;
-        this._standardAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
+        this._standardAnimation.position.y = this._preJumpAnimation.height - this._spriteProperties.translate[this._playerIndex];
 
         if (this._playerIndex == 1) {
             let poussingSprites = []
@@ -186,7 +187,7 @@ class Player {
             this._poussingAnimation.width = this._spriteProperties.width[this._playerIndex];
             this._poussingAnimation.height = this._spriteProperties.width[this._playerIndex] / ratio;
             this._poussingAnimation.position.x = this._spriteProperties.x;
-            this._poussingAnimation.position.y = this._canvas.height - this._preJumpAnimation.height - this._spriteProperties.translate;
+            this._poussingAnimation.position.y = this._preJumpAnimation.height - this._spriteProperties.translate[this._playerIndex];
         }
 
         this._addChild(this._standardAnimation);

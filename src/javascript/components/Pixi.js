@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _, { size } from 'underscore';
 import * as PIXI from 'pixi.js'
 import { TweenLite } from 'gsap';
 import Stats from 'stats.js';
@@ -107,15 +107,17 @@ class Pixi {
         );
         
         this._app.renderer.resize(sizes.width, sizes.height);
+        this._app.stage.scale.set(sizes.scale, sizes.scale);
         // this._canvas.style.transform = `scale(${sizes.scale}, ${sizes.scale})`;
-        this._canvas.style.left = `${sizes.x}px`;
-        this._canvas.style.top = `${sizes.y}px`;
+        // this._canvas.style.left = `${sizes.x}px`;
+        // this._canvas.style.top = `${sizes.y}px`;
         
+        // this._canvas.width = sizes.width
+        // this._canvas.height = sizes.width * 2.2
+
         // if (this._playerContainer) {
         //     this._playerContainer.getRealPlayer().scale.x = this._playerContainer.scale.y = ratio;
         // }
-
-        // this._app.renderer.resize(Math.ceil(this._width * ratio), Math.ceil(this._height * ratio));
     }
 
     _setupLayers() {
@@ -130,9 +132,9 @@ class Pixi {
     setupPlayer(index, ressources) {
         this._playerIndex = index;
         if (this._playerIndex === 1) {
-            this._playerContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetSkate'], ressources['shadowSpritesheet']);
+            this._playerContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetSkate'], ressources['shadowSpritesheet'], this._app.stage);
         } else {
-            this._playerContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetBike'], ressources['shadowSpritesheet']);
+            this._playerContainer = new Player(this._canvas, this._playerIndex, ressources['animationSpritesheetBike'], ressources['shadowSpritesheet'], this._app.stage);
         }
         this._setupGameManager();
     }
