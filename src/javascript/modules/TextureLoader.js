@@ -93,7 +93,7 @@ class TextureLoader {
     loadedPlayerTexture(index) {
         let spritesheet = this._textureLoader.resources;
         // this._textureLoader.add('animationSpritesheet', this._spritesheetsUrl[index]);
-        // this._requestFullScreen();
+        this._requestFullScreen();
         this.pixiComponent.setupPlayer(index, spritesheet)
 
     }
@@ -101,7 +101,7 @@ class TextureLoader {
     _requestFullScreen() {
         if(DeviceUtils.isMobile()) {
             document.addEventListener('click',() => {
-                this._canvas.requestFullscreen();
+                // this._canvas.requestFullscreen();
                 document.body.requestFullscreen();
             })
         }
