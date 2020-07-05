@@ -32,7 +32,11 @@
           <img src="assets/images/player1-body_plateform.png" alt="">
           <img class="player__head" src="assets/images/player1-head_plateform.png" alt="">
           <div class="player__name">
-            Théo
+            <span class="player__name-content-container">
+              <span class="player__name-content" data-content="Théo">
+                Théo
+              </span>
+            </span>
           </div>
         </div>
         <div class="player player__second js-player">
@@ -40,7 +44,11 @@
           <img src="assets/images/player2-body_plateform.png" alt="">
           <img class="player__head" src="assets/images/player2-head_platform.png" alt="">
           <div class="player__name">
-            Ogach
+            <span class="player__name-content-container">
+              <span class="player__name-content" data-content="Ogach">
+                Ogach
+              </span>
+            </span>
           </div>
         </div>
       </div>
@@ -185,32 +193,37 @@
     <img src="assets/images/player1-inscription.png" alt="" class="section-form__image section-form__image--left">
     <img src="assets/images/player2-inscription.png" alt="" class="section-form__image section-form__image--right">
 
-    <h1 class="section-form__title">
-      Inscris-toi pour gagner ta place pour
-      <img src="assets/images/logo-jahneration_transparent.png" alt="" class="section-form__title-logo-jahneration">
-      <span>à</span>
-      <img src="assets/images/logo-olympia.png" alt="" class="section-form__title-logo-olympia">
-    </h1>
+    <div class="section-form__container">
+      <h1 class="section-form__title">
+        <div class="section-form__title-content">
+          Inscris-toi pour gagner ta place pour
+        </div>
+        <img src="assets/images/logo-jahneration_transparent.png" alt="" class="section-form__title-logo-jahneration">
+        <span class="section-form__title-separator">à</span>
+        <img src="assets/images/logo-olympia.png" alt="" class="section-form__title-logo-olympia">
+      </h1>
+  
+      <form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate js-form" target="_blank" novalidate>
+        <div class="section-form__form">
+          <div class="form__text-field-wrapper">
+            <div class="form__input-wrapper  form__input-wrapper--name">
+                <input type="text" class="form__input form__name" name="LNAME" id="mce-LNAME" placeholder="ton nom">
+            </div>
+            <div class="form__input-wrapper form__input-wrapper--lastname">
+              <input type="text" class="form__input form__lastname" name="FNAME" id="mce-FNAME" placeholder="ton prénom">
+            </div>
+            <div class="form__input-wrapper form__input-wrapper--email">
+              <input type="email" class="form__input form__email" name="EMAIL" id="mce-EMAIL" placeholder="ton email">
+            </div>
+          </div>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_865e089434b6e7d78112f0878_4a0729be21" tabindex="-1" value=""></div>
+          <div class="form__input-wrapper-submit">
+              <input type="submit" class="form__submit" name="subscribe" id="mc-embedded-subscribe">
+          </div>
+        </div>
+      </form>
+    </div>
 
-    <form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate js-form" target="_blank" novalidate>
-      <div class="section-form__form">
-        <div class="form__text-field-wrapper">
-          <div class="form__input-wrapper  form__input-wrapper--name">
-              <input type="text" class="form__input form__name" name="LNAME" id="mce-LNAME" placeholder="ton nom">
-          </div>
-          <div class="form__input-wrapper form__input-wrapper--lastname">
-            <input type="text" class="form__input form__lastname" name="FNAME" id="mce-FNAME" placeholder="ton prénom">
-          </div>
-          <div class="form__input-wrapper form__input-wrapper--email">
-            <input type="email" class="form__input form__email" name="EMAIL" id="mce-EMAIL" placeholder="ton email">
-          </div>
-        </div>
-        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_865e089434b6e7d78112f0878_4a0729be21" tabindex="-1" value=""></div>
-        <div class="form__input-wrapper-submit">
-            <input type="submit" class="form__submit" name="subscribe" id="mc-embedded-subscribe">
-        </div>
-      </div>
-    </form>
   </section>
 
   <section class="section-mobile-orientation js-orientation-message isDisable">

@@ -49,8 +49,8 @@ class Loose {
     }
 
     animate() {
-        // this.timeline.restart();
-        // this.timeline.play();
+        this.timeline.restart();
+        this.timeline.play();
     }
     
     _onCompleteHandler() {

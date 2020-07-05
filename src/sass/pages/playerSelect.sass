@@ -92,9 +92,23 @@
         position: absolute
         transition: transform .2s ease-in-out
 
-    &:hover
+    &:hover, &.isActive
         .player__head
             transform: translateY(-20px)
+
+        .player__name
+            transform: translate(calc(34% + 5px) , calc(-103% - 3px)) skewY(5.125deg)
+
+            &:before
+                width: 20px
+                height: 30px
+                right: -20%
+                top: -6px
+
+    &:hover
+        .player__name-content
+            transform: translateY(-100%)
+            
 
 .player__first
     transform: translate(-5%, -8.4%)
@@ -103,7 +117,6 @@
     position: relative
     height: 300px
 
-    // transform: scale(1.2) translateX(-30%)
     &__background
         background-color: #c9c7cb
         width: 90px
@@ -124,6 +137,7 @@
         text-transform: uppercase
         color: white
         transform: translate(34%,-103%) skewY(5.125deg)
+        transition: transform .2s ease-in-out
 
     
         &::before
@@ -136,6 +150,26 @@
             top: -7px
             position: absolute
             transform: skewY(-30.125deg)
+            transition: all .2s ease-in-out
+
+
+.player__name-content-container
+    display: block
+    overflow: hidden
+    line-height: 18px
+
+.player__name-content
+    position: relative
+    display: block
+    transition: transform .2s ease-in-out
+
+    &:before
+        content: attr(data-content)
+
+        position: absolute
+        left: 0
+        top: 100%
+
 .player__head
     position: absolute
     left: 0
