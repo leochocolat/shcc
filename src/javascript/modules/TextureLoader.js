@@ -101,7 +101,7 @@ class TextureLoader {
     _requestFullScreen() {
         if(DeviceUtils.isMobile()) {
             document.addEventListener('click',() => {
-                // this._canvas.requestFullscreen();
+                this._canvas.requestFullscreen();
                 document.body.requestFullscreen();
             })
         }

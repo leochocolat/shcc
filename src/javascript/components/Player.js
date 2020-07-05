@@ -73,10 +73,11 @@ class Player {
     }
 
     _setupHammer() {
+        let container = document.querySelector("#home")
         this.options = {
             direction: Hammer.DIRECTION_ALL
         }
-        this.hammer = new Hammer(this._canvas, this.options);
+        this.hammer = new Hammer(container, this.options);
         this.hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     }
 
