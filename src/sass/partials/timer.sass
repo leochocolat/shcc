@@ -4,8 +4,12 @@
     left: 0
     width: 100%
     height: 100vh
-    @media screen and (max-width: 640px)
-        display: none
+    // @media screen and (max-width: 640px)
+    //     display: none
+
+    z-index: 100000
+    pointer-events: none
+
 .infos__timer
     color: white
     font-size: 65px
@@ -17,8 +21,7 @@
     height: 300px
     transform: skewX(4.5deg) rotate(4.5deg)
 
-    @media screen and (max-width: 1250px)
-        display: none
+    pointer-events: all
 
     .timer-value
         position: absolute
@@ -134,29 +137,113 @@
                     width: 20px
                     background-color: rgba(255, 255, 255, 0.4)
                     transform: skewY(-35deg)
+    
+    @media screen and (max-width: 1250px)
+        bottom: 100px
+        right: 100px
+        transform: skewX(0) rotate(0)
 
-            // .progress-bar-white
-            //     position: absolute
-            //     height: 30px
-            //     width: 265px
-            //     .progress-bar-front
-            //         position: absolute
-            //         height: 30px
-            //         width: 265px
-            //         background-color: rgba(255, 255, 255, 1)
-            //     .progress-bar-top
-            //         position: absolute
-            //         height: 15px
-            //         width: 265px
-            //         background-color: rgba(255, 255, 255, 1)
-            //         bottom: 30px
-            //         right: -10px
-            //         transform: skewX(-55deg)
-            //     .progress-bar-right
-            //         position: absolute
-            //         height: 30px
-            //         bottom: 7px
-            //         right: -20px
-            //         width: 20px
-            //         background-color: rgba(255, 255, 255, 1)
-            //         transform: skewY(-35deg)
+        width: 350px
+        height: 100px
+
+        .timer-box
+            width: 100%
+            height: 100%
+
+            .box-front
+                position: absolute
+                left: 0
+                top: 0
+
+                width: 100%
+                height: 100%
+
+                background-color: #ce3739
+            .box-top
+                display: none
+            .box-right
+                display: none
+
+            .progress-bar
+                position: absolute
+                left: 0
+                top: 0
+
+                width: 100%
+                height: 100%
+
+                display: block
+
+                .progress-bar-lines
+                    position: absolute
+                    left: 0
+                    right: 0
+                    bottom: 0
+                    top: auto
+
+                    height: 70px
+
+                    margin: auto
+
+                    .line
+                        &:after
+                            position: absolute
+                            left: 0
+                            top: 15px
+
+                            height: 15px
+                            width: 0
+
+                            border: solid 1px white
+
+                            content: ''
+                        &.line-centered
+                            &:after
+                                left: 0
+                                right: 0
+
+                                margin: auto
+                        &.line-right
+                            &:after
+                                left: auto
+                                right: 0
+                            
+
+                .progress-bar-transparent
+                    position: absolute
+                    left: 0
+                    right: 0
+                    bottom: 20px
+
+                    margin: auto
+
+                    .progress-bar-head
+                        top: 0
+                    
+                        .head-progress
+                            top: 0
+                            left: 0
+
+                            img 
+                                top: 0
+                                bottom: 0
+                                margin: auto
+
+                                z-index: 1
+
+                .progress-bar-front
+                    .front-progress
+                        background-color: white !important
+
+                .progress-bar-top
+                    display: none
+
+                .progress-bar-right
+                    display: none
+
+        .timer-value
+            position: absolute
+            top: -45px
+            right: auto
+            left: 30px
+            text-shadow: transparent 2px 5px

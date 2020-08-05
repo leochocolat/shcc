@@ -30,10 +30,11 @@ class TextureLoader {
             playerTextSpans: document.querySelectorAll('.js-player-text-span'),
             players: document.querySelectorAll('.js-player')
         }
-
+        
         this._setup();
         this._setupSplitAnimtation();
         this._setupEventListeners();
+
     }
 
     _setup() {
@@ -65,7 +66,8 @@ class TextureLoader {
     }
 
     _setupEventListeners() {
-        this._textureLoader.load(this._onTextureLoaded)
+        this._textureLoader.load(this._onTextureLoaded);
+
     }
 
     _onTextureLoaded(e) {
@@ -94,23 +96,41 @@ class TextureLoader {
         let spritesheet = this._textureLoader.resources;
         // this._textureLoader.add('animationSpritesheet', this._spritesheetsUrl[index]);
         this._requestFullScreen();
+        this._requestFullScreenIos();
         this.pixiComponent.setupPlayer(index, spritesheet)
-
     }
 
     _requestFullScreen() {
         if(DeviceUtils.isMobile()) {
-            document.addEventListener('click',() => {
-                if ( document.body.requestFullscreen) {
-                    document.body.requestFullscreen()
-                } else if ( document.body.mozRequestFullScreen) { /* Firefox */
-                    document.body.mozRequestFullScreen()
-                } else if ( document.body.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-                    document.body.webkitRequestFullscreen()
-                } else if ( document.body.msRequestFullscreen) { /* IE/Edge */
-                    document.body.msRequestFullscreen() 
-                }
-            })
+            if ( document.body.requestFullscreen) {
+                document.body.requestFullscreen()
+            } else if ( document.body.mozRequestFullScreen) { /* Firefox */
+                document.body.mozRequestFullScreen()
+            } else if ( document.body.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                document.body.webkitRequestFullscreen()
+            } else if ( document.body.msRequestFullscreen) { /* IE/Edge */
+                document.body.msRequestFullscreen() 
+            }
+        }
+    }
+
+    _requestFullScreenIos() {
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+            window.scrollTo(0, 1);
+        }
+    }
+
+    _exitFullScreen() {
+        if(DeviceUtils.isMobile()) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) { /* Firefox */
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE/Edge */
+                document.msExitFullscreen();
+            }
         }
     }
 
