@@ -142,6 +142,7 @@ class GameManager {
     }
 
     _updateTimerSeconds() {
+        
         this._currentTime = this._timer.getDeltaTime();
     }
 
