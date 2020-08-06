@@ -9,7 +9,7 @@ class TextureLoader {
     constructor(playerIndex) {
         this._playerIndex = playerIndex;
 
-        _.bindAll(this, '_onTextureLoaded');
+        _.bindAll(this, '_onTextureLoaded', '_fullScreenButtonHandler');
 
         this._spritesheetsUrl = [
             'assets/spriteheets/bikeSpritesheet.json',
@@ -28,7 +28,9 @@ class TextureLoader {
             logoLoader: this._loaderSectionContainer.querySelector('.js-loader-logo'),
             playerText: document.querySelector('.js-player-text'),
             playerTextSpans: document.querySelectorAll('.js-player-text-span'),
-            players: document.querySelectorAll('.js-player')
+            players: document.querySelectorAll('.js-player'),
+            fullScreenButton: document.querySelector('.js-full-screen-button'),
+            timer: document.querySelector('.js-infos-timer'),
         }
         
         this._setup();
@@ -67,7 +69,13 @@ class TextureLoader {
 
     _setupEventListeners() {
         this._textureLoader.load(this._onTextureLoaded);
+        this._ui.fullScreenButton.addEventListener('click', this._fullScreenButtonHandler);
+    }
 
+    _fullScreenButtonHandler() {
+        this._toggleFullScreenButton();
+        this._requestFullScreen();
+        this._requestFullScreenIos();
     }
 
     _onTextureLoaded(e) {
@@ -97,11 +105,26 @@ class TextureLoader {
         // this._textureLoader.add('animationSpritesheet', this._spritesheetsUrl[index]);
         this._requestFullScreen();
         this._requestFullScreenIos();
+        this._toggleFullScreenButton();
         this.pixiComponent.setupPlayer(index, spritesheet)
+    }
+
+    _toggleFullScreenButton() {
+        if (this._ui.fullScreenButton.classList.contains('is-active')) {
+            this._ui.fullScreenButton.classList.remove('is-active');
+        } else {
+            this._ui.fullScreenButton.classList.add('is-active');
+        }
+    }
+
+    _enableFullScreenOption() {
+        this._ui.fullScreenButton.classList.add('is-enable');
+        this._ui.timer.classList.add('is-fullscreen-enable');
     }
 
     _requestFullScreen() {
         if(DeviceUtils.isMobile()) {
+            this._enableFullScreenOption();
             if ( document.body.requestFullscreen) {
                 document.body.requestFullscreen()
             } else if ( document.body.mozRequestFullScreen) { /* Firefox */
