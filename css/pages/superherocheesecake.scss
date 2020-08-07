@@ -1,0 +1,32 @@
+.superherocheesecake {
+  // overflow-y: auto;
+
+
+  .container-hi {
+    position: relative;
+    transform: rotate(-60deg) translate(0, -8%);
+    .hi-line {
+      position: relative;
+      white-space: nowrap;
+      font-size: 130px;
+      font-weight: 700;
+      line-height: 110px;
+
+
+
+    }
+
+  }
+
+
+
+
+}
+
+#canvas {
+  // background-color: red;
+}
+
+#glcanvas {
+  background-color: white;
+}

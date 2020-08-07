@@ -1,0 +1,60 @@
+.hello {
+  height: 500vh;
+  overflow-y: auto;
+
+  #canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .e-mail {
+    display: none;
+  }
+
+  .appear-custom {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .container-content {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    .content {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      p {
+        text-shadow: .5px 1px 1.5px black;
+        text-align: center;
+        width: 70%;
+        font-size: 50px;
+        line-height: 70px;
+        font-style: oblique;
+        font-weight: 300;
+        text-transform: none;
+        span {
+          border-bottom: 3px solid #ff66ff;
+
+          &.title {
+            border: none;
+            font-size: 100px;
+          }
+        }
+
+        &.end {
+          font-size: 30px;
+          line-height: normal;
+        }
+      }
+
+
+    }
+  }
+
+
+}
